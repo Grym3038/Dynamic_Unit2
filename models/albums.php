@@ -15,6 +15,19 @@ function getAlbum(int $albumId)
     return $album;
 }
 
+function getAlbums()
+{
+    global $db;
+    $query = 'SELECT id, name, artistId
+              FROM albums
+              ORDER BY LOWER(name)';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $albums = $statement->fetchAll();
+    $statement->closeCursor();
+    return $albums;
+}
+
 function getAlbumsByArtistId(int $artistId)
 {
     global $db;
