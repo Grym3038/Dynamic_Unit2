@@ -40,7 +40,7 @@ function addAlbum(string $name, int $artistId)
     $statement->execute();
     $albumId = $db->lastInsertId();
     $statement->closeCursor();
-    return $albumId();
+    return $albumId;
 }
 
 function updateAlbum(int $albumId, string $name, int $artistId)
