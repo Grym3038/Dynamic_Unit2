@@ -1,7 +1,7 @@
 <?php
 namespace albums;
 
-function getAlbum(int $albumId)
+function getAlbum(int $albumId) : array
 {
     global $db;
     $query = 'SELECT id, name, artistId
@@ -15,7 +15,7 @@ function getAlbum(int $albumId)
     return $album;
 }
 
-function getAlbums()
+function getAlbums() : array
 {
     global $db;
     $query = 'SELECT id, name, artistId
@@ -28,7 +28,22 @@ function getAlbums()
     return $albums;
 }
 
-function getAlbumsByArtistId(int $artistId)
+function getAlbumsWithArtistNames() : array
+{
+    global $db;
+    $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId,
+                     artists.name artistName
+              FROM albums
+                  JOIN artists ON albums.artistId = artists.id
+              ORDER BY LOWER(albums.name)';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $albums = $statement->fetchAll();
+    $statement->closeCursor();
+    return $albums;
+}
+
+function getAlbumsByArtistId(int $artistId) : array
 {
     global $db;
     $query = 'SELECT id, name
@@ -42,7 +57,7 @@ function getAlbumsByArtistId(int $artistId)
     return $albums;
 }
 
-function addAlbum(string $name, int $artistId)
+function addAlbum(string $name, int $artistId) : int
 {
     global $db;
     $query = 'INSERT INTO albums (name, artistId)
@@ -56,7 +71,7 @@ function addAlbum(string $name, int $artistId)
     return $albumId;
 }
 
-function updateAlbum(int $albumId, string $name, int $artistId)
+function updateAlbum(int $albumId, string $name, int $artistId) : void
 {
     global $db;
     $query = 'UPDATE albums
