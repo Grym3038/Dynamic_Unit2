@@ -9,16 +9,13 @@
     <nav>
         <ul>
             <li>
-                <a href=".">Artists</a>
+                <a href=".?action=listArtists">Artists</a>
             </li>
             <li>
-                <a href=".?action=artistForm">Add Artist</a>
+                <a href=".?action=listAlbums">Albums</a>
             </li>
             <li>
-                <a href=".?action=albumForm">Add Album</a>
-            </li>
-            <li>
-                <a href=".?action=songForm">Add Song</a>
+                <a href=".?action=listSongs">Songs</a>
             </li>
         </ul>
     </nav>
