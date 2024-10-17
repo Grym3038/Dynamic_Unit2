@@ -11,7 +11,7 @@ USE spotifyClone;
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
     name             varchar(1023) NOT NULL,
-    monthlyListeners int,
+    monthlyListeners int           NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -25,18 +25,18 @@ CREATE TABLE albums (
 );
 
 CREATE TABLE songs (
-    id      int            AUTO_INCREMENT,
-    name    varchar(1023),
-    length  int,
-    albumId int,
+    id      int           AUTO_INCREMENT,
+    name    varchar(1023) NOT NULL,
+    length  int           NOT NULL,
+    albumId int           NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fkSongAlbum FOREIGN KEY (albumId)
         REFERENCES albums(id)
 );
 
 CREATE TABLE artistsSongs (
-    artistId int AUTO_INCREMENT,
-    songId   int,
+    artistId int NOT NULL,
+    songId   int NOT NULL,
     CONSTRAINT fkArtist FOREIGN KEY (artistId)
         REFERENCES artists(id),
     CONSTRAINT fkSong FOREIGN KEY (songId)
