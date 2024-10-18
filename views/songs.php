@@ -14,7 +14,6 @@
     <table>
         <thead>
             <tr>
-                <th>&nbsp;&nbsp;</th>
                 <th>Name</th>
                 <th>Duration</th>
                 <th>Album</th>
@@ -23,13 +22,6 @@
         <tbody>
             <?php foreach($songs as $song) : ?>
                 <tr>
-                    <td>
-                        <?php if (in_array($song['id'], $_SESSION['likedSongIds'])) : ?>
-                            &star;
-                        <?php else : ?>
-                            &nbsp;&nbsp;
-                        <?php endif; ?>
-                    </td>
                     <td>
                         <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
                             <?php echo htmlspecialchars($song['name']); ?>
