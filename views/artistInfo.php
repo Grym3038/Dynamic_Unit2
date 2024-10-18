@@ -2,14 +2,18 @@
 
 <h1><?php echo htmlspecialchars($artist['name']); ?></h1>
 
-<p>
-    <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>">
-        Edit
-    </a>
-    <a href=".?action=deleteForm&entityType=artist&entityId=<?php echo $artist['id']; ?>">
-        Delete
-    </a>
-</p>
+<ul>
+    <li>
+        <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>">
+            Edit
+        </a>
+    </li>
+    <li>
+        <a href=".?action=deleteForm&entityType=artist&entityId=<?php echo $artist['id']; ?>">
+            Delete
+        </a>
+    </li>
+</ul>
 
 <table>
     <tr>
