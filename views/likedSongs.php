@@ -1,10 +1,12 @@
 <?php include('views/partials/header.php'); ?>
 
+<?php require('views/utilities/formatTime.php'); ?>
+
 <h1>Liked Songs</h1>
 
 <?php if (count($songs) == 0) : ?>
     <p>
-        <i>No songs.</i>
+        <i>None.</i>
     </p>
 <?php else : ?>
     <table>
@@ -36,10 +38,7 @@
                         </a>
                     </td>
                     <td>
-                        <?php
-                        include('views/utilities/formatTime.php');
-                        echo formatTime($song['length']);
-                        ?>
+                        <?php echo formatTime($song['length']); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
