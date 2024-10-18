@@ -11,9 +11,29 @@
         </a>
     </li>
     <li>
-        <a href=".?action=deleteForm&entityType=song&entityId=<?php echo $song['id']; ?>">
+        <a href=".?action=deleteSong&songId=<?php echo $song['id']; ?>">
             Delete
         </a>
+    </li>
+    <li>
+        <form action="." method="post">
+            <input type="hidden" name="action" value="toggleFavorite" />
+            <input type="hidden" name="songId"
+                value="<?php echo $song['id']; ?>" />
+            
+            <?php
+                if (in_array($song['id'], $_SESSION['likedSongIds']))
+                {
+                    $buttonText = 'Unlike';
+                }
+                else
+                {
+                    $buttonText = 'Like';
+                }
+            ?>
+
+            <input type="submit" value="<?php echo $buttonText; ?>" />
+        </form>
     </li>
 </ul>
 

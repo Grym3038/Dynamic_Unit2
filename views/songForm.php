@@ -1,8 +1,7 @@
 <?php include('views/partials/header.php'); ?>
 
 <h1>
-    <?php echo ($song['id'] == 0 ? 'Add' : 'Edit'); ?>
-    Song
+    <?php echo ($song['id'] == 0 ? 'Add' : 'Edit') . ' Song'; ?>
 </h1>
 
 <form action="." method="post">
@@ -37,8 +36,6 @@
         </select>
     </div>
 
-    <h2>Duration</h2>
-
     <?php
     $length = $song['length'];
     $minutes = intdiv($length, 60);
@@ -46,12 +43,10 @@
     ?>
                 
     <div>
-        <label for="minutes">Minutes</label>
+        <label>Length</label>
         <input type="number" name="minutes" id="minutes"
             value="<?php echo $minutes; ?>" />
-    </div>
-    <div>
-        <label for="seconds">Seconds</label>
+        <span>:</span>
         <input type="number" name="seconds" id="seconds"
             value="<?php echo $seconds; ?>" />
     </div>
@@ -62,8 +57,8 @@
         <?php foreach ($artists as $artist) : ?>
             <div>
                 <input type="checkbox"
-                    name="contributingArtistIds[<?php echo $artist['id']; ?>]"
-                    <?php echo (in_array($artist['id'], $contributingArtistIds) ? 'checked' : ''); ?>
+                    name="artistIds[<?php echo $artist['id']; ?>]"
+                    <?php echo (in_array($artist['id'], $artistIds) ? 'checked' : ''); ?>
                 />
                 <label>
                     <?php echo htmlspecialchars($artist['name']); ?>
