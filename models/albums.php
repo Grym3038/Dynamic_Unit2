@@ -7,12 +7,12 @@ function validateAlbum(array $album) : array
     
     if (!is_string($album['name']) || $album['name'] == '')
     {
-        array_push($errors, 'Name is required');
+        $errors[] = 'Name is required';
     }
 
     if (!is_integer($album['artistId']) || $album['artistId'] < 0)
     {
-        array_push($errors, 'Invalid artist Id.');
+        $errors[] = 'Invalid artist Id.';
     }
 
     return $errors;

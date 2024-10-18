@@ -7,17 +7,17 @@ function validateSong(array $song) : array
 
     if (!is_string($song['name']) || $song['name'] == '')
     {
-        array_push($errors, 'Name is required');
+        $errors[] = 'Name is required';
     }
 
     if (!is_integer($song['length']) || $song['length'] < 0)
     {
-        array_push($errors, 'Length must be a positive number.');
+        $errors[] = 'Length must be a positive number.';
     }
 
     if (!is_integer($song['albumId']) || $song['albumId'] < 0)
     {
-        array_push($errors, 'Invalid album id.');
+        $errors[] = 'Invalid album id.';
     }
 
     return $errors;

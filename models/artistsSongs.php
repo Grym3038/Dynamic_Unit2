@@ -16,7 +16,7 @@ function getSongIdsByArtistId(int $artistId)
     $songIds = array();
     foreach ($rows as $row)
     {
-        array_push($songIds, $row['songId']);
+        $songIds[] = $row['songId'];
     }
 
     return $songIds;
@@ -37,7 +37,7 @@ function getArtistIdsBySongId(int $songId) : array
     $artistIds = array();
     foreach ($rows as $row)
     {
-        array_push($artistIds, $row['artistId']);
+        $artistIds[] = $row['artistId'];
     }
 
     return $artistIds;

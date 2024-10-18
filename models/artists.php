@@ -7,13 +7,13 @@ function validateArtist(array $artist) : array
 
     if (!is_string($artist['name']) || $artist['name'] == '')
     {
-        array_push($errors, 'Name is required.');
+        $errors[] = 'Name is required.';
     }
 
     if (!is_integer($artist['monthlyListeners']) ||
         $artist['monthlyListeners'] < 0)
     {
-        array_push($errors, 'Monthly listeners must be a positive number.');
+        $errors[] = 'Monthly listeners must be a positive number.';
     }
 
     return $errors;
@@ -83,12 +83,12 @@ function updateArtist(array $artist) : void
     $query = 'UPDATE artists
               SET name = :name, monthlyListeners = :monthlyListeners
               WHERE id = :artistId;';
-        $statement = $db->prepare($query);
-        $statement->bindValue(':name', $artist['name']);
-        $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
-        $statement->bindValue(':artistId', $artist['id']);
-        $statement->execute();
-        $statement->closeCursor();
+    $statement = $db->prepare($query);
+    $statement->bindValue(':name', $artist['name']);
+    $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
+    $statement->bindValue(':artistId', $artist['id']);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 function deleteArtist(array $artist) : void
