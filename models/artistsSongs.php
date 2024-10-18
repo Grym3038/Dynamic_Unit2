@@ -10,12 +10,19 @@ function getSongIdsByArtistId(int $artistId)
     $statement = $db->prepare($query);
     $statement->bindValue(':artistId', $artistId);
     $statement->execute();
-    $songIds = array_values($statement->fetchAll());
+    $rows = $statement->fetchAll();
     $statement->closeCursor();
+
+    $songIds = array();
+    foreach ($rows as $row)
+    {
+        array_push($songIds, $row['songId']);
+    }
+
     return $songIds;
 }
 
-function getArtistIdsBySongId(int $songId)
+function getArtistIdsBySongId(int $songId) : array
 {
     global $db;
     $query = 'SELECT artistId
@@ -24,8 +31,15 @@ function getArtistIdsBySongId(int $songId)
     $statement = $db->prepare($query);
     $statement->bindValue(':songId', $songId);
     $statement->execute();
-    $artistIds = array_values($statement->fetchAll());
+    $rows = $statement->fetchAll();
     $statement->closeCursor();
+
+    $artistIds = array();
+    foreach ($rows as $row)
+    {
+        array_push($artistIds, $row['artistId']);
+    }
+
     return $artistIds;
 }
 
