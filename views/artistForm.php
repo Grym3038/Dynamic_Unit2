@@ -1,16 +1,5 @@
 <?php include('views/partials/header.php'); ?>
 
-<?php
-if (!isset($artist))
-{
-    $artist = array(
-        'id' => 0,
-        'name' => '',
-        'monthlyListeners' => ''
-    );
-}
-?>
-
 <h1>
     <?php echo ($artist['id'] == 0 ? 'Add' : 'Edit'); ?>
     Artist
@@ -42,9 +31,15 @@ if (!isset($artist))
     </div>
     <div>
         <input type="submit" value="Submit" />
-        <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
-            Cancel
-        </a>
+        <?php if ($artist['id'] == 0) : ?>
+            <a href=".?action=listArtists">
+                Cancel
+            </a>
+        <?php else : ?>
+            <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
+                Cancel
+            </a>
+        <?php endif; ?>
     </div>
 </form>
 

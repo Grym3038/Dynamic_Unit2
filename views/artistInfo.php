@@ -9,7 +9,7 @@
         </a>
     </li>
     <li>
-        <a href=".?action=deleteForm&entityType=artist&entityId=<?php echo $artist['id']; ?>">
+        <a href=".?action=deleteArtist&artistId=<?php echo $artist['id']; ?>">
             Delete
         </a>
     </li>
