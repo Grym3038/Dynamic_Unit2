@@ -13,16 +13,16 @@ CREATE TABLE artists (
     name             varchar(1023) NOT NULL,
     monthlyListeners int           NOT NULL,
     PRIMARY KEY (id)
-) ENGINE=InnoDB;
+) ENGINE = INNODB;
 
 CREATE TABLE albums (
     id       int           AUTO_INCREMENT,
     name     varchar(1023) NOT NULL,
     artistId int           NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fkAlbumArtist FOREIGN KEY (artistId)
-        REFERENCES artists(id)
-) ENGINE=InnoDB;
+    CONSTRAINT fkAlbumArtist FOREIGN KEY (artistId) REFERENCES artists(id)
+        ON DELETE CASCADE
+) ENGINE = INNODB;
 
 CREATE TABLE songs (
     id      int           AUTO_INCREMENT,
@@ -30,19 +30,19 @@ CREATE TABLE songs (
     length  int           NOT NULL,
     albumId int           NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fkSongAlbum FOREIGN KEY (albumId)
-        REFERENCES albums(id)
-) ENGINE=InnoDB;
+    CONSTRAINT fkSongAlbum FOREIGN KEY (albumId) REFERENCES albums(id)
+        ON DELETE CASCADE
+) ENGINE = INNODB;
 
 CREATE TABLE artistsSongs (
     artistId int NOT NULL,
     songId   int NOT NULL,
-    CONSTRAINT fkArtist FOREIGN KEY (artistId)
-        REFERENCES artists(id),
-    CONSTRAINT fkSong FOREIGN KEY (songId)
-        REFERENCES songs(id),
+    CONSTRAINT fkArtist FOREIGN KEY (artistId) REFERENCES artists(id)
+        ON DELETE CASCADE,
+    CONSTRAINT fkSong FOREIGN KEY (songId) REFERENCES songs(id)
+        ON DELETE CASCADE,
     CONSTRAINT ukArtistSong UNIQUE (artistId, songId)
-) ENGINE=InnoDB;
+) ENGINE = INNODB;
 
 CREATE USER IF NOT EXISTS spotifyClone@localhost
 IDENTIFIED BY 'password';
