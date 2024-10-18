@@ -1,17 +1,5 @@
 <?php include('views/partials/header.php'); ?>
 
-<?php
-if (empty($song))
-{
-    $song = array(
-        'id' => 0,
-        'name' => '',
-        'length' => 0,
-        'albumId' => 0
-    );
-}
-?>
-
 <h1>
     <?php echo ($song['id'] == 0 ? 'Add' : 'Edit'); ?>
     Song
@@ -34,32 +22,16 @@ if (empty($song))
     <div>
         <label for="name">Name</label>
         <input type="text" name="name" id="name"
-            value="<?php echo $song['name']; ?>" />
-    </div>
-
-    <h2>Format</h2>
-
-    <div>
-        <input type="radio" id="songFormatSingle" name="songFormat"
-            value="single" />
-        <label for="songFormatSingle">Single</label>
-        <select name="artistId">
-            <?php foreach ($artists as $artist) : ?>
-                <option value="<?php echo $artist['id']; ?>">
-                    <?php echo htmlspecialchars($artist['name']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            value="<?php echo $song['name']; ?>" autofocus />
     </div>
 
     <div>
-        <input type="radio" id="songFormatAlbum" name="songFormat"
-            value="album" />
-        <label for="songFormatAlbum">Album</label>
+        <label for="albumId">Album</label>
         <select name="albumId">
             <?php foreach ($albums as $album) : ?>
                 <option value="<?php echo $album['id']; ?>">
-                    <?php echo htmlspecialchars($album['name']); ?>
+                    <?php echo htmlspecialchars($album['name']) . ' (' .
+                        htmlspecialchars($album['artistName']) . ')'; ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -87,22 +59,31 @@ if (empty($song))
     <h2>Contributing Artists</h2>
 
     <div>
-        <?php $i = 0 ?>
         <?php foreach ($artists as $artist) : ?>
             <div>
-                <input type="checkbox" name="artists[<?php echo $i; ?>]"
-                    value="<?php echo $artist['id']; ?>"/>
+                <input type="checkbox"
+                    name="contributingArtistIds[<?php echo $artist['id']; ?>]"
+                    <?php echo (in_array($artist['id'], $contributingArtistIds) ? 'checked' : ''); ?>
+                />
                 <label>
                     <?php echo htmlspecialchars($artist['name']); ?>
                 </label>
             </div>
-            <?php $i++; ?>
         <?php endforeach; ?>
     </div>
 
     <div>
         <input type="submit" value="Submit" />
-        <a href=".">Cancel</a>
+
+        <?php if ($songId == 0) : ?>
+            <a href=".">
+                Cancel
+            </a>
+        <?php else : ?>
+            <a href=".?action=viewSong&songId=<?php echo $songId; ?>">
+                Cancel
+            </a>
+        <?php endif; ?>
     </div>
 </form>
 
