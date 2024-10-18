@@ -6,7 +6,21 @@
     <?php echo htmlspecialchars($album['name']); ?>
 </h1>
 
+<ul>
+    <li>
+        <a href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
+            Edit
+        </a>
+    </li>
+    <li>
+        <a href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
+            Delete
+        </a>
+    </li>
+</ul>
+
 <p>
+    Album by
     <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
         <?php echo htmlspecialchars($artist['name']); ?>
     </a>
