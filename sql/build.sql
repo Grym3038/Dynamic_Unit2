@@ -13,7 +13,7 @@ CREATE TABLE artists (
     name             varchar(1023) NOT NULL,
     monthlyListeners int           NOT NULL,
     PRIMARY KEY (id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE albums (
     id       int           AUTO_INCREMENT,
@@ -22,7 +22,7 @@ CREATE TABLE albums (
     PRIMARY KEY (id),
     CONSTRAINT fkAlbumArtist FOREIGN KEY (artistId)
         REFERENCES artists(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE songs (
     id      int           AUTO_INCREMENT,
@@ -32,7 +32,7 @@ CREATE TABLE songs (
     PRIMARY KEY (id),
     CONSTRAINT fkSongAlbum FOREIGN KEY (albumId)
         REFERENCES albums(id)
-);
+) ENGINE=InnoDB;
 
 CREATE TABLE artistsSongs (
     artistId int NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE artistsSongs (
     CONSTRAINT fkSong FOREIGN KEY (songId)
         REFERENCES songs(id),
     CONSTRAINT ukArtistSong UNIQUE (artistId, songId)
-);
+) ENGINE=InnoDB;
 
 CREATE USER IF NOT EXISTS spotifyClone@localhost
 IDENTIFIED BY 'password';
