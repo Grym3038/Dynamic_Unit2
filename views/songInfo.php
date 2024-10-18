@@ -4,6 +4,19 @@
     <?php echo htmlspecialchars($song['name']); ?>
 </h1>
 
+<ul>
+    <li>
+        <a href=".?action=songForm&songId=<?php echo $song['id']; ?>">
+            Edit
+        </a>
+    </li>
+    <li>
+        <a href=".?action=deleteForm&entityType=song&entityId=<?php echo $song['id']; ?>">
+            Delete
+        </a>
+    </li>
+</ul>
+
 <table>
     <tbody>
         <tr>
