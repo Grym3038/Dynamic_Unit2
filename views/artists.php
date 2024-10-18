@@ -2,6 +2,12 @@
 
 <h1>Artists</h1>
 
+<p>
+    <a href=".?action=artistForm">
+        Add Artist
+    </a>
+</p>
+
 <table>
     <thead>
         <th>Name</td>
