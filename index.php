@@ -3,25 +3,30 @@
     Title: Controller
 */
 
-require('models/database.php');
-require('models/artists.php');
-require('models/albums.php');
-require('models/songs.php');
-require('models/artistsSongs.php');
+require_once('models/database.php');
+require_once('models/artists.php');
+require_once('models/albums.php');
+require_once('models/songs.php');
+require_once('models/artistsSongs.php');
+
+function return404()
+{
+    $title = '404 Not Found';
+    $body = 'That page does not exist';
+    include('views/error.php');
+    exit();
+}
 
 // Start the session
-
 $lifetime = 60 * 60 * 24 * 365; // 1 year in seconds
 session_set_cookie_params($lifetime, '/');
 session_start();
-
-if (empty($_SESSION['favoriteSongs']))
+if (empty($_SESSION['likedSongIds']))
 {
-    $_SESSION['favoriteSongs'] = array();
+    $_SESSION['likedSongIds'] = array();
 }
 
 // Get the action
-
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL)
 {
@@ -41,14 +46,9 @@ switch ($action)
 
     case 'viewArtist':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
-        if ($artistId == NULL || $artistId == FALSE)
-        {
-            $title = '404 Not Found';
-            $body = 'That pages does not exist.';
-            include('views/error.php');
-            exit();
-        }
+        if (!is_integer($artistId) || $artistId < 1) return404();
         $artist = artists\getArtist($artistId);
+        if ($artist == FALSE) return404();
         $albums = albums\getAlbumsByArtistId($artistId);
         $songs = songs\getSongsByArtistId($artistId);
         include('views/artistInfo.php');
@@ -56,10 +56,26 @@ switch ($action)
 
     case 'artistForm':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
-        if ($artistId != NULL || $artistId != FALSE)
+
+        $newArtist = array(
+            'id' => 0,
+            'name' => '',
+            'monthlyListeners' => ''
+        );
+
+        if (!is_integer($artistId) || $artistId < 0)
+        {
+            $artist = $newArtist;
+        }
+        else
         {
             $artist = artists\getArtist($artistId);
+            if ($artist === NULL)
+            {
+                $artist = $newArtist;
+            }
         }
+
         include('views/artistForm.php');
         break;
 
@@ -69,33 +85,45 @@ switch ($action)
         $monthlyListeners = filter_input(INPUT_POST, 'monthlyListeners',
             FILTER_VALIDATE_INT);
 
-        $errors = array();
-        if ($name === NULL || $name === '')
-            array_push($errors, 'Name is required.');
-        if ($monthlyListeners === NULL || $monthlyListeners === FALSE)
-            array_push($errors, 'Monthly listeners is required.');
-        
+        $artist = array(
+            'id' => $artistId,
+            'name' => $name,
+            'monthlyListeners' => $monthlyListeners
+        );
+
+        $errors = artists\validateArtist($artist);
         if (count($errors) > 0)
         {
-            $artist = array(
-                'id' => $artistId,
-                'name' => $name,
-                'monthlyListeners' => $monthlyListeners
-            );
             include('views/artistForm.php');
             exit();
         }
 
-        if ($artistId == 0)
+        if ($artist['id'] == 0)
         {
-            $artistId = artists\addArtist($name, $monthlyListeners);
+            $artist['id'] = artists\addArtist($artist);
         }
         else
         {
-            artists\updateArtist($artistId, $name, $monthlyListeners);
+            artists\updateArtist($artist);
         }
 
-        header('Location: .?action=viewArtist&artistId=' . $artistId);
+        header('Location: .?action=viewArtist&artistId=' . $artist['id']);
+        break;
+
+    case 'deleteArtist':
+        $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
+
+        $entity = artists\getArtist($artistId);
+
+        if ($entity == FALSE)
+        {
+            include('views/404.php');
+            exit();
+        }
+
+        $entity['type'] = 'artist';
+
+        include('views/deleteForm.php');
         break;
 
     case 'listAlbums':
@@ -105,18 +133,40 @@ switch ($action)
 
     case 'viewAlbum':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
-        if ($albumId == NULL || $albumId == FALSE)
-        {
-            include('views/404.php');
-            exit();
-        }
+
+        if (!is_integer($albumId) || $albumId < 1) return404();
+
         $album = albums\getAlbum($albumId);
+
+        if ($album === FALSE) return404();
+
         $artist = artists\getArtist($album['artistId']);
         $songs = songs\getSongsByAlbumId($albumId);
         include('views/albumInfo.php');
         break;
 
     case 'albumForm':
+        $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
+
+        $newAlbum = array(
+            'id' => 0,
+            'name' => '',
+            'artistId' => ''
+        );
+
+        if (!is_integer($albumId) || $albumId < 0)
+        {
+            $album = $newAlbum;
+        }
+        else
+        {
+            $album = albums\getAlbum($albumId);
+            if ($album === NULL)
+            {
+                $album = $newAlbum;
+            }
+        }
+
         $artists = artists\getArtists();
         include('views/albumForm.php');
         break;
@@ -126,50 +176,46 @@ switch ($action)
         $name = filter_input(INPUT_POST, 'name');
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
 
-        $errors = array();
-        if ($albumId === NULL || $albumId === FALSE)
-            array_push($errors, 'Invalid album id.');
-        if ($name === NULL || $name == '')
-            array_push($errors, 'Album name is required.');
-        if ($artistId === NULL || $artistId === FALSE ||
-            artists\getArtist($artistId) === NULL)
-            array_push($errors, 'Invalid artist.');
-        
+        $album = array(
+            'id' => $albumId,
+            'name' => $name,
+            'artistId' => $artistId
+        );
+
+        $errors = albums\validateAlbum($album);
         if (count($errors) > 0)
         {
-            $album = array(
-                'id' => $albumId,
-                'name' => $name,
-                'artistId' => $artistId
-            );
             $artists = artists\getArtists();
             include('views/albumForm.php');
             exit();
         }
 
-        if ($albumId === 0)
+        if ($album['id'] == 0)
         {
-            $albumId = albums\addAlbum($name, $artistId);
+            $album['id'] = albums\addAlbum($album);
         }
         else
         {
-            albums\updateAlbum($albumId, $name, $albumId);
+            albums\updateAlbum($album);
         }
 
-        header('Location: .?action=viewAlbum&albumId=' . $albumId);
+        header('Location: .?action=viewAlbum&albumId=' . $album['id']);
+        break;
 
+    case 'deleteAlbum':
+        $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
+        if (!is_integer($albumId) || $albumId < 0) return404();
+        $entity = albums\getAlbum($albumId);
+        if ($entity == FALSE) return404();
+        $entity['type'] = 'album';
+        include('views/deleteForm.php');
         break;
 
     case 'viewSong':
         $songId = filter_input(INPUT_GET, 'songId', FILTER_VALIDATE_INT);
-        if ($songId == NULL || $songId == FALSE)
-        {
-            $title = '404 Not Found';
-            $body = 'That page does not exist.';
-            include('views/error.php');
-            exit();
-        }
+        if (!is_integer($songId) || $songId < 1) return404();
         $song = songs\getSong($songId);
+        if ($song == FALSE) return404();
         $album = albums\getAlbum($song['albumId']);
         $artists = artists\getArtistsOfSong($songId);
         include('views/songInfo.php');
@@ -183,23 +229,30 @@ switch ($action)
     case 'songForm':
         $songId = filter_input(INPUT_GET, 'songId', FILTER_VALIDATE_INT);
         
-        if ($songId === NULL || $songId === FALSE) $songId = 0;
+        $newSong = array(
+            'id' => 0,
+            'name' => '',
+            'length' => 0,
+            'albumId' => ''
+        );
 
-        $song = songs\getSong($songId);
-
-        if (!$song)
+        if (!is_integer($songId) || $songId < 0)
         {
-            $song = array(
-                'id' => 0,
-                'name' => '',
-                'length' => 0,
-                'albumId' => ''
-            );
-            $contributingArtistIds = array();
+            $song = $newSong;
+            $artistIds = array();
         }
         else
         {
-            $contributingArtistIds = artistsSongs\getArtistIdsBySongId($songId);
+            $song = songs\getSong($songId);
+            if ($song == FALSE)
+            {
+                $song = $newSong;
+                $artistIds = array();
+            }
+            else
+            {
+                $artistIds = artistsSongs\getArtistIdsBySongId($songId);
+            }
         }
 
         $albums = albums\getAlbumsWithArtistNames();
@@ -210,59 +263,49 @@ switch ($action)
     case 'editSong':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
-        $albumId = filter_input(INPUT_POST, 'albumId');
+        $albumId = filter_input(INPUT_POST, 'albumId', FILTER_VALIDATE_INT);
         $minutes = filter_input(INPUT_POST, 'minutes', FILTER_VALIDATE_INT);
         $seconds = filter_input(INPUT_POST, 'seconds', FILTER_VALIDATE_INT);
-        $contributingArtistIds = filter_input(INPUT_POST,
-            'contributingArtistIds', FILTER_VALIDATE_BOOL,
+        $artistIdRows = filter_input(INPUT_POST, 'artistIds', FILTER_DEFAULT,
             FILTER_REQUIRE_ARRAY);
 
-        /* Validation */
+        $song = array(
+            'id' => $songId,
+            'name' => $name,
+            'length' => 0,
+            'albumId' => $albumId
+        );
 
-        $errors = array();
+        $errors = songs\validateSong($song);
 
-        if ($songId === NULL || $songId === FALSE)
-            array_push($errors, 'Song id is required.');
-
-        if ($name === NULL || $name === '')
-            array_push($errors, 'Song name is required.');
-
-        if ($albumId === NULL || $albumId === FALSE)
-            array_pust($errors, 'Album is required.');
-
-        if ($minutes === NULL || $minutes === FALSE)
+        if (!is_integer($minutes) || $minutes < 0)
         {
-            array_push($errors, 'Minutes must be a positive, whole number.');
+            $errors[] = 'Minutes must a positive number.';
             $minutes = 0;
         }
 
-        if ($seconds === NULL || $seconds === FALSE)
+        if (!is_integer($seconds) || $seconds < 0)
         {
-            array_push($errors, 'Seconds must be a positive, whole number.');
+            $errors[] = 'Seconds must be a positive number.';
             $seconds = 0;
         }
-        
-        if ($minutes == 0 && $seconds == 0)
+
+        if (!is_array($artistIdRows) || count($artistIdRows) == 0)
         {
-            array_push($errors, 'Duration must be greater than zero.');
+            $errors[] = 'Please select at least one contributing artist.';
+            $artistIdRows = array();
         }
 
-        if ($contributingArtistIds === NULL || $contributingArtistIds === FALSE)
-        {
-            array_push($errors, 'Please select at least one contributing artist.');
-            $contributingArtistIds = array();
-        }
+        $song['length'] = $minutes * 60 + $seconds;
 
-        $length = $minutes * 60 + $seconds;
-        $contributingArtistIds = array_keys($contributingArtistIds);
+        $artistIds = array();
+        foreach ($artistIdRows as $key => $value)
+        {
+            $artistIds[] = $key;
+        }
 
         if (count($errors) > 0)
         {
-            $song = array(
-                'id' => $songId,
-                'name' => $name,
-                'length' => $length
-            );
             $artists = artists\getArtists();
             $albums = albums\getAlbumsWithArtistNames();
             include('views/songForm.php');
@@ -271,32 +314,28 @@ switch ($action)
 
         // Add/edit the song
 
-        if ($songId == 0)
+        if ($song['id'] == 0)
         {
-            $songId = songs\addSong($name, $length, $albumId);
+            $song['id'] = songs\addSong($song);
         }
         else
         {
-            songs\updateSong($songId, $name, $length, $albumId);
+            songs\updateSong($song);
         }
 
         // Set the song's authorship
-        artistsSongs\updateArtistsSongs($songId, $contributingArtistIds);
+        $artistIds = array_keys($artistIds);
+        artistsSongs\updateArtistsSongs($songId, $artistIds);
 
-        header('Location: .?action=viewSong&songId=' . $songId);
+        header('Location: .?action=viewSong&songId=' . $song['id']);
         break;
 
-    case 'deleteForm':
-        $entityType = filter_input(INPUT_GET, 'entityType');
-        $entityId = filter_input(INPUT_GET, 'entityId', FILTER_VALIDATE_INT);
-
-        if (!in_array($entityType, ['artist', 'album', 'song']) ||
-            $entityId === NULL || $entityId == FALSE)
-        {
-            header('Location: .');
-            exit();
-        }
-
+    case 'deleteSong':
+        $songId = filter_input(INPUT_GET, 'songId', FILTER_VALIDATE_INT);
+        if (!is_integer($songId) || $songId < 1) return404();
+        $entity = songs\getSong($songId);
+        if ($entity == FALSE) return404();
+        $entity['type'] = 'song';
         include('views/deleteForm.php');
         break;
 
@@ -305,73 +344,76 @@ switch ($action)
         $entityId = filter_input(INPUT_POST, 'entityId', FILTER_VALIDATE_INT);
 
         if (!in_array($entityType, ['artist', 'album', 'song']) ||
-            $entityId === NULL || $entityId == FALSE)
+            !is_integer($entityId) || $entityId < 1)
         {
             header('Location: .');
-            exit();
-        }
-
-        if ($entityType == 'artist')
-        {
-            $entity = artists\getArtist($entityId);
-        }
-        else if ($entityType == 'album')
-        {
-            $entity = albums\getAlbum($entityId);
-        }
-        else if ($entityType == 'song')
-        {
-            $entity = songs\getSong($entityId);
-        }
-
-        if ($entity === NULL)
-        {
-            $title = 'Error';
-            $body = 'That ' . $entityType . ' does not exist.';
-            include('views/error.php');
             exit();
         }
 
         switch ($entityType)
         {
             case 'artist':
-                artists\deleteArtist($entityId);
-                header('Location: .?action=listArtists');
+                $entity = artists\getArtist($entityId);
                 break;
             case 'album':
-                albums\deleteAlbum($entityId);
-                header('Location: .?action=listAlbums');
+                $entity = albums\getAlbum($entityId);
                 break;
             case 'song':
-                songs\deleteSong($entityId);
+                $entity = songs\getSong($entityId);
+                break;
+        }
+
+        if ($entity == FALSE) return404();
+
+        switch ($entityType)
+        {
+            case 'artist':
+                artists\deleteArtist($entity);
+                header('Location: .?action=listArtists');
+                exit();
+            case 'album':
+                albums\deleteAlbum($entity);
+                header('Location: .?action=listAlbums');
+                exit();
+            case 'song':
+                songs\deleteSong($entity);
                 header('Location: .?action=listSongs');
-                break;
-            default:
-                $title = 'Error';
-                $body = 'Invalid submission';
-                include('views/errors.php');
-                break;
+                exit();
         }
         break;
 
-    case 'listFavorites':
-        include('views/favorites.php');
+    case 'listLikedSongs':
+        $songs = songs\getSongsBySongIds($_SESSION['likedSongIds']);
+        include('views/likedSongs.php');
         break;
     
-    case 'addFavorite':
+    case 'toggleFavorite':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
 
-        if ($songId === NULL || $songId === FALSE ||
-            songs\getSong($songId) == NULL)
+        if ($songId === NULL ||
+            $songId === FALSE ||
+            songs\getSong($songId) === NULL)
         {
             header('Location: .?action=listSongs');
+            exit();
+        }
+
+        if (in_array($songId, $_SESSION['likedSongIds']))
+        {
+            $_SESSION['likedSongIds'] = array_diff($_SESSION['likedSongIds'],
+                [$songId]);
         }
         else
         {
-            array_push($_SESSION['favoriteSongs'], $songId);
-            header('Location: .?action=viewSong&songId=' . $songId);
+            $_SESSION['likedSongIds'][] = $songId;
         }
 
+        header('Location: .?action=listLikedSongs');
+        break;
+    
+    case 'clearLikedSongs':
+        $_SESSION['likedSongIds'] = array();
+        header('Location: .?action=listLikedSongs');
         break;
     
     default:
