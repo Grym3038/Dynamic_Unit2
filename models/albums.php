@@ -18,7 +18,7 @@ function validateAlbum(array $album) : array
     return $errors;
 }
 
-function getAlbum(int $albumId) : array
+function getAlbum(int $albumId) : array | bool
 {
     global $db;
     $query = 'SELECT id, name, artistId
@@ -97,7 +97,7 @@ function updateAlbum(array $album) : void
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $album['name']);
     $statement->bindValue(':artistId', $album['artistId']);
-    $statement->bindValue(':albumId', $album['albumId']);
+    $statement->bindValue(':albumId', $album['id']);
     $statement->execute();
     $statement->closeCursor();
 }
@@ -108,7 +108,7 @@ function deleteAlbum(array $album) : void
     $query = 'DELETE FROM albums
               WHERE id = :albumId';
     $statement = $db->prepare($query);
-    $statement->bindValue(':albumId', $album['albumId']);
+    $statement->bindValue(':albumId', $album['id']);
     $statement->execute();
     $statement->closeCursor();
 }
