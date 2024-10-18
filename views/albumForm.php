@@ -1,8 +1,7 @@
 <?php include('views/partials/header.php'); ?>
 
 <h1>
-    <?php echo ($album['id'] == 0 ? 'Add' : 'Edit'); ?>
-    Album
+    <?php echo ($album['id'] == 0 ? 'Add' : 'Edit') . ' Album'; ?>
 </h1>
 
 <form action="." method="post">
@@ -39,7 +38,21 @@
     </div>
     <div>
         <input type="submit" value="Submit" />
-        <a href=".">Cancel</a>
+
+        <?php
+            if ($album['id'] == 0)
+            {
+                $href = '.?action=listAlbums';
+            }
+            else
+            {
+                $href = '.?action=viewAlbum&albumId=' . $album['id'];
+            }
+        ?>
+
+        <a href="<?php echo $href; ?>">
+            Cancel
+        </a>
     </div>
 </form>
 
