@@ -1,6 +1,31 @@
 <?php
 namespace albums;
 
+function validateAlbum(array $album) : array
+{
+    $errors = array();
+
+    if (!is_string($album['name']) || $album['name'] === '')
+    {
+        array_push($errors, 'Name is required');
+    }
+
+    if (!is_integer($album['artistId']) || $albumId < 0)
+    {
+        array_push($errors, 'Invalid artist Id.');
+    }
+    else
+    {
+        include('models/artists.php');
+        if (artists\getArtist($album['artistId']) === NULL)
+        {
+            array_push($errors, 'That artist does not exist.');
+        }
+    }
+
+    return $errors;
+}
+
 function getAlbum(int $albumId) : array
 {
     global $db;
@@ -57,41 +82,41 @@ function getAlbumsByArtistId(int $artistId) : array
     return $albums;
 }
 
-function addAlbum(string $name, int $artistId) : int
+function addAlbum(array $album) : int
 {
     global $db;
     $query = 'INSERT INTO albums (name, artistId)
               VALUES (:name, :artistId)';
     $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':artistId', $artistId);
+    $statement->bindValue(':name', $album['name']);
+    $statement->bindValue(':artistId', $album['artistId']);
     $statement->execute();
     $albumId = $db->lastInsertId();
     $statement->closeCursor();
     return $albumId;
 }
 
-function updateAlbum(int $albumId, string $name, int $artistId) : void
+function updateAlbum(array $album) : void
 {
     global $db;
     $query = 'UPDATE albums
               SET name = :name, artistId = :artistId
               WHERE id = :albumId';
     $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':artistId', $artistId);
-    $statement->bindValue(':albumId', $albumId);
+    $statement->bindValue(':name', $album['name']);
+    $statement->bindValue(':artistId', $album['artistId']);
+    $statement->bindValue(':albumId', $album['albumId']);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function deleteAlbum(int $albumId) : bool
+function deleteAlbum(array $album) : void
 {
     global $db;
     $query = 'DELETE FROM albums
               WHERE id = :albumId';
     $statement = $db->prepare($query);
-    $statement->bindValue(':albumId', $albumId);
+    $statement->bindValue(':albumId', $album['albumId']);
     $statement->execute();
     $statement->closeCursor();
 }
