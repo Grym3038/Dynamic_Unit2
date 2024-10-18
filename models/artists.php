@@ -5,7 +5,7 @@ function validateArtist(array $artist) : array
 {
     $errors = array();
 
-    if (!is_string($artist['name']) || $artist['name'] === '')
+    if (!is_string($artist['name']) || $artist['name'] == '')
     {
         array_push($errors, 'Name is required.');
     }

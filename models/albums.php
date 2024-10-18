@@ -4,23 +4,15 @@ namespace albums;
 function validateAlbum(array $album) : array
 {
     $errors = array();
-
-    if (!is_string($album['name']) || $album['name'] === '')
+    
+    if (!is_string($album['name']) || $album['name'] == '')
     {
         array_push($errors, 'Name is required');
     }
 
-    if (!is_integer($album['artistId']) || $albumId < 0)
+    if (!is_integer($album['artistId']) || $album['artistId'] < 0)
     {
         array_push($errors, 'Invalid artist Id.');
-    }
-    else
-    {
-        include('models/artists.php');
-        if (artists\getArtist($album['artistId']) === NULL)
-        {
-            array_push($errors, 'That artist does not exist.');
-        }
     }
 
     return $errors;

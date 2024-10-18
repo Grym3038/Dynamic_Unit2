@@ -1,6 +1,28 @@
 <?php
 namespace songs;
 
+function validateSong(array $song) : array
+{
+    $errors = array();
+
+    if (!is_string($song['name']) || $song['name'] == '')
+    {
+        array_push($errors, 'Name is required');
+    }
+
+    if (!is_integer($song['length']) || $song['length'] < 0)
+    {
+        array_push($errors, 'Length must be a positive number.');
+    }
+
+    if (!is_integer($song['albumId']) || $song['albumId'] < 0)
+    {
+        array_push($errors, 'Invalid album id.');
+    }
+
+    return $errors;
+}
+
 function getSongs() : array
 {
     global $db;
@@ -46,6 +68,25 @@ function getSong(int $songId) : array
     return $song;
 }
 
+function getSongsBySongIds(array $songIds) : array
+{
+    if (count($songIds) == 0) return array();
+
+    global $db;
+
+    $idList = implode(',', $songIds); // SQL injection possible?
+
+    $query = "SELECT id, name, length, albumId
+              FROM songs
+              WHERE id IN ($idList)";
+
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $songs = $statement->fetchAll();
+    $statement->closeCursor();
+    return $songs;
+}
+
 function getSongsByAlbumId(int $albumId) : array
 {
     global $db;
@@ -77,43 +118,43 @@ function getSongsByArtistId(int $artistId) : array
     return $songs;
 }
 
-function addSong(string $name, int $length, int $albumId) : int
+function addSong(array $song) : int
 {
     global $db;
     $query = 'INSERT INTO songs (name, length, albumId)
               VALUES (:name, :length, :albumId)';
     $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':length', $length);
-    $statement->bindValue(':albumId', $albumId);
+    $statement->bindValue(':name', $song['name']);
+    $statement->bindValue(':length', $song['length']);
+    $statement->bindValue(':albumId', $song['albumId']);
     $statement->execute();
     $songId = $db->lastInsertId();
     $statement->closeCursor();
     return $songId;
 }
 
-function updateSong(int $songId, string $name, int $length, int $albumId) : void
+function updateSong(array $song) : void
 {
     global $db;
     $query = 'UPDATE songs
               SET name = :name, length = :length, albumId = :albumId
               WHERE id = :songId';
     $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':length', $length);
-    $statement->bindValue(':albumId', $albumId);
-    $statement->bindValue(':songId', $songId);
+    $statement->bindValue(':name', $song['name']);
+    $statement->bindValue(':length', $song['length']);
+    $statement->bindValue(':albumId', $song['albumId']);
+    $statement->bindValue(':songId', $song['songId']);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function deleteSong(int $songId) : void
+function deleteSong(array $song) : void
 {
     global $db;
     $query = 'DELETE FROM songs
               WHERE id = :songId';
     $statement = $db->prepare($query);
-    $statement->bindValue(':songId', $songId);
+    $statement->bindValue(':songId', $song['songId']);
     $statement->execute();
     $statement->closeCursor();
 }
