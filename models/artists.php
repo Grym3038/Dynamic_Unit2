@@ -1,7 +1,25 @@
 <?php
 namespace artists;
 
-function getArtists()
+function validateArtist(array $artist) : array
+{
+    $errors = array();
+
+    if (!is_string($artist['name']) || $artist['name'] === '')
+    {
+        array_push($errors, 'Name is required.');
+    }
+
+    if (!is_integer($artist['monthlyListeners']) ||
+        $artist['monthlyListeners'] < 0)
+    {
+        array_push($errors, 'Monthly listeners must be a positive number.');
+    }
+
+    return $errors;
+}
+
+function getArtists() : array
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners
@@ -14,7 +32,7 @@ function getArtists()
     return $artists;
 }
 
-function getArtist(int $artistId)
+function getArtist(int $artistId) : array
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners
@@ -28,7 +46,7 @@ function getArtist(int $artistId)
     return $artist;
 }
 
-function getArtistsOfSong(int $songId)
+function getArtistsOfSong(int $songId) : array
 {
     global $db;
     $query = 'SELECT artists.id, artists.name, artists.monthlyListeners
@@ -44,41 +62,41 @@ function getArtistsOfSong(int $songId)
     return $artists;
 }
 
-function addArtist(string $name, int $monthlyListeners) : string
+function addArtist(array $artist) : string
 {
     global $db;
     $query = 'INSERT INTO artists (name, monthlyListeners)
               VALUES (:name, :monthlyListeners);';
     $statement = $db->prepare($query);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':monthlyListeners', $monthlyListeners);
+    $statement->bindValue(':name', $artist['name']);
+    $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
     $statement->execute();
     $artistId = $db->lastInsertId();
     $statement->closeCursor();
     return $artistId;
 }
 
-function updateArtist(int $artistId, string $name, $monthlyListeners)
+function updateArtist(array $artist) : void
 {
     global $db;
     $query = 'UPDATE artists
               SET name = :name, monthlyListeners = :monthlyListeners
               WHERE id = :artistId;';
         $statement = $db->prepare($query);
-        $statement->bindValue(':name', $name);
-        $statement->bindValue(':monthlyListeners', $monthlyListeners);
-        $statement->bindValue(':artistId', $artistId);
+        $statement->bindValue(':name', $artist['name']);
+        $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
+        $statement->bindValue(':artistId', $artist['id']);
         $statement->execute();
         $statement->closeCursor();
 }
 
-function deleteArtist(int $artistId)
+function deleteArtist(array $artist) : void
 {
     global $db;
     $query = 'DELETE FROM artists
               WHERE id = :artistId;';
     $statement = $db->prepare($query);
-    $statement->bindValue(':artistId', $artistId);
+    $statement->bindValue(':artistId', $artist['id']);
     $statement->execute();
     $statement->closeCursor();
 }
