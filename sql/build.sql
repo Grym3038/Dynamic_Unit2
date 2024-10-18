@@ -1,5 +1,5 @@
 /*
-    Title: Database Build
+    Title: Build Database
 */
 
 DROP DATABASE IF EXISTS spotifyClone;
@@ -7,6 +7,15 @@ DROP USER IF EXISTS spotifyClone;
 
 CREATE DATABASE spotifyClone;
 USE spotifyClone;
+
+CREATE USER IF NOT EXISTS spotifyClone@localhost
+IDENTIFIED BY 'password';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON spotifyClone.*
+TO spotifyClone@localhost;
+
+/* Tables */
 
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
@@ -43,13 +52,6 @@ CREATE TABLE artistsSongs (
         ON DELETE CASCADE,
     CONSTRAINT ukArtistSong UNIQUE (artistId, songId)
 ) ENGINE = INNODB;
-
-CREATE USER IF NOT EXISTS spotifyClone@localhost
-IDENTIFIED BY 'password';
-
-GRANT SELECT, INSERT, UPDATE, DELETE
-ON spotifyClone.*
-TO spotifyClone@localhost;
 
 /* Sample Data */
 
