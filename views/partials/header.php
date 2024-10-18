@@ -18,7 +18,7 @@
                 <a href=".?action=listSongs">Songs</a>
             </li>
             <li>
-                <a href=".?action=listFavorites">Favorites</a>
+                <a href=".?action=listLikedSongs">Liked Songs</a>
             </li>
         </ul>
     </nav>
