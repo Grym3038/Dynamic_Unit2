@@ -118,6 +118,20 @@ function getSongsByArtistId(int $artistId) : array
     return $songs;
 }
 
+function getAlbumLength(int $albumId) : int
+{
+    global $db;
+    $query = 'SELECT COALESCE(SUM(length), 0) length
+              FROM songs
+              WHERE albumId = :albumId';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':albumId', $albumId);
+    $statement->execute();
+    $row = $statement->fetch();
+    $statement->closeCursor();
+    return $row['length'];
+}
+
 function addSong(array $song) : int
 {
     global $db;
