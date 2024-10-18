@@ -5,19 +5,19 @@
 <form action="." method="post">
     <p>
         Are you sure you want to delete
-        "<?php echo htmlspecialchars($entityName) ?>"?
+        "<?php echo htmlspecialchars($entity['name']) ?>"?
     </p>
     <input type="hidden" name="action" value="deleteEntity" />
     <input type="hidden" name="entityType"
-        value="<?php echo htmlspecialchars($entityType); ?>" />
+        value="<?php echo htmlspecialchars($entity['type']); ?>" />
     <input type="hidden" name="entityId"
-        value="<?php echo htmlspecialchars($entityId); ?>" />
+        value="<?php echo htmlspecialchars($entity['id']); ?>" />
     <div>
         <input type="submit" value="Yes" />
         <?php
-            $href = '.?action=view' . htmlspecialchars(ucwords($entityType)) .
-                '&' . htmlspecialchars(strtolower($entityType)) . 'Id=' .
-                $entityId;
+            $href = '.?action=view' . htmlspecialchars(ucwords($entity['type'])) .
+                '&' . htmlspecialchars(strtolower($entity['type'])) . 'Id=' .
+                $entity['id'];
         ?>
         <a href="<?php echo $href; ?>">
             Cancel
