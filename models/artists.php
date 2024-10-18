@@ -24,7 +24,7 @@ function getArtists() : array
     global $db;
     $query = 'SELECT id, name, monthlyListeners
               FROM artists
-              ORDER BY LOWER(name);';
+              ORDER BY LOWER(name)';
     $statement = $db->prepare($query);
     $statement->execute();
     $artists = $statement->fetchAll();
@@ -37,7 +37,7 @@ function getArtist(int $artistId) : array
     global $db;
     $query = 'SELECT id, name, monthlyListeners
               FROM artists
-              WHERE id = :artistId;';
+              WHERE id = :artistId';
     $statement = $db->prepare($query);
     $statement->bindValue(':artistId', $artistId);
     $statement->execute();
@@ -53,7 +53,8 @@ function getArtistsOfSong(int $songId) : array
               FROM artists
                   JOIN artistsSongs ON artists.id = artistsSongs.artistId
                   JOIN songs ON artistsSongs.songId = songs.Id
-              WHERE songs.id = :songId;';
+              WHERE songs.id = :songId
+              ORDER BY LOWER(artists.name)';
     $statement = $db->prepare($query);
     $statement->bindValue(':songId', $songId);
     $statement->execute();
