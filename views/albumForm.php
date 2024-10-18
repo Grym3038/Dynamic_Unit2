@@ -1,16 +1,5 @@
 <?php include('views/partials/header.php'); ?>
 
-<?php
-if (!isset($album))
-{
-    $album = array(
-        'id' => 0,
-        'name' => '',
-        'artistId' => ''
-    );
-}
-?>
-
 <h1>
     <?php echo ($album['id'] == 0 ? 'Add' : 'Edit'); ?>
     Album
