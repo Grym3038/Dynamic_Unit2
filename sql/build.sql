@@ -44,8 +44,10 @@ CREATE TABLE songs (
 ) ENGINE = INNODB;
 
 CREATE TABLE artistsSongs (
+    id       int AUTO_INCREMENT,
     artistId int NOT NULL,
     songId   int NOT NULL,
+    PRIMARY KEY (id),
     CONSTRAINT fkArtist FOREIGN KEY (artistId) REFERENCES artists(id)
         ON DELETE CASCADE,
     CONSTRAINT fkSong FOREIGN KEY (songId) REFERENCES songs(id)
