@@ -1,3 +1,5 @@
+<?php require('views/helpers/formatTime.php'); />
+
 <?php include('views/partials/header.php'); ?>
 
 <h1>
@@ -50,10 +52,7 @@
         <tr>
             <th>Runtime</th>
             <td>
-                <?php
-                    require('views/utilities/formattime.php');
-                    echo formatTime($song['length']);
-                ?>
+                <?php echo formatTime($song['length']); ?>
             </td>
         </tr>
     </tbody>

@@ -1,6 +1,6 @@
-<?php include('views/partials/header.php'); ?>
+<?php require('views/helpers/formatTime.php'); ?>
 
-<?php require('views/utilities/formattime.php'); ?>
+<?php include('views/partials/header.php'); ?>
 
 <h1>Songs</h1>
 

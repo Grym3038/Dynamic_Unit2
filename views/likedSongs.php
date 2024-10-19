@@ -1,6 +1,6 @@
-<?php include('views/partials/header.php'); ?>
+<?php require('views/helpers/formatTime.php'); ?>
 
-<?php require('views/utilities/formatTime.php'); ?>
+<?php include('views/partials/header.php'); ?>
 
 <h1>Liked Songs</h1>
 

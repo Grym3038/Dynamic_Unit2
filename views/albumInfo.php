@@ -1,4 +1,4 @@
-<?php require('views/utilities/formattime.php'); ?>
+<?php require('views/helpers/formatTime.php'); ?>
 
 <?php include('views/partials/header.php'); ?>
 
