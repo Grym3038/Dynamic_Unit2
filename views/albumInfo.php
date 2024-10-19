@@ -19,12 +19,24 @@
     </li>
 </ul>
 
-<p>
-    Album by
-    <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
-        <?php echo htmlspecialchars($artist['name']); ?>
-    </a>
-</p>
+<table>
+    <tbody>
+        <tr>
+            <th>Artist</th>
+            <td>
+                <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
+                    <?php echo htmlspecialchars($artist['name']); ?>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>Length</th>
+            <td>
+                <?php echo formatTime($album['length']); ?>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 <table>
     <thead>
