@@ -32,7 +32,7 @@ function getArtists() : array
     return $artists;
 }
 
-function getArtist(int $artistId) : array
+function getArtist(int $artistId) : array | bool
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners
@@ -63,7 +63,7 @@ function getArtistsOfSong(int $songId) : array
     return $artists;
 }
 
-function addArtist(array $artist) : string
+function addArtist(array $artist) : int
 {
     global $db;
     $query = 'INSERT INTO artists (name, monthlyListeners)
