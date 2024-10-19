@@ -6,15 +6,7 @@
 </h1>
 
 <form action="." method="post">
-    <?php if (!empty($errors) && count($errors) > 0) : ?>
-        <ul>
-            <?php foreach ($errors as $error) : ?>   
-            <li>
-                <?php echo $error; ?>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+    <?php include('views/partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editArtist" />
     <input type="hidden" name="artistId" value="<?php echo $artist['id']; ?>" />

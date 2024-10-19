@@ -5,15 +5,7 @@
 </h1>
 
 <form action="." method="post">
-    <?php if (!empty($errors) && count($errors) > 0) : ?>
-        <ul>
-            <?php foreach ($errors as $error) : ?>   
-            <li>
-                <?php echo $error; ?>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+    <?php include('views/partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editAlbum" />
     <input type="hidden" name="albumId" value="<?php echo $album['id']; ?>" />
