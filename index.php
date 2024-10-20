@@ -3,7 +3,7 @@
     Title: Controller
 */
 
-require_once('models/database.php');
+require_once('models/_database.php');
 require_once('models/artists.php');
 require_once('models/albums.php');
 require_once('models/songs.php');
