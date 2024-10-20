@@ -1,6 +1,13 @@
 <?php
+/**
+ * Functions for manipulating songs in the database.
+ */
+
 namespace songs;
 
+/**
+ * Validate the properties of a song.
+ */
 function validateSong(array $song) : array
 {
     $errors = array();
@@ -23,6 +30,9 @@ function validateSong(array $song) : array
     return $errors;
 }
 
+/**
+ * Get all songs.
+ */
 function getSongs() : array
 {
     global $db;
@@ -36,6 +46,9 @@ function getSongs() : array
     return $songs;
 }
 
+/**
+ * Get all songs, including their album names.
+ */
 function getSongsWithAlbumName() : array
 {
     global $db;
@@ -51,7 +64,10 @@ function getSongsWithAlbumName() : array
     return $songs;
 }
 
-function getSong(int $songId) : array
+/**
+ * Get a song based on its id.
+ */
+function getSong(int $songId) : array | bool
 {
     global $db;
     $query = 'SELECT id, name, length, albumId
@@ -63,11 +79,12 @@ function getSong(int $songId) : array
     $song = $statement->fetch();
     $statement->closeCursor();
 
-    if ($song == FALSE) $song = array();
-
     return $song;
 }
 
+/**
+ * Get all songs with ids in the given list of ids.
+ */
 function getSongsBySongIds(array $songIds) : array
 {
     if (count($songIds) == 0) return array();
@@ -87,6 +104,9 @@ function getSongsBySongIds(array $songIds) : array
     return $songs;
 }
 
+/**
+ * Get all songs with the given album id.
+ */
 function getSongsByAlbumId(int $albumId) : array
 {
     global $db;
@@ -102,6 +122,9 @@ function getSongsByAlbumId(int $albumId) : array
     return $songs;
 }
 
+/**
+ * Get all songs with the given artist id.
+ */
 function getSongsByArtistId(int $artistId) : array
 {
     global $db;
@@ -118,6 +141,9 @@ function getSongsByArtistId(int $artistId) : array
     return $songs;
 }
 
+/**
+ * Calculate the duration of an album in seconds given the album id.
+ */
 function getAlbumLength(int $albumId) : int
 {
     global $db;
@@ -132,6 +158,11 @@ function getAlbumLength(int $albumId) : int
     return $row['length'];
 }
 
+/**
+ * Add a song.
+ * 
+ * @return int The id of the new song
+ */
 function addSong(array $song) : int
 {
     global $db;
@@ -147,6 +178,9 @@ function addSong(array $song) : int
     return $songId;
 }
 
+/**
+ * Update a song.
+ */
 function updateSong(array $song) : void
 {
     global $db;
@@ -162,6 +196,9 @@ function updateSong(array $song) : void
     $statement->closeCursor();
 }
 
+/**
+ * Delete a song.
+ */
 function deleteSong(array $song) : void
 {
     global $db;
