@@ -14,6 +14,7 @@
             <th>Artist</th>
             <th>Song</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,11 @@
                 <td>
                     <a href=".?action=viewSong&songId=<?php echo $artistSong['songId']; ?>">
                         <?php echo htmlspecialchars($artistSong['songName']); ?>
+                    </a>
+                </td>
+                <td>
+                    <a href=".?action=artistsSongsForm&artistSongId=<?php echo $artistSong['id']; ?>">
+                        Edit
                     </a>
                 </td>
                 <td>

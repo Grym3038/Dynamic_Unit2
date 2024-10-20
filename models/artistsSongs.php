@@ -20,23 +20,29 @@ function validateArtistSong(array $artistSong) : array
         $errors[] = 'Artist is required.';
     }
 
+    if (count($errors) === 0)
+    {
+        global $db;
+        $query = 'SELECT COUNT(*) count
+                  FROM artistsSongs
+                  WHERE artistId = :artistId
+                      AND songId = :songId
+                      AND id != :id';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':artistId', $artistSong['artistId']);
+        $statement->bindValue(':songId', $artistSong['songId']);
+        $statement->bindValue(':id', $artistSong['id']);
+        $statement->execute();
+        $count = $statement->fetch()['count'];
+        $statement->closeCursor();
+
+        if ($count > 0)
+        {
+            $errors[] = 'That relationship already exists.';
+        }
+    }
+
     return $errors;
-}
-
-function isArtistSongUnique(array $artistSong) : bool
-{
-    global $db;
-    $query = 'SELECT COUNT(*) count
-              FROM artistsSongs
-              WHERE artistId = :artistId AND songId = :songId';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':artistId', $artistSong['artistId']);
-    $statement->bindValue(':songId', $artistSong['songId']);
-    $statement->execute();
-    $count = $statement->fetch()['count'];
-    $statement->closeCursor();
-
-    return ($count === 0);
 }
 
 function getArtistsSongs() : array

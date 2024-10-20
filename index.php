@@ -372,7 +372,7 @@ switch ($action)
         }
         else
         {
-            $artistsSongs = artistsSongs\getArtistSong($artistSongId);
+            $artistSong = artistsSongs\getArtistSong($artistSongId);
             if ($artistSong === FALSE)
             {
                 $artistSong = $newArtistSong;
@@ -397,15 +397,6 @@ switch ($action)
         );
 
         $errors = artistsSongs\validateArtistSong($artistSong);
-
-        if ($artistSong['id'] === 0)
-        {
-            $isUnique = artistsSongs\isArtistSongUnique($artistSong);
-            if (!$isUnique)
-            {
-                $errors[] = 'That relationship already exists.';
-            }
-        }
 
         if (count($errors) > 0)
         {

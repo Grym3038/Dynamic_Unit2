@@ -17,7 +17,8 @@
                 select an artist
             </option>
             <?php foreach ($artists as $artist) : ?>
-                <option value="<?php echo $artist['id']; ?>">
+                <option value="<?php echo $artist['id']; ?>"
+                    <?php echo ($artist['id'] == $artistSong['artistId']) ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($artist['name']); ?>
                 </option>
             <?php endforeach; ?>
@@ -30,7 +31,8 @@
                 select a song
             </option>
             <?php foreach ($songs as $song) : ?>
-                <option value="<?php echo $song['id']; ?>">
+                <option value="<?php echo $song['id']; ?>"
+                    <?php echo ($song['id'] == $artistSong['songId']) ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($song['name']); ?>
                 </option>
             <?php endforeach; ?>
