@@ -205,7 +205,7 @@ function deleteSong(array $song) : void
     $query = 'DELETE FROM songs
               WHERE id = :songId';
     $statement = $db->prepare($query);
-    $statement->bindValue(':songId', $song['songId']);
+    $statement->bindValue(':songId', $song['id']);
     $statement->execute();
     $statement->closeCursor();
 }
