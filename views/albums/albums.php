@@ -27,7 +27,7 @@
         <?php foreach($albums as $album) : ?>
             <tr>
                 <td>
-                    <img src="<?php echo $album['iPath']; ?>" alt="">
+                    <img src="<?php echo $album['iPath']; ?>" style="width: 9rem; height: 9rem;" class="img-thumbnail" alt="">
                 </td>
                 <td>
                     <a class="btn btn-dark" href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
