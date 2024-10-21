@@ -6,25 +6,23 @@
     <?php echo htmlspecialchars($album['name']); ?>
 </h1>
 
-<ul>
-    <li>
-        <a href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
-            Edit
-        </a>
+<div class="btn-group" role="group" aria-label="Basic example">
+    
+    <a class="btn btn-outline-info" href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
+        Edit
+    </a>
+    <a class="btn btn-outline-danger" href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
+        Delete
+    </a>
     </li>
-    <li>
-        <a href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
-            Delete
-        </a>
-    </li>
-</ul>
+</div>
 
 <table>
     <tbody>
         <tr>
             <th>Artist</th>
             <td>
-                <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
+                <a class="btn btn-outline-secondary" href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
                     <?php echo htmlspecialchars($artist['name']); ?>
                 </a>
             </td>
@@ -38,7 +36,7 @@
     </tbody>
 </table>
 
-<table>
+<table class="table table-sm">
     <thead>
         <tr>
             <th>Song</th>
