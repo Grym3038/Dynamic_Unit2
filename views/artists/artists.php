@@ -1,15 +1,11 @@
 <?php include('views/_partials/header.php'); ?>
+<div class="container mt-4 bg-dark text-light rounded" style="margin-bottom: 60px;">
 
 <h1>Artists</h1>
 
 
 
-<table>
-    <thead>
-        <th>Name</td>
-        <th>Monthly Listeners</th>
-    </thead>
-    <tbody>
+
     <div class="row bg-dark text-light rounded">
 
         <?php foreach ($artists as $artist) : ?>
@@ -52,7 +48,7 @@
             </a>
         </div>
         </div>
-    </tbody>
-</table>
+
+</div>
 
 <?php include('views/_partials/footer.php'); ?>
