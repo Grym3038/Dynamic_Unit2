@@ -61,7 +61,7 @@ function getArtistsSongs() : array
     return $artistsSongs;
 }
 
-function getArtistSong(int $artistSongId) : array | bool
+function getArtistSong(int $artistSongId) 
 {
     global $db;
     $query = 'SELECT artistsSongs.id, artistId, artists.name artistName,

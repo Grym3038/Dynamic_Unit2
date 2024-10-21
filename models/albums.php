@@ -18,7 +18,7 @@ function validateAlbum(array $album) : array
     return $errors;
 }
 
-function getAlbum(int $albumId) : array | bool
+function getAlbum(int $albumId) 
 {
     global $db;
     $query = 'SELECT id, name, artistId

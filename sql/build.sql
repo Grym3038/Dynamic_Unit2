@@ -27,7 +27,6 @@ CREATE TABLE artists (
 
 CREATE TABLE albums (
     id       int           AUTO_INCREMENT,
-    iPath            varchar(2023) NOT NULL,
     name     varchar(1023) NOT NULL,
     artistId int           NOT NULL,
     PRIMARY KEY (id),
@@ -59,17 +58,17 @@ CREATE TABLE artistsSongs (
 
 /* Sample Data */
 
-INSERT INTO artists (name, monthlyListeners)
-VALUES ('Coldplay', 47850643),
-       ('Sabrina Carpenter', 32976052),
-       ('Zach Bryan', 5965245),
-       ('Luke Combs', 41065710),
-       ('Post Malone', 48176336),
-       ('Kendrick Lamar', 44523462),
-       ('Teddy Swims', 45574887),
-       ('Eminem', 39851740),
-       ('Travis Scott', 29176861),
-       ('Tyler, the Creator', 10649493)
+INSERT INTO artists (name, iPath, monthlyListeners)
+VALUES ('Coldplay', 'images/artists/coldPlay.png', 47850643),
+       ('Sabrina Carpenter', 'images/artists/sabrinaCarpenter.png', 32976052),
+       ('Zach Bryan', 'images/artists/zachBryan.png', 5965245),
+       ('Luke Combs', 'images/artists/lukeCombs.png', 41065710),
+       ('Post Malone', 'images/artists/postMalone.png', 48176336),
+       ('Kendrick Lamar', 'images/artists/kendrickLamar.png', 44523462),
+       ('Teddy Swims', 'images/artists/teddySwims.png', 45574887),
+       ('Eminem', 'images/artists/Eminem.png', 39851740),
+       ('Travis Scott', 'images/artists/travisScott.png', 29176861),
+       ('Tyler, the Creator', 'images/artists/tylerTheCreator.png',  10649493)
        ;
 
 INSERT INTO albums (name, artistId)

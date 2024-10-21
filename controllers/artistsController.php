@@ -22,11 +22,12 @@ switch($action)
 
     case 'artistForm':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
-
+        
         $newArtist = array(
             'id' => 0,
             'name' => '',
-            'monthlyListeners' => ''
+            'monthlyListeners' => '',
+            'iPath' => ''
         );
 
         if (!is_integer($artistId) || $artistId < 0)

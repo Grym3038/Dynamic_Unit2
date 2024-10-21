@@ -22,6 +22,11 @@
             value="<?php echo htmlspecialchars($artist['monthlyListeners']); ?>" />
     </div>
     <div>
+        <label for="iPath">Image Path</label>
+        <input type="text" name="iPath" id="iPath" autofocus
+            value="<?php echo htmlspecialchars($artist['iPath']); ?>" />
+    </div>
+    <div>
         <input type="submit" value="Submit" />
         <?php if ($artist['id'] == 0) : ?>
             <a href=".?action=listArtists">
