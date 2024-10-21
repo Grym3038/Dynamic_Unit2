@@ -27,7 +27,8 @@ switch ($action)
         $newAlbum = array(
             'id' => 0,
             'name' => '',
-            'artistId' => ''
+            'artistId' => '',
+            'iPath' => ''
         );
 
         if (!is_integer($albumId) || $albumId < 0)
@@ -51,11 +52,12 @@ switch ($action)
         $albumId = filter_input(INPUT_POST, 'albumId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
-
+        $albumIpath = filter_input(INPUT_POST, 'iPath');
         $album = array(
             'id' => $albumId,
             'name' => $name,
-            'artistId' => $artistId
+            'artistId' => $artistId,
+            'iPath' => $albumIpath
         );
 
         $errors = albums\validateAlbum($album);

@@ -12,7 +12,7 @@
 
     <div>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" autofocus
+        <input type="text" name="name" id="name" 
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
     <div>
@@ -27,6 +27,11 @@
                 </option>
             <?php endforeach; ?>
         </select>
+    </div>
+    <div>
+        <label for="iPath">Image Path</label>
+        <input type="text" name="iPath" id="iPath" 
+            value="<?php echo htmlspecialchars($album['iPath']); ?>" />
     </div>
     <div>
         <input type="submit" value="Submit" />
