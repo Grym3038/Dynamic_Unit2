@@ -11,6 +11,8 @@
 
 <h1><?php echo htmlspecialchars($artist['name']); ?></h1>
 
+<img src="<?php echo $artist['iPath']; ?>" alt="">
+
 <ul>
     <li>
         <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>">

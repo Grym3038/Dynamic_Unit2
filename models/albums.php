@@ -30,10 +30,10 @@ function validateAlbum(array $album) : array
 /**
  * Get all albums
  */
-function getAlbums() : array
+function getAlbums()
 {
     global $db;
-    $query = 'SELECT id, name, artistId
+    $query = 'SELECT id, name, artistId, iPath
               FROM albums
               ORDER BY LOWER(name)';
     $statement = $db->prepare($query);
@@ -49,7 +49,7 @@ function getAlbums() : array
 function getAlbum(int $albumId) : array | bool
 {
     global $db;
-    $query = 'SELECT id, name, artistId
+    $query = 'SELECT id, name, artistId, iPath
               FROM albums
               WHERE id = :albumId';
     $statement = $db->prepare($query);
@@ -66,7 +66,7 @@ function getAlbum(int $albumId) : array | bool
 function getAlbumsWithArtistNames() : array
 {
     global $db;
-    $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId,
+    $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId, albums.iPath iPath
                      artists.name artistName
               FROM albums
                   JOIN artists ON albums.artistId = artists.id
@@ -101,11 +101,12 @@ function getAlbumsByArtistId(int $artistId) : array
 function addAlbum(array $album) : int
 {
     global $db;
-    $query = 'INSERT INTO albums (name, artistId)
-              VALUES (:name, :artistId)';
+    $query = 'INSERT INTO albums (name, artistId, iPath)
+              VALUES (:name, :artistId, :iPath)';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $album['name']);
     $statement->bindValue(':artistId', $album['artistId']);
+    $statement->bindValue(':iPath', $album['iPath']);
     $statement->execute();
     $albumId = $db->lastInsertId();
     $statement->closeCursor();
@@ -119,12 +120,13 @@ function updateAlbum(array $album) : void
 {
     global $db;
     $query = 'UPDATE albums
-              SET name = :name, artistId = :artistId
+              SET name = :name, artistId = :artistId, iPath = :iPath
               WHERE id = :albumId';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $album['name']);
     $statement->bindValue(':artistId', $album['artistId']);
     $statement->bindValue(':albumId', $album['id']);
+    $statement->bindValue(':iPath', $album['iPath']);
     $statement->execute();
     $statement->closeCursor();
 }

@@ -15,6 +15,8 @@
     <?php echo htmlspecialchars($album['name']); ?>
 </h1>
 
+<img src="<?php echo $album['iPath']; ?>" alt="">
+
 <ul>
     <li>
         <a href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">

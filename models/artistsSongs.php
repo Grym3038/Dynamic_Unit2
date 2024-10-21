@@ -77,7 +77,7 @@ function getArtistsSongs() : array
 /**
  * Get an artist-song relationship based on its id
  */
-function getArtistSong(int $artistSongId) : array | bool
+function getArtistSong(int $artistSongId)
 {
     global $db;
     $query = 'SELECT artistsSongs.id, artistId, artists.name artistName,
