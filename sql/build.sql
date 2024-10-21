@@ -19,6 +19,7 @@ TO spotifyClone@localhost;
 
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
+    iPath            varchar(2023) NOT NULL,
     name             varchar(1023) NOT NULL,
     monthlyListeners int           NOT NULL,
     PRIMARY KEY (id)
@@ -26,6 +27,7 @@ CREATE TABLE artists (
 
 CREATE TABLE albums (
     id       int           AUTO_INCREMENT,
+    iPath            varchar(2023) NOT NULL,
     name     varchar(1023) NOT NULL,
     artistId int           NOT NULL,
     PRIMARY KEY (id),
@@ -58,16 +60,17 @@ CREATE TABLE artistsSongs (
 /* Sample Data */
 
 INSERT INTO artists (name, monthlyListeners)
-VALUES ('Keri Minto', 47850643),
-       ('Nissa Cartmel', 32976052),
-       ('Hirsch Tivnan', 5965245),
-       ('Willamina Acutt', 41065710),
-       ('Sheff Noel', 48176336),
-       ('Welsh Feldstern', 44523462),
-       ('Roseann Mulqueen', 45574887),
-       ('Denny Schottli', 39851740),
-       ('Mead Wehner', 29176861),
-       ('Orlan Tregust', 10649493);
+VALUES ('Coldplay', 47850643),
+       ('Sabrina Carpenter', 32976052),
+       ('Zach Bryan', 5965245),
+       ('Luke Combs', 41065710),
+       ('Post Malone', 48176336),
+       ('Kendrick Lamar', 44523462),
+       ('Teddy Swims', 45574887),
+       ('Eminem', 39851740),
+       ('Travis Scott', 29176861),
+       ('Tyler, the Creator', 10649493)
+       ;
 
 INSERT INTO albums (name, artistId)
 VALUES ('Pre-emptive encompassing open architecture', 3),
