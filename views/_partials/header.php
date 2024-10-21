@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Header Partial
+ * Purpose: To provide a header for all pages of the application, including
+ *          navigation links
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +14,7 @@
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css" />
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="container mt-4 bg-dark text-light rounded">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Song App</a>

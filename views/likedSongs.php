@@ -1,3 +1,11 @@
+<?php
+/**
+ * Title: Liked Songs List
+ * Purpose: To list all the songs that have been liked and provide buttons for
+ *          unliking songs and clearing the list of liked songs
+ */
+?>
+
 <?php require('views/_helpers/formatTime.php'); ?>
 
 <?php include('views/_partials/header.php'); ?>

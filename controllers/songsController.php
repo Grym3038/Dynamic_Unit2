@@ -1,6 +1,22 @@
 <?php
+/**
+ * Title: Songs Controller
+ * Purpose: To view, add, update, and delete songs
+ */
+
 switch ($action)
 {
+    /**
+     * List all songs
+     */
+    case 'listSongs':
+        $songs = songs\getSongsWithAlbumName();
+        include('views/songs/songs.php');
+        exit();
+
+    /**
+     * View the details about a specific song
+     */
     case 'viewSong':
         $songId = filter_input(INPUT_GET, 'songId', FILTER_VALIDATE_INT);
 
@@ -14,12 +30,10 @@ switch ($action)
         $artists = artists\getArtistsOfSong($songId);
         include('views/songs/songInfo.php');
         exit();
-    
-    case 'listSongs':
-        $songs = songs\getSongsWithAlbumName();
-        include('views/songs/songs.php');
-        exit();
 
+    /**
+     * Render the form for adding or editing a song
+     */
     case 'songForm':
         $songId = filter_input(INPUT_GET, 'songId', FILTER_VALIDATE_INT);
         
@@ -54,6 +68,9 @@ switch ($action)
         include('views/songs/songForm.php');
         exit();
 
+    /**
+     * Accept form data to add or update a song
+     */
     case 'editSong':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
@@ -70,6 +87,7 @@ switch ($action)
             'albumId' => $albumId
         );
 
+        // Validate the form data
         $errors = songs\validateSong($song);
 
         if (!is_integer($minutes) || $minutes < 0)
@@ -117,6 +135,9 @@ switch ($action)
         header('Location: .?action=viewSong&songId=' . $song['id']);
         exit();
 
+    /**
+     * Render the form to confirm the deletion of a song
+     */
     case 'deleteSong':
         $songId = filter_input(INPUT_GET, 'songId', FILTER_VALIDATE_INT);
 

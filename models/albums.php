@@ -1,6 +1,15 @@
 <?php
+/**
+ * Title: Albums Model
+ * Purpose: To provide database access for getting, adding, updating, and
+ *          deleting albums
+ */
+
 namespace albums;
 
+/**
+ * Validate an album
+ */
 function validateAlbum(array $album) : array
 {
     $errors = array();
@@ -18,7 +27,26 @@ function validateAlbum(array $album) : array
     return $errors;
 }
 
-function getAlbum(int $albumId) 
+/**
+ * Get all albums
+ */
+function getAlbums()
+{
+    global $db;
+    $query = 'SELECT id, name, artistId, iPath
+              FROM albums
+              ORDER BY LOWER(name)';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $albums = $statement->fetchAll();
+    $statement->closeCursor();
+    return $albums;
+}
+
+/**
+ * Get an album based on its id
+ */
+function getAlbum(int $albumId) : array | bool
 {
     global $db;
     $query = 'SELECT id, name, artistId, iPath
@@ -32,19 +60,9 @@ function getAlbum(int $albumId)
     return $album;
 }
 
-function getAlbums() : array
-{
-    global $db;
-    $query = 'SELECT id, name, artistId, iPath
-              FROM albums
-              ORDER BY LOWER(name)';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $albums = $statement->fetchAll();
-    $statement->closeCursor();
-    return $albums;
-}
-
+/**
+ * Get all albums, including their artist names
+ */
 function getAlbumsWithArtistNames() : array
 {
     global $db;
@@ -60,6 +78,9 @@ function getAlbumsWithArtistNames() : array
     return $albums;
 }
 
+/**
+ * Get all albums associated with a given artist id
+ */
 function getAlbumsByArtistId(int $artistId) : array
 {
     global $db;
@@ -74,6 +95,9 @@ function getAlbumsByArtistId(int $artistId) : array
     return $albums;
 }
 
+/**
+ * Add an album to the database
+ */
 function addAlbum(array $album) : int
 {
     global $db;
@@ -89,6 +113,9 @@ function addAlbum(array $album) : int
     return $albumId;
 }
 
+/**
+ * Update an album in the database
+ */
 function updateAlbum(array $album) : void
 {
     global $db;
@@ -104,6 +131,9 @@ function updateAlbum(array $album) : void
     $statement->closeCursor();
 }
 
+/**
+ * Delete an album from the database
+ */
 function deleteAlbum(array $album) : void
 {
     global $db;

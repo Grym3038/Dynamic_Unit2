@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Song Form
+ * Purpose: To provide a form for adding or updating a song
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>

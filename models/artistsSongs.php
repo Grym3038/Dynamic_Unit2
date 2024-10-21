@@ -1,6 +1,15 @@
 <?php
+/**
+ * Title: Artists-Songs Model
+ * Purpose: To provide database access for getting, adding, updating, and
+ *          deleting artist-song relationships
+ */
+
 namespace artistsSongs;
 
+/**
+ * Validate an artist-song relationship
+ */
 function validateArtistSong(array $artistSong) : array
 {
     $errors = array();
@@ -22,6 +31,7 @@ function validateArtistSong(array $artistSong) : array
 
     if (count($errors) === 0)
     {
+        // Ensure that the artist-song relationship doesn't already exist
         global $db;
         $query = 'SELECT COUNT(*) count
                   FROM artistsSongs
@@ -45,6 +55,9 @@ function validateArtistSong(array $artistSong) : array
     return $errors;
 }
 
+/**
+ * Get all artist-song relationships
+ */
 function getArtistsSongs() : array
 {
     global $db;
@@ -61,7 +74,10 @@ function getArtistsSongs() : array
     return $artistsSongs;
 }
 
-function getArtistSong(int $artistSongId) 
+/**
+ * Get an artist-song relationship based on its id
+ */
+function getArtistSong(int $artistSongId)
 {
     global $db;
     $query = 'SELECT artistsSongs.id, artistId, artists.name artistName,
@@ -78,6 +94,9 @@ function getArtistSong(int $artistSongId)
     return $artistSong;
 }
 
+/**
+ * Get all songs ids associated with a given artist id
+ */
 function getSongIdsByArtistId(int $artistId)
 {
     global $db;
@@ -99,6 +118,9 @@ function getSongIdsByArtistId(int $artistId)
     return $songIds;
 }
 
+/**
+ * Get all artist ids associated with a given song id
+ */
 function getArtistIdsBySongId(int $songId) : array
 {
     global $db;
@@ -120,6 +142,9 @@ function getArtistIdsBySongId(int $songId) : array
     return $artistIds;
 }
 
+/**
+ * Add an artist-song relationship to the database
+ */
 function addArtistSong(array $artistSong): int
 {
     global $db;
@@ -133,6 +158,9 @@ function addArtistSong(array $artistSong): int
     return $artistSongId;
 }
 
+/**
+ * Update an artist-song relationship in the database
+ */
 function updateArtistSong(array $artistSong) : void
 {
     global $db;
@@ -147,6 +175,10 @@ function updateArtistSong(array $artistSong) : void
     $statement->closeCursor();
 }
 
+/**
+ * Regenerate the artist-song relationships for a given song given the song id
+ * and all artist ids the song should be associated with
+ */
 function updateArtistsSongs(int $songId, array $artistIds)
 {
     global $db;
@@ -169,6 +201,9 @@ function updateArtistsSongs(int $songId, array $artistIds)
     $statement->closeCursor();
 }
 
+/**
+ * Delete an artist-song relationship from the database
+ */
 function deleteArtistSong(array $artistSong) : void
 {
     global $db;
