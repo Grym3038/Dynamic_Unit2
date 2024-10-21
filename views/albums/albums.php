@@ -18,14 +18,17 @@
 <table class="table table-hover">
     <thead class="table-light">
         <tr>
+            <Th></th>
             <th>Name</th>
             <th>Artist</th>
         </tr>
     </thead>
     <tbody class="table-dark">
         <?php foreach($albums as $album) : ?>
-            <img src="<?php echo $album['iPath']; ?>" alt="">
             <tr>
+                <td>
+                    <img src="<?php echo $album['iPath']; ?>" alt="">
+                </td>
                 <td>
                     <a class="btn btn-dark" href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
                         <?php echo htmlspecialchars($album['name']); ?>
