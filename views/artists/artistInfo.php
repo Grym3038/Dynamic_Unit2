@@ -1,4 +1,4 @@
-<?php include('views/partials/header.php'); ?>
+<?php include('views/_partials/header.php'); ?>
 
 <h1><?php echo htmlspecialchars($artist['name']); ?></h1>
 
@@ -60,4 +60,4 @@
 </ul>
 <?php endif ?>
 
-<?php include('views/partials/footer.php'); ?>
+<?php include('views/_partials/footer.php'); ?>

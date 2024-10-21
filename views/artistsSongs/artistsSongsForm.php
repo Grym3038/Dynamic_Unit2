@@ -1,11 +1,11 @@
-<?php include('views/partials/header.php'); ?>
+<?php include('views/_partials/header.php'); ?>
 
 <h1>
     <?php echo ($artistSong['id'] == 0 ? 'Add' : 'Edit') . ' Artist-Song'; ?>
 </h1>
 
 <form action="." method="post">
-    <?php include('views/partials/formErrors.php'); ?>
+    <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editArtistSong" />
     <input type="hidden" name="artistSongId"
@@ -46,4 +46,4 @@
     </div>
 </form>
 
-<?php include('views/partials/footer.php'); ?>
+<?php include('views/_partials/footer.php'); ?>
