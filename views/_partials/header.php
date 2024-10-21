@@ -13,7 +13,7 @@
     <title>Song App</title>
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css" />
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./Css/Site.css" />
+    <link rel="stylesheet" href="./css/site.css" />
 </head>
 <body class="container mt-4 bg-dark text-light rounded">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
