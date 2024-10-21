@@ -10,14 +10,14 @@
     <input type="hidden" name="action" value="editAlbum" />
     <input type="hidden" name="albumId" value="<?php echo $album['id']; ?>" />
 
-    <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" autofocus
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default" name="name" id="name" autofocus
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
-    <div>
-        <label for="artistId">Artist</label>
-        <select name="artistId" id="artistId">
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Artist</label>
+        <select class="form-select" name="artistId" id="artistId">
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
                     <?php if ($album['artistId'] == $artist['id']) : ?>
@@ -29,7 +29,7 @@
         </select>
     </div>
     <div>
-        <input type="submit" value="Submit" />
+        <input class="btn btn-primary" type="submit" value="Submit" />
 
         <?php
             if ($album['id'] == 0)
@@ -42,7 +42,7 @@
             }
         ?>
 
-        <a href="<?php echo $href; ?>">
+        <a class="btn btn-warning" href="<?php echo $href; ?>">
             Cancel
         </a>
     </div>
