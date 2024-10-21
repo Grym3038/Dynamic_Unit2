@@ -1,6 +1,15 @@
 <?php
+/**
+ * Title: Artists Model
+ * Purpose: To provide database access for getting, adding, updating, and
+ *          deleting artists
+ */
+
 namespace artists;
 
+/**
+ * Validate an artist
+ */
 function validateArtist(array $artist) : array
 {
     $errors = array();
@@ -19,6 +28,9 @@ function validateArtist(array $artist) : array
     return $errors;
 }
 
+/**
+ * Get all artists
+ */
 function getArtists() : array
 {
     global $db;
@@ -32,6 +44,9 @@ function getArtists() : array
     return $artists;
 }
 
+/**
+ * Get an artist based on its id
+ */
 function getArtist(int $artistId) : array | bool
 {
     global $db;
@@ -46,6 +61,9 @@ function getArtist(int $artistId) : array | bool
     return $artist;
 }
 
+/**
+ * Get all artists associated with a given song
+ */
 function getArtistsOfSong(int $songId) : array
 {
     global $db;
@@ -63,6 +81,9 @@ function getArtistsOfSong(int $songId) : array
     return $artists;
 }
 
+/**
+ * Add an artist to the database
+ */
 function addArtist(array $artist) : int
 {
     global $db;
@@ -77,6 +98,9 @@ function addArtist(array $artist) : int
     return $artistId;
 }
 
+/**
+ * Update an artist in the database
+ */
 function updateArtist(array $artist) : void
 {
     global $db;
@@ -91,6 +115,9 @@ function updateArtist(array $artist) : void
     $statement->closeCursor();
 }
 
+/**
+ * Delete an artist from the database
+ */
 function deleteArtist(array $artist) : void
 {
     global $db;

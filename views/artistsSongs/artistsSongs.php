@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Artists Songs List
+ * Purpose: To list all artist-song relationships
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>Artists Songs</h1>

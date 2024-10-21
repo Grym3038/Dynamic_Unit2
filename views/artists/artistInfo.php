@@ -1,3 +1,12 @@
+<?php
+/**
+ * Title: Artist Info
+ * Purpose: To view all information about a given artist, including edit and
+ *          delete buttons, their monthly listeners, and all their albums and
+ *          songs
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1><?php echo htmlspecialchars($artist['name']); ?></h1>

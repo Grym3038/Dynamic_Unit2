@@ -1,3 +1,11 @@
+<?php
+/**
+ * Title: Song Info
+ * Purpose: To view all information about a given song as well as provide
+ *          buttons for editing, deleting, liking, and unliking the song
+ */
+?>
+
 <?php require('views/_helpers/formatTime.php'); ?>
 
 <?php include('views/_partials/header.php'); ?>

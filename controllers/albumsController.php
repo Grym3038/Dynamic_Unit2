@@ -1,11 +1,22 @@
 <?php
+/**
+ * Title: Albums Controller
+ * Purpose: To view, add, update, and delete albums
+ */
+
 switch ($action)
 {
+    /**
+     * List all albums
+     */
     case 'listAlbums':
         $albums = albums\getAlbumsWithArtistNames();
         include('views/albums/albums.php');
         exit();
 
+    /**
+     * View the details about a specific album
+     */
     case 'viewAlbum':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 
@@ -21,6 +32,9 @@ switch ($action)
         include('views/albums/albumInfo.php');
         exit();
 
+    /**
+     * Render the form for adding or editing an album
+     */
     case 'albumForm':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 
@@ -47,6 +61,9 @@ switch ($action)
         include('views/albums/albumForm.php');
         exit();
 
+    /**
+     * Accept form data to add or update an album
+     */
     case 'editAlbum':
         $albumId = filter_input(INPUT_POST, 'albumId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
@@ -78,6 +95,9 @@ switch ($action)
         header('Location: .?action=viewAlbum&albumId=' . $album['id']);
         exit();
 
+    /**
+     * Render the form to confirm the deletion of an album
+     */
     case 'deleteAlbum':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 

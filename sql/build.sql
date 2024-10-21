@@ -1,6 +1,9 @@
 /*
     Title: Build Database
+    Purpose: Build and configure the database of the application
 */
+
+/* Create the database and user */
 
 DROP DATABASE IF EXISTS spotifyClone;
 DROP USER IF EXISTS spotifyClone;
@@ -15,7 +18,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE
 ON spotifyClone.*
 TO spotifyClone@localhost;
 
-/* Tables */
+/* Create the tables */
 
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
@@ -55,7 +58,7 @@ CREATE TABLE artistsSongs (
     CONSTRAINT ukArtistSong UNIQUE (artistId, songId)
 ) ENGINE = INNODB;
 
-/* Sample Data */
+/* Insert the sample data */
 
 INSERT INTO artists (name, monthlyListeners)
 VALUES ('Keri Minto', 47850643),

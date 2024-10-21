@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Artists List
+ * Purpose: To list all the artists and their monthly listeners
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>Artists</h1>

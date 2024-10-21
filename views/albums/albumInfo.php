@@ -1,3 +1,12 @@
+<?php
+/**
+ * Title: Album Info
+ * Purpose: To view all information about a given album, including edit and
+ *          delete buttons, the artist, the songs, and the lengths of the album
+ *          and the songs
+ */
+?>
+
 <?php require('views/_helpers/formatTime.php'); ?>
 
 <?php include('views/_partials/header.php'); ?>

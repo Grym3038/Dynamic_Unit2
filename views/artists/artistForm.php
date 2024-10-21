@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Artist Form
+ * Purpose: To provide a form for adding or editing an album
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>

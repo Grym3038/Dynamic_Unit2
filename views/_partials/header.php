@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Header Partial
+ * Purpose: To provide a header for all pages of the application, including
+ *          navigation links
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

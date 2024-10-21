@@ -1,11 +1,22 @@
 <?php
+/**
+ * Title: Artists Controller
+ * Purpose: To view, add, update, and delete artists
+ */
+
 switch($action)
 {
+    /**
+     * List all artists
+     */
     case 'listArtists':
         $artists = artists\getArtists();
         include('views/artists/artists.php');
         exit();
 
+    /**
+     * View the details about a specific artist
+     */
     case 'viewArtist':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
 
@@ -20,6 +31,9 @@ switch($action)
         include('views/artists/artistInfo.php');
         exit();
 
+    /**
+     * Render the form for adding or editing an artist
+     */
     case 'artistForm':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
 
@@ -45,6 +59,9 @@ switch($action)
         include('views/artists/artistForm.php');
         exit();
 
+    /**
+     * Accept form data to add or update an artist
+     */
     case 'editArtist':
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
@@ -76,6 +93,9 @@ switch($action)
         header('Location: .?action=viewArtist&artistId=' . $artist['id']);
         exit();
 
+    /**
+     * Render the form to confirm the deletion of an artist
+     */
     case 'deleteArtist':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
 
