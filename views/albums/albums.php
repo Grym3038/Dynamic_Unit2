@@ -2,29 +2,29 @@
 
 <h1>Albums</h1>
 
-<p>
-    <a href=".?action=albumForm">
+<div class="d-grid gap-2">
+    <a class="btn btn-primary" href=".?action=albumForm" role="button"> 
         Add Album
     </a>
-</p>
+</div>
 
-<table>
-    <thead>
+<table class="table table-hover">
+    <thead class="table-light">
         <tr>
             <th>Name</th>
             <th>Artist</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-dark">
         <?php foreach($albums as $album) : ?>
             <tr>
                 <td>
-                    <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
+                    <a class="btn btn-dark" href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
                         <?php echo htmlspecialchars($album['name']); ?>
                     </a>
                 </td>
                 <td>
-                    <a href=".?action=viewArtist&artistId=<?php echo $album['artistId']; ?>">
+                    <a class="btn btn-dark" href=".?action=viewArtist&artistId=<?php echo $album['artistId']; ?>">
                         <?php echo $album['artistName']; ?>
                     </a>
                 </td>
