@@ -22,19 +22,20 @@ TO spotifyClone@localhost;
 
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
+    name             varchar(255) NOT NULL,
     iPath            varchar(2023) NOT NULL,
-    name             varchar(1023) NOT NULL,
     monthlyListeners int           NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    CONSTRAINT artistsUkName UNIQUE (name)
 ) ENGINE = INNODB;
 
 CREATE TABLE albums (
     id       int           AUTO_INCREMENT,
-    iPath            varchar(2023) NOT NULL,
     name     varchar(1023) NOT NULL,
+    iPath    varchar(2023) NOT NULL,
     artistId int           NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fkAlbumArtist FOREIGN KEY (artistId) REFERENCES artists(id)
+    CONSTRAINT albumsFkArtistId FOREIGN KEY (artistId) REFERENCES artists(id)
         ON DELETE CASCADE
 ) ENGINE = INNODB;
 
@@ -44,7 +45,7 @@ CREATE TABLE songs (
     length  int           NOT NULL,
     albumId int           NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fkSongAlbum FOREIGN KEY (albumId) REFERENCES albums(id)
+    CONSTRAINT songsFkAlbumId FOREIGN KEY (albumId) REFERENCES albums(id)
         ON DELETE CASCADE
 ) ENGINE = INNODB;
 
@@ -53,9 +54,9 @@ CREATE TABLE artistsSongs (
     artistId int NOT NULL,
     songId   int NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fkArtist FOREIGN KEY (artistId) REFERENCES artists(id)
-        ON DELETE CASCADE,
-    CONSTRAINT fkSong FOREIGN KEY (songId) REFERENCES songs(id)
+    CONSTRAINT artistsSongsFkArtistId FOREIGN KEY (artistId)
+        REFERENCES artists(id) ON DELETE CASCADE,
+    CONSTRAINT artistsSongsFkSongId FOREIGN KEY (songId) REFERENCES songs(id)
         ON DELETE CASCADE,
     CONSTRAINT ukArtistSong UNIQUE (artistId, songId)
 ) ENGINE = INNODB;
