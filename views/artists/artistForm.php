@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Artist Form
+ * Purpose: To provide a form for adding or editing an album
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>
@@ -20,6 +27,11 @@
         <label for="monthlyListeners">Monthly Listeners</label>
         <input type="number" name="monthlyListeners" id="monthlyListeners"
             value="<?php echo htmlspecialchars($artist['monthlyListeners']); ?>" />
+    </div>
+    <div>
+        <label for="iPath">Image Path</label>
+        <input type="text" name="iPath" id="iPath" autofocus
+            value="<?php echo htmlspecialchars($artist['iPath']); ?>" />
     </div>
     <div>
         <input type="submit" value="Submit" />

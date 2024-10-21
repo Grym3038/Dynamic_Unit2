@@ -1,3 +1,11 @@
+<?php
+/**
+ * Title: Deletion Confirmation
+ * Purpose: To provide a form for confirming the deletion of arbitrary entites
+ *          in the database
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>Confirm Deletion</h1>
