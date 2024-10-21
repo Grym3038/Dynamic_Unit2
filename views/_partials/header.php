@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song App</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css" />
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
     <nav>
