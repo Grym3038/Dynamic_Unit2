@@ -67,10 +67,11 @@ function addArtist(array $artist) : int
 {
     global $db;
     $query = 'INSERT INTO artists (name, monthlyListeners, iPath)
-              VALUES (:name, :monthlyListeners);';
+              VALUES (:name, :monthlyListeners, :iPath);';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
+    $statement->bindValue(':iPath', $artist['iPath']);
     $statement->execute();
     $artistId = $db->lastInsertId();
     $statement->closeCursor();
@@ -87,6 +88,8 @@ function updateArtist(array $artist) : void
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
     $statement->bindValue(':artistId', $artist['id']);
+    $statement->bindValue(':iPath', $artist['iPath']);
+
     $statement->execute();
     $statement->closeCursor();
 }

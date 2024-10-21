@@ -1,10 +1,12 @@
-<?php require('views/helpers/formatTime.php'); ?>
+<?php require('views/_helpers/formatTime.php'); ?>
 
 <?php include('views/_partials/header.php'); ?>
 
 <h1>
     <?php echo htmlspecialchars($album['name']); ?>
 </h1>
+
+<img src="<?php echo $album['iPath']; ?>" alt="">
 
 <ul>
     <li>

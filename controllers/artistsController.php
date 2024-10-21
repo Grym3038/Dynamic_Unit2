@@ -49,13 +49,15 @@ switch($action)
     case 'editArtist':
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
+        $iPath = filter_input(INPUT_POST, 'iPath');
         $monthlyListeners = filter_input(INPUT_POST, 'monthlyListeners',
             FILTER_VALIDATE_INT);
 
         $artist = array(
             'id' => $artistId,
             'name' => $name,
-            'monthlyListeners' => $monthlyListeners
+            'monthlyListeners' => $monthlyListeners,
+            'iPath' => $iPath
         );
 
         $errors = artists\validateArtist($artist);
