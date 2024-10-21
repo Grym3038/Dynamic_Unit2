@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Albums List
+ * Purpose: To list all the albums, including the album names and artist names
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>Albums</h1>
@@ -17,6 +24,7 @@
     </thead>
     <tbody>
         <?php foreach($albums as $album) : ?>
+            <img src="<?php echo $album['iPath']; ?>" alt="">
             <tr>
                 <td>
                     <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">

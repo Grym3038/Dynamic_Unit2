@@ -1,11 +1,22 @@
 <?php
+/**
+ * Title: Albums Controller
+ * Purpose: To view, add, update, and delete albums
+ */
+
 switch ($action)
 {
+    /**
+     * List all albums
+     */
     case 'listAlbums':
         $albums = albums\getAlbumsWithArtistNames();
         include('views/albums/albums.php');
         exit();
 
+    /**
+     * View the details about a specific album
+     */
     case 'viewAlbum':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 
@@ -21,13 +32,17 @@ switch ($action)
         include('views/albums/albumInfo.php');
         exit();
 
+    /**
+     * Render the form for adding or editing an album
+     */
     case 'albumForm':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 
         $newAlbum = array(
             'id' => 0,
             'name' => '',
-            'artistId' => ''
+            'artistId' => '',
+            'iPath' => ''
         );
 
         if (!is_integer($albumId) || $albumId < 0)
@@ -47,15 +62,19 @@ switch ($action)
         include('views/albums/albumForm.php');
         exit();
 
+    /**
+     * Accept form data to add or update an album
+     */
     case 'editAlbum':
         $albumId = filter_input(INPUT_POST, 'albumId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
-
+        $albumIpath = filter_input(INPUT_POST, 'iPath');
         $album = array(
             'id' => $albumId,
             'name' => $name,
-            'artistId' => $artistId
+            'artistId' => $artistId,
+            'iPath' => $albumIpath
         );
 
         $errors = albums\validateAlbum($album);
@@ -78,6 +97,9 @@ switch ($action)
         header('Location: .?action=viewAlbum&albumId=' . $album['id']);
         exit();
 
+    /**
+     * Render the form to confirm the deletion of an album
+     */
     case 'deleteAlbum':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 

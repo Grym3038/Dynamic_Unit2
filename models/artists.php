@@ -1,7 +1,16 @@
 <?php
+/**
+ * Title: Artists Model
+ * Purpose: To provide database access for getting, adding, updating, and
+ *          deleting artists
+ */
+
 namespace artists;
 
-function validateArtist(array $artist) : array
+/**
+ * Validate an artist
+ */
+function validateArtist(array $artist)
 {
     $errors = array();
 
@@ -40,10 +49,13 @@ function validateArtist(array $artist) : array
     return $errors;
 }
 
-function getArtists() : array
+/**
+ * Get all artists
+ */
+function getArtists() 
 {
     global $db;
-    $query = 'SELECT id, name, monthlyListeners
+    $query = 'SELECT id, name, monthlyListeners, iPath
               FROM artists
               ORDER BY LOWER(name)';
     $statement = $db->prepare($query);
@@ -53,10 +65,13 @@ function getArtists() : array
     return $artists;
 }
 
-function getArtist(int $artistId) : array | bool
+/**
+ * Get an artist based on its id
+ */
+function getArtist(int $artistId)
 {
     global $db;
-    $query = 'SELECT id, name, monthlyListeners
+    $query = 'SELECT id, name, monthlyListeners, iPath
               FROM artists
               WHERE id = :artistId';
     $statement = $db->prepare($query);
@@ -67,10 +82,13 @@ function getArtist(int $artistId) : array | bool
     return $artist;
 }
 
+/**
+ * Get all artists associated with a given song
+ */
 function getArtistsOfSong(int $songId) : array
 {
     global $db;
-    $query = 'SELECT artists.id, artists.name, artists.monthlyListeners
+    $query = 'SELECT artists.id, artists.name, artists.monthlyListeners, artists.iPath
               FROM artists
                   JOIN artistsSongs ON artists.id = artistsSongs.artistId
                   JOIN songs ON artistsSongs.songId = songs.Id
@@ -84,34 +102,46 @@ function getArtistsOfSong(int $songId) : array
     return $artists;
 }
 
+/**
+ * Add an artist to the database
+ */
 function addArtist(array $artist) : int
 {
     global $db;
-    $query = 'INSERT INTO artists (name, monthlyListeners)
-              VALUES (:name, :monthlyListeners);';
+    $query = 'INSERT INTO artists (name, monthlyListeners, iPath)
+              VALUES (:name, :monthlyListeners, :iPath);';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
+    $statement->bindValue(':iPath', $artist['iPath']);
     $statement->execute();
     $artistId = $db->lastInsertId();
     $statement->closeCursor();
     return $artistId;
 }
 
+/**
+ * Update an artist in the database
+ */
 function updateArtist(array $artist) : void
 {
     global $db;
     $query = 'UPDATE artists
-              SET name = :name, monthlyListeners = :monthlyListeners
+              SET name = :name, monthlyListeners = :monthlyListeners, iPath = :iPath
               WHERE id = :artistId;';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
     $statement->bindValue(':artistId', $artist['id']);
+    $statement->bindValue(':iPath', $artist['iPath']);
+
     $statement->execute();
     $statement->closeCursor();
 }
 
+/**
+ * Delete an artist from the database
+ */
 function deleteArtist(array $artist) : void
 {
     global $db;

@@ -1,3 +1,11 @@
+<?php
+/**
+ * Title: Artists-Songs Form
+ * Purpose: To provide a form for adding or editing a relationship between an
+ *          artist and a song
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>
