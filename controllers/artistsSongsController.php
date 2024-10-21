@@ -1,11 +1,22 @@
 <?php
+/**
+ * Title: Artists-Songs Controller
+ * Purpose: To view, add, update, and delete artist-song relationships
+ */
+
 switch ($action)
 {
+    /**
+     * List all artist-song relationships
+     */
     case 'listArtistsSongs':
         $artistsSongs = artistsSongs\getArtistsSongs();
         include('views/artistsSongs/artistsSongs.php');
         exit();
 
+    /**
+     * Render the form for adding or updating an artist-song relationship
+     */
     case 'artistsSongsForm':
         $artistSongId = filter_input(INPUT_GET, 'artistSongId',
             FILTER_VALIDATE_INT);
@@ -34,6 +45,9 @@ switch ($action)
         include('views/artistsSongs/artistsSongsForm.php');
         exit();
 
+    /**
+     * Accept form data to add or update an artist-song relationship
+     */
     case 'editArtistSong':
         $artistSongId = filter_input(INPUT_POST, 'artistSongId',
             FILTER_VALIDATE_INT);
@@ -46,6 +60,7 @@ switch ($action)
             'songId' => $songId
         );
 
+        // Validate the form data
         $errors = artistsSongs\validateArtistSong($artistSong);
 
         if (count($errors) > 0)
@@ -56,6 +71,7 @@ switch ($action)
             exit();
         }
 
+        // Add/update the artist
         if ($artistSong['id'] == 0)
         {
             artistsSongs\addArtistSong($artistSong);

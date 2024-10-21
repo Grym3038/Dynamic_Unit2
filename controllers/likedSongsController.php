@@ -1,11 +1,22 @@
 <?php
+/**
+ * Title: Liked Songs Controller
+ * Purpsose: To like songs, unlike songs, and view liked songs
+ */
+
 switch ($action)
 {
+    /**
+     * List all liked songs
+     */
     case 'listLikedSongs':
         $songs = songs\getSongsBySongIds($_SESSION['likedSongIds']);
         include('views/likedSongs.php');
         exit();
     
+    /**
+     * Toggle whether a song is liked or unliked
+     */
     case 'toggleFavorite':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
 
@@ -30,6 +41,9 @@ switch ($action)
         header('Location: .?action=listLikedSongs');
         exit();
     
+    /**
+     * Clear the list of liked songs
+     */
     case 'clearLikedSongs':
         $_SESSION['likedSongIds'] = array();
         header('Location: .?action=listLikedSongs');

@@ -1,11 +1,17 @@
 <?php
+/**
+ * Title: Deletion Confirmation Controller
+ * Purpose: To accept form data to delete a database entity, including artists,
+ *          albums, songs, and artist-song relationships
+ */
+
 if ($action == 'deleteEntity')
 {
     $entityType = filter_input(INPUT_POST, 'entityType');
     $entityId = filter_input(INPUT_POST, 'entityId', FILTER_VALIDATE_INT);
 
+    // Validate the form data
     $validTypes = array('artist', 'album', 'song', 'artistSong');
-
     $isValidType = in_array($entityType, $validTypes);
     $isValidId = is_integer($entityId) && $entityId > 0;
 
@@ -15,6 +21,7 @@ if ($action == 'deleteEntity')
         exit();
     }
 
+    // Get the entity to delete based on the type
     switch ($entityType)
     {
         case 'artist':
@@ -33,6 +40,7 @@ if ($action == 'deleteEntity')
 
     if ($entity === FALSE) return404();
 
+    // Delete the entity based on the type
     switch ($entityType)
     {
         case 'artist':

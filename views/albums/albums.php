@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Albums List
+ * Purpose: To list all the albums, including the album names and artist names
+ */
+?>
+
 <?php include('views/_partials/header.php'); ?>
 
 <h1>Albums</h1>

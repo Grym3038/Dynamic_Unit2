@@ -1,3 +1,10 @@
+<?php
+/**
+ * Title: Songs List
+ * Purpose: To list all songs, including their durations and albums
+ */
+?>
+
 <?php require('views/_helpers/formatTime.php'); ?>
 
 <?php include('views/_partials/header.php'); ?>

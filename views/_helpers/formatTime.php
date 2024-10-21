@@ -1,4 +1,10 @@
 <?php
+/**
+ * Format a number of seconds as a string with hours, minutes, and seconds,
+ * separated by colons
+ * 
+ * Example: 123 => "00:02:03"
+ */
 function formatTime(int $seconds) : string
 {
     $hours = intdiv($seconds, 60 * 60);
