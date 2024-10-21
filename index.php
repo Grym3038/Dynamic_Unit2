@@ -41,7 +41,7 @@ switch ($action)
 {
     case 'listArtists':
         $artists = artists\getArtists();
-        include('views/artists.php');
+        include('views/artists/artists.php');
         break;
 
     case 'viewArtist':
@@ -55,7 +55,7 @@ switch ($action)
 
         $albums = albums\getAlbumsByArtistId($artistId);
         $songs = songs\getSongsByArtistId($artistId);
-        include('views/artistInfo.php');
+        include('views/artists/artistInfo.php');
         break;
 
     case 'artistForm':
@@ -80,7 +80,7 @@ switch ($action)
             }
         }
 
-        include('views/artistForm.php');
+        include('views/artists/artistForm.php');
         break;
 
     case 'editArtist':
@@ -98,7 +98,7 @@ switch ($action)
         $errors = artists\validateArtist($artist);
         if (count($errors) > 0)
         {
-            include('views/artistForm.php');
+            include('views/artists/artistForm.php');
             exit();
         }
 
@@ -121,8 +121,7 @@ switch ($action)
 
         if ($entity === FALSE)
         {
-            include('views/404.php');
-            exit();
+            return404();
         }
 
         $entity['type'] = 'artist';
@@ -132,7 +131,7 @@ switch ($action)
 
     case 'listAlbums':
         $albums = albums\getAlbumsWithArtistNames();
-        include('views/albums.php');
+        include('views/albums/albums.php');
         break;
 
     case 'viewAlbum':
@@ -147,7 +146,7 @@ switch ($action)
         $album['length'] = songs\getAlbumLength($album['id']);
         $artist = artists\getArtist($album['artistId']);
         $songs = songs\getSongsByAlbumId($album['id']);
-        include('views/albumInfo.php');
+        include('views/albums/albumInfo.php');
         break;
 
     case 'albumForm':
@@ -173,7 +172,7 @@ switch ($action)
         }
 
         $artists = artists\getArtists();
-        include('views/albumForm.php');
+        include('views/albums/albumForm.php');
         break;
 
     case 'editAlbum':
@@ -191,7 +190,7 @@ switch ($action)
         if (count($errors) > 0)
         {
             $artists = artists\getArtists();
-            include('views/albumForm.php');
+            include('views/albums/albumForm.php');
             exit();
         }
 
@@ -232,12 +231,12 @@ switch ($action)
 
         $album = albums\getAlbum($song['albumId']);
         $artists = artists\getArtistsOfSong($songId);
-        include('views/songInfo.php');
+        include('views/songs/songInfo.php');
         break;
     
     case 'listSongs':
         $songs = songs\getSongsWithAlbumName();
-        include('views/songs.php');
+        include('views/songs/songs.php');
         break;
 
     case 'songForm':
@@ -271,7 +270,7 @@ switch ($action)
 
         $albums = albums\getAlbumsWithArtistNames();
         $artists = artists\getArtists();
-        include('views/songForm.php');
+        include('views/songs/songForm.php');
         break;
 
     case 'editSong':
@@ -317,7 +316,7 @@ switch ($action)
         {
             $artists = artists\getArtists();
             $albums = albums\getAlbumsWithArtistNames();
-            include('views/songForm.php');
+            include('views/songs/songForm.php');
             exit();
         }
 
@@ -353,7 +352,7 @@ switch ($action)
 
     case 'listArtistsSongs':
         $artistsSongs = artistsSongs\getArtistsSongs();
-        include('views/artistsSongs.php');
+        include('views/artistsSongs/artistsSongs.php');
         break;
 
     case 'artistsSongsForm':
@@ -381,7 +380,7 @@ switch ($action)
 
         $artists = artists\getArtists();
         $songs = songs\getSongs();
-        include('views/artistsSongsForm.php');
+        include('views/artistsSongs/artistsSongsForm.php');
         break;
 
     case 'editArtistSong':
@@ -402,7 +401,7 @@ switch ($action)
         {
             $artists = artists\getArtists();
             $songs = songs\getSongs();
-            include('views/artistsSongsForm.php');
+            include('views/artistsSongs/artistsSongsForm.php');
             exit();
         }
 

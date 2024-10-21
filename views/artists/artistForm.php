@@ -1,4 +1,4 @@
-<?php include('views/partials/header.php'); ?>
+<?php include('views/_partials/header.php'); ?>
 
 <h1>
     <?php echo ($artist['id'] == 0 ? 'Add' : 'Edit'); ?>
@@ -6,7 +6,7 @@
 </h1>
 
 <form action="." method="post">
-    <?php include('views/partials/formErrors.php'); ?>
+    <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editArtist" />
     <input type="hidden" name="artistId" value="<?php echo $artist['id']; ?>" />
@@ -35,4 +35,4 @@
     </div>
 </form>
 
-<?php include('views/partials/footer.php'); ?>
+<?php include('views/_partials/footer.php'); ?>

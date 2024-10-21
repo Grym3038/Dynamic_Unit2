@@ -1,6 +1,6 @@
-<?php require('views/helpers/formatTime.php'); ?>
+<?php require('views/_helpers/formatTime.php'); ?>
 
-<?php include('views/partials/header.php'); ?>
+<?php include('views/_partials/header.php'); ?>
 
 <h1>Liked Songs</h1>
 
@@ -52,4 +52,4 @@
     </p>
 <?php endif; ?>
 
-<?php include('views/partials/footer.php'); ?>
+<?php include('views/_partials/footer.php'); ?>

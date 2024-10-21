@@ -1,4 +1,4 @@
-<?php include('views/partials/header.php'); ?>
+<?php include('views/_partials/header.php'); ?>
 
 <h1>Confirm Deletion</h1>
 
@@ -25,4 +25,4 @@
     </div>
 </form>
 
-<?php include('views/partials/footer.php'); ?>
+<?php include('views/_partials/footer.php'); ?>

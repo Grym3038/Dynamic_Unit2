@@ -1,4 +1,4 @@
-<?php include('views/partials/header.php'); ?>
+<?php include('views/_partials/header.php'); ?>
 
 <h1>Artists</h1>
 
@@ -29,4 +29,4 @@
     </tbody>
 </table>
 
-<?php include('views/partials/footer.php'); ?>
+<?php include('views/_partials/footer.php'); ?>
