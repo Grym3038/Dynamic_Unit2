@@ -19,6 +19,7 @@ TO spotifyClone@localhost;
 
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
+    iPath            varchar(2023) NOT NULL,
     name             varchar(1023) NOT NULL,
     monthlyListeners int           NOT NULL,
     PRIMARY KEY (id)
@@ -26,6 +27,7 @@ CREATE TABLE artists (
 
 CREATE TABLE albums (
     id       int           AUTO_INCREMENT,
+    iPath            varchar(2023) NOT NULL,
     name     varchar(1023) NOT NULL,
     artistId int           NOT NULL,
     PRIMARY KEY (id),
@@ -57,39 +59,40 @@ CREATE TABLE artistsSongs (
 
 /* Sample Data */
 
-INSERT INTO artists (name, monthlyListeners)
-VALUES ('Keri Minto', 47850643),
-       ('Nissa Cartmel', 32976052),
-       ('Hirsch Tivnan', 5965245),
-       ('Willamina Acutt', 41065710),
-       ('Sheff Noel', 48176336),
-       ('Welsh Feldstern', 44523462),
-       ('Roseann Mulqueen', 45574887),
-       ('Denny Schottli', 39851740),
-       ('Mead Wehner', 29176861),
-       ('Orlan Tregust', 10649493);
+INSERT INTO artists (name, iPath, monthlyListeners)
+VALUES ('Coldplay', 'images/artists/coldPlay.png', 47850643),
+       ('Sabrina Carpenter', 'images/artists/sabrinaCarpenter.png', 32976052),
+       ('Zach Bryan', 'images/artists/zachBryan.png', 5965245),
+       ('Luke Combs', 'images/artists/lukeCombs.png', 41065710),
+       ('Post Malone', 'images/artists/postMalone.png', 48176336),
+       ('Kendrick Lamar', 'images/artists/kendrickLamar.png', 44523462),
+       ('Teddy Swims', 'images/artists/teddySwims.png', 45574887),
+       ('Eminem', 'images/artists/Eminem.png', 39851740),
+       ('Travis Scott', 'images/artists/travisScott.png', 29176861),
+       ('Tyler, the Creator', 'images/artists/tylerTheCreator.png',  10649493)
+       ;
 
-INSERT INTO albums (name, artistId)
-VALUES ('Pre-emptive encompassing open architecture', 3),
-       ('Adaptive needs-based solution', 5),
-       ('Adaptive mobile ability', 8),
-       ('Secured zero administration budgetary management', 3),
-       ('Adaptive 4th generation time-frame', 8),
-       ('Future-proofed object-oriented archive', 7),
-       ('Cloned leading edge database', 6),
-       ('Programmable real-time matrix', 6),
-       ('User-friendly zero administration Graphical User Interface', 3),
-       ('Right-sized asynchronous artificial intelligence', 10),
-       ('Diverse reciprocal groupware', 6),
-       ('Public-key actuating core', 5),
-       ('Automated asynchronous flexibility', 6),
-       ('Cross-group incremental task-force', 6),
-       ('Compatible static help-desk', 10),
-       ('Reverse-engineered exuding installation', 7),
-       ('Adaptive directional hierarchy', 5),
-       ('Right-sized neutral archive', 3),
-       ('Sharable dedicated local area network', 2),
-       ('Upgradable logistical neural-net', 4);
+INSERT INTO albums (name, iPath, artistId)
+VALUES ('Pre-emptive encompassing open architecture', 'images/albums/openArchitecture.png', 3),
+       ('Adaptive needs-based solution', 'images/albums/basedSolution.png', 5),
+       ('Adaptive mobile ability', 'images/albums/mobileAbility.png', 8),
+       ('Secured zero administration budgetary management', 'images/albums/budgetaryManagement.png', 3),
+       ('Adaptive 4th generation time-frame', 'images/albums/timeFrame.png',  8),
+       ('Future-proofed object-oriented archive', 'images/albums/orientedArchive.png', 7),
+       ('Cloned leading edge database', 'images/albums/edgeDatabase.png', 6),
+       ('Programmable real-time matrix', 'images/albums/timeMatrix.png', 6),
+       ('User-friendly zero administration Graphical User Interface', 'images/albums/userInterface.png',  3),
+       ('Right-sized asynchronous artificial intelligence', 'images/albums/artificialIntelligence.png', 10),
+       ('Diverse reciprocal groupware', 'images/albums/reciprocalGroupware.png',  6),
+       ('Public-key actuating core', 'images/albums/actuatingCore.png', 5),
+       ('Automated asynchronous flexibility', 'images/albums/asynchronousFlexibility.png', 6),
+       ('Cross-group incremental task-force', 'images/albums/taskForce.png', 6),
+       ('Compatible static help-desk', 'images/albums/helpDesk.png', 10),
+       ('Reverse-engineered exuding installation', 'images/albums/exudingInstallation.png', 7),
+       ('Adaptive directional hierarchy', 'images/albums/directionalHierarchy.png',  5),
+       ('Right-sized neutral archive', 'images/albums/neuralNet.png',  3),
+       ('Sharable dedicated local area network', 'images/albums/areaNetwork.png', 2),
+       ('Upgradable logistical neural-net', 'images/albums/neuralNet.png', 4);
 
 INSERT INTO songs (name, length, albumId)
 VALUES ('Quality-focused high-level instruction set', 159, 5),

@@ -7,7 +7,7 @@
 </h1>
 
 <div class="btn-group" role="group" aria-label="Basic example">
-    
+<img src="<?php echo $album['iPath']; ?>" alt="">
     <a class="btn btn-outline-info" href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
         Edit
     </a>

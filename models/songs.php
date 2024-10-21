@@ -67,7 +67,7 @@ function getSongsWithAlbumName() : array
 /**
  * Get a song based on its id.
  */
-function getSong(int $songId) : array | bool
+function getSong(int $songId)
 {
     global $db;
     $query = 'SELECT id, name, length, albumId

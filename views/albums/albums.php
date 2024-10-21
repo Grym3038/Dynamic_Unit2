@@ -17,6 +17,7 @@
     </thead>
     <tbody class="table-dark">
         <?php foreach($albums as $album) : ?>
+            <img src="<?php echo $album['iPath']; ?>" alt="">
             <tr>
                 <td>
                     <a class="btn btn-dark" href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">

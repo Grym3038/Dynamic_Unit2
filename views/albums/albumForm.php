@@ -29,7 +29,12 @@
         </select>
     </div>
     <div>
-        <input class="btn btn-primary" type="submit" value="Submit" />
+        <label for="iPath">Image Path</label>
+        <input type="text" name="iPath" id="iPath" 
+            value="<?php echo htmlspecialchars($album['iPath']); ?>" />
+    </div>
+    <div>
+    <input class="btn btn-primary" type="submit" value="Submit" />
 
         <?php
             if ($album['id'] == 0)
