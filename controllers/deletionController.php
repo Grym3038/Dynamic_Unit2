@@ -38,7 +38,10 @@ if ($action == 'deleteEntity')
             break;
     }
 
-    if ($entity === FALSE) return404();
+    if ($entity === FALSE)
+    {
+        return404();
+    }
 
     // Delete the entity based on the type
     switch ($entityType)

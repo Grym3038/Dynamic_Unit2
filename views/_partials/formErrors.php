@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Form Errors
+ * Title: Form Errors Partial
  * Purpose: To format error messages for use on a form
  */
 ?>
