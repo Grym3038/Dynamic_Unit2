@@ -119,7 +119,7 @@ switch ($action)
             exit();
         }
 
-        // Add/edit the song
+        // Add/update the song
         if ($song['id'] == 0)
         {
             $song['id'] = songs\addSong($song);

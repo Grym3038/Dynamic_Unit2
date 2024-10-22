@@ -60,9 +60,8 @@ switch ($action)
             'songId' => $songId
         );
 
-        // Validate the form data
+        // Validate the artist-song relationship
         $errors = artistsSongs\validateArtistSong($artistSong);
-
         if (count($errors) > 0)
         {
             $artists = artists\getArtists();
@@ -71,7 +70,7 @@ switch ($action)
             exit();
         }
 
-        // Add/update the artist
+        // Add/update the artist-song relationship
         if ($artistSong['id'] == 0)
         {
             artistsSongs\addArtistSong($artistSong);

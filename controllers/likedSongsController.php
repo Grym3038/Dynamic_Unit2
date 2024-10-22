@@ -20,8 +20,7 @@ switch ($action)
     case 'toggleFavorite':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
 
-        if ($songId === NULL ||
-            $songId === FALSE ||
+        if ($songId === NULL || $songId === FALSE ||
             songs\getSong($songId) === NULL)
         {
             header('Location: .?action=listSongs');
@@ -42,7 +41,7 @@ switch ($action)
         exit();
     
     /**
-     * Clear the list of liked songs
+     * Clear the array of liked songs
      */
     case 'clearLikedSongs':
         $_SESSION['likedSongIds'] = array();

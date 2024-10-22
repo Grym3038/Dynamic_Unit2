@@ -77,6 +77,7 @@ switch($action)
             'iPath' => $iPath
         );
 
+        // Validate the artist
         $errors = artists\validateArtist($artist);
         if (count($errors) > 0)
         {
@@ -84,6 +85,7 @@ switch($action)
             exit();
         }
 
+        // Add/update the artist
         if ($artist['id'] == 0)
         {
             $artist['id'] = artists\addArtist($artist);
@@ -101,6 +103,11 @@ switch($action)
      */
     case 'deleteArtist':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
+
+        if (!is_integer($artistId) || $artistId < 1)
+        {
+            return404();
+        }
 
         $entity = artists\getArtist($artistId);
 

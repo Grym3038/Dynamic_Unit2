@@ -64,8 +64,8 @@ function getArtistsSongs() : array
     $query = 'SELECT artistsSongs.id, artistId, artists.name artistName,
                      songId, songs.name songName
               FROM artistsSongs
-              JOIN artists ON artistsSongs.artistId = artists.id
-              JOIN songs ON artistsSongs.songId = songs.id
+                  JOIN artists ON artistsSongs.artistId = artists.id
+                  JOIN songs ON artistsSongs.songId = songs.id
               ORDER BY LOWER(artists.name), LOWER(songs.name)';
     $statement = $db->prepare($query);
     $statement->execute();
@@ -80,11 +80,11 @@ function getArtistsSongs() : array
 function getArtistSong(int $artistSongId)
 {
     global $db;
-    $query = 'SELECT artistsSongs.id, artistId, artists.name artistName,
-                     songId, songs.name songName
+    $query = 'SELECT artistsSongs.id, artistId, artists.name artistName, songId,
+                     songs.name songName
               FROM artistsSongs
-              JOIN artists ON artistsSongs.artistId = artists.id
-              JOIN songs ON artistsSongs.songId = songs.id
+                  JOIN artists ON artistsSongs.artistId = artists.id
+                  JOIN songs ON artistsSongs.songId = songs.id
               WHERE artistsSongs.id = :artistSongId';
     $statement = $db->prepare($query);
     $statement->bindValue(':artistSongId', $artistSongId);
