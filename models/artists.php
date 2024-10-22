@@ -50,6 +50,34 @@ function validateArtist(array $artist)
 }
 
 /**
+ * Validate a list of artist ids
+ */
+function validateArtistIds(array $artistIds) : array
+{
+    if (count($artistIds) == 0) return array();
+
+    global $db;
+
+    $idList = implode(',', $artistIds); // SQL injection possible?
+
+    $query = "SELECT COUNT(*) count
+              FROM artists
+              WHERE id IN ($idList)";
+
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch()['count'];
+    $statement->closeCursor();
+
+    $errors = array();
+    if ($count != count($artistIds))
+    {
+        $errors[] = 'Invalid artist ids';
+    }
+    return $errors;
+}
+
+/**
  * Get all artists
  */
 function getArtists() 
