@@ -122,15 +122,13 @@ html {
       align-items: center; /* Center vertically */
   }
 
-.table-vertical-align td, .table-vertical-align th
-{
+.table-vertical-align td, .table-vertical-align th {
     vertical-align: middle;
 }
 
 /* Albums */
 
-.album-cover
-{
+.album-cover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
