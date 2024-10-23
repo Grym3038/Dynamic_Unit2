@@ -11,7 +11,7 @@ if ($action == 'deleteEntity')
     $entityId = filter_input(INPUT_POST, 'entityId', FILTER_VALIDATE_INT);
 
     // Validate the form data
-    $validTypes = array('artist', 'album', 'song', 'artistSong');
+    $validTypes = array('artist', 'album', 'song');
     $isValidType = in_array($entityType, $validTypes);
     $isValidId = is_integer($entityId) && $entityId > 0;
 
@@ -33,12 +33,9 @@ if ($action == 'deleteEntity')
         case 'song':
             $entity = songs\getSong($entityId);
             break;
-        case 'artistSong':
-            $entity = artistsSongs\getArtistSong($entityId);
-            break;
     }
 
-    if ($entity === FALSE)
+    if ($entity == FALSE)
     {
         return404();
     }
@@ -57,10 +54,6 @@ if ($action == 'deleteEntity')
         case 'song':
             songs\deleteSong($entity);
             header('Location: .?action=listSongs');
-            break;
-        case 'artistSong':
-            artistsSongs\deleteArtistSong($entity);
-            header('Location: .?action=listArtistsSongs');
             break;
     }
     exit();

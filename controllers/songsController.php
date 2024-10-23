@@ -110,6 +110,11 @@ switch ($action)
 
         $song['length'] = $minutes * 60 + $seconds;
 
+        if ($song['length'] == 0)
+        {
+            $errors[] = 'Song length must be greater than 0.';
+        }
+
         // Validate the artist ids
         $artistIds = array_keys($artistIdRows);
         $errors = array_merge($errors, artists\validateArtistIds($artistIds));

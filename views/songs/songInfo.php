@@ -30,6 +30,8 @@
             <input type="hidden" name="action" value="toggleFavorite" />
             <input type="hidden" name="songId"
                 value="<?php echo $song['id']; ?>" />
+            <input type="hidden" name="redirectTo"
+                value="?action=viewSong&songId=<?php echo $song['id']; ?>" />
             
             <?php
                 if (in_array($song['id'], $_SESSION['likedSongIds']))

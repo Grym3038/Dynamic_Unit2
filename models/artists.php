@@ -18,20 +18,13 @@ function validateArtist(array $artist)
     {
         $errors[] = 'Name is required.';
     }
-
-    if (!is_integer($artist['monthlyListeners']) ||
-        $artist['monthlyListeners'] < 0)
-    {
-        $errors[] = 'Monthly listeners must be a positive number.';
-    }
-
-    if (count($errors) == 0)
+    else
     {
         // Ensure the artist's name is unique
         global $db;
         $query = 'SELECT COUNT(*) count
-                  FROM artists
-                  WHERE name = :name
+                    FROM artists
+                    WHERE name = :name
                     AND id != :id';
         $statement = $db->prepare($query);
         $statement->bindValue(':name', $artist['name']);
@@ -44,6 +37,12 @@ function validateArtist(array $artist)
         {
             $errors[] = 'An artist with that name already exists.';
         }
+    }
+
+    if (!is_integer($artist['monthlyListeners']) ||
+        $artist['monthlyListeners'] <= 0)
+    {
+        $errors[] = 'Monthly listeners must be a positive number.';
     }
 
     return $errors;
@@ -162,7 +161,6 @@ function updateArtist(array $artist) : void
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
     $statement->bindValue(':artistId', $artist['id']);
     $statement->bindValue(':iPath', $artist['iPath']);
-
     $statement->execute();
     $statement->closeCursor();
 }

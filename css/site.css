@@ -5,59 +5,57 @@
 
 html {
     font-size: 14px;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     html {
       font-size: 16px;
     }
-  }
+}
   
-  html {
+html {
     position: relative;
     min-height: 100%;
-  }
+}
   
-  body {
-      margin-bottom: 60px;
-  }
+body {
+    margin-bottom: 60px;
+}
+
+/* Product card section*/
   
+.product-card {
+    cursor: pointer; /* Changes the cursor to pointer */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Move the card up slightly on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+}
   
+.product-container {
+    overflow: hidden; /* Ensures content doesn't overflow */
+    position: relative;
+}
   
-  /* Product card section*/
-  
-  .product-card {
-      cursor: pointer; /* Changes the cursor to pointer */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .product-card:hover {
-      transform: translateY(-5px); /* Move the card up slightly on hover */
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
-  }
-  
-  .product-container {
-      overflow: hidden; /* Ensures content doesn't overflow */
-      position: relative;
-  }
-  
-  .image-wrapper {
-      width: 100%; /* Make it responsive */
-      padding-top: 100%; /* This creates a square aspect ratio */
-      position: relative; /* For positioning child elements */
-      display: flex; /* Use flexbox for centering */
-      align-items: center;
-      justify-content: center; /* Center horizontally */
-  }
-  
-  .product-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      object-fit: fill; /* Ensures the image covers the square */
-      transition: transform 0.3s ease;
-  }
+.image-wrapper {
+    width: 100%; /* Make it responsive */
+    padding-top: 100%; /* This creates a square aspect ratio */
+    position: relative; /* For positioning child elements */
+    display: flex; /* Use flexbox for centering */
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+}
+
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: fill; /* Ensures the image covers the square */
+    transition: transform 0.3s ease;
+}
   
   /* Dark overlay styling */
   .overlay {
@@ -180,7 +178,7 @@ a.btn-cancel {
     display: inline-block;
 }
 
-input[type="submit"]:hover{
+input[value="Submit"]:hover{
     background-color: #00b812;
 }   
 a.btn-cancel:hover {

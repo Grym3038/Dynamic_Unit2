@@ -13,8 +13,8 @@
 
         <?php foreach ($artists as $artist) : ?>
 
-            <div class="col-md-2 mb-2">
-                    <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>" class="card bg-black border-0 text-center text-light product-card">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>" class="card bg-black border-0 text-center text-light product-card">
                     <!-- Hover container -->
                     <div class="product-container position-relative">
                         <div class="image-wrapper">
@@ -30,12 +30,11 @@
                 </a>
             </div>
 
-
         <?php endforeach ?>
     
 
-               <!-- Add Product Card -->
-               <div class="col-md-2 mb-2">
+        <!-- Add Product Card -->
+        <div class="col-md-2 mb-2">
             <a href=".?action=artistForm" class="card bg-black border-0 text-center text-light product-card">
                 <div class="product-container position-relative">
                     <div class="image-wrapper d-flex justify-content-center align-items-center">
@@ -50,8 +49,7 @@
                 </div>
             </a>
         </div>
-        </div>
-
+    </div>
 </div>
 
 <?php include('views/_partials/footer.php'); ?>
