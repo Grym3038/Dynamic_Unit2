@@ -15,22 +15,24 @@
     <?php echo htmlspecialchars($album['name']); ?>
 </h1>
 
-<img src="<?php echo $album['iPath']; ?>" alt="">
+<div>
+    <div class="album-cover"
+        style="background-image: url(<?php echo $album['iPath']; ?>);">
+    </div>
+</div>
 
-<ul>
-    <li>
-        <a href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
-            Edit
-        </a>
-    </li>
-    <li>
-        <a href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
-            Delete
-        </a>
-    </li>
-</ul>
+<div class="mt-3">
+    <a href=".?action=albumForm&albumId=<?php echo $album['id']; ?>"
+        class="btn btn-warning">
+        Edit
+    </a>
+    <a href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>"
+        class="btn btn-danger">
+        Delete
+    </a>
+</div>
 
-<table>
+<table class="table table-dark mt-3">
     <tbody>
         <tr>
             <th>Artist</th>
@@ -41,7 +43,7 @@
             </td>
         </tr>
         <tr>
-            <th>Length</th>
+            <th>Duration</th>
             <td>
                 <?php echo formatTime($album['length']); ?>
             </td>
@@ -49,11 +51,11 @@
     </tbody>
 </table>
 
-<table>
+<table class="table table-dark mt-3">
     <thead>
         <tr>
             <th>Song</th>
-            <th>Length</th>
+            <th>Duration</th>
         </tr>
     </thead>
     <tbody>

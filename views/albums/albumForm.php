@@ -10,7 +10,7 @@
 <h1>
     <?php echo ($album['id'] == 0 ? 'Add' : 'Edit') . ' Album'; ?>
 </h1>
-<form action="." method="post" class="form-dark">
+<form action="." method="post" class="form form-dark">
     <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editAlbum" />
@@ -22,9 +22,9 @@
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
 
-    <div >
+    <div>
         <label for="artistId">Artist</label>
-        <select name="artistId" id="artistId" class="form-control">
+        <select name="artistId" id="artistId" class="form-select">
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
                     <?php if ($album['artistId'] == $artist['id']) : ?>

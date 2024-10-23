@@ -6,7 +6,7 @@
 ?>
 
 <?php if (!empty($errors) && count($errors) > 0) : ?>
-    <ul>
+    <ul class="text-danger">
         <?php foreach ($errors as $error) : ?>   
         <li>
             <?php echo $error; ?>

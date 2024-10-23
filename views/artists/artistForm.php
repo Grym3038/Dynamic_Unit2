@@ -12,7 +12,7 @@
     Artist
 </h1>
 
-<form action="." method="post" class="form-dark">
+<form action="." method="post" class="form form-dark mt-3 mb-3">
     <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editArtist" />

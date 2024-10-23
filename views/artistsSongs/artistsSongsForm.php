@@ -12,12 +12,13 @@
     <?php echo ($artistSong['id'] == 0 ? 'Add' : 'Edit') . ' Artist-Song'; ?>
 </h1>
 
-<form action="." method="post">
+<form action="." method="post" class="form">
     <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editArtistSong" />
     <input type="hidden" name="artistSongId"
         value="<?php echo $artistSong['id']; ?>" />
+
     <div>
         <label for="artistId">Artist</label>
         <select name="artistId" id="artistId">
@@ -48,7 +49,7 @@
     </div>
     <div>
         <input type="submit" value="Submit" />
-        <a href=".?action=listArtistsSongs">
+        <a href=".?action=listArtistsSongs" class="btn btn-cancel">
             Cancel
         </a>
     </div>

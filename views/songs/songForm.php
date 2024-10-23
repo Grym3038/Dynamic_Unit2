@@ -11,7 +11,7 @@
     <?php echo ($song['id'] == 0 ? 'Add' : 'Edit') . ' Song'; ?>
 </h1>
 
-<form action="." method="post">
+<form action="." method="post" class="form">
     <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editSong" />
@@ -40,7 +40,7 @@
     $minutes = intdiv($length, 60);
     $seconds = $length - ($minutes * 60);
     ?>
-                
+    
     <div class="form-group length-group">
         <label for="minutes" class="mr-2">Length</label>
         <input type="number" name="minutes" id="minutes" class="form-control" 
@@ -50,9 +50,7 @@
             value="<?php echo $seconds; ?>" />
     </div>
 
-    <h2>Contributing Artists</h2>
-
-    <div class="form-group check-boxes">
+    <div class="form-group check-boxes mt-3">
         <?php foreach ($artists as $artist) : ?>
             <div class="form-check">
                 <input type="checkbox" name="artistIds[<?php echo $artist['id']; ?>]"

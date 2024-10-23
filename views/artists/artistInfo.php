@@ -11,31 +11,29 @@
 
 <h1><?php echo htmlspecialchars($artist['name']); ?></h1>
 
-<img src="<?php echo $artist['iPath']; ?>" alt="">
+<div class="p-2">
+    <div class="album-cover"
+        style="background-image: url(<?php echo $artist['iPath']; ?>)">
+    </div>
+</div>
 
-<ul>
-    <li>
-        <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>">
-            Edit
-        </a>
-    </li>
-    <li>
-        <a href=".?action=deleteArtist&artistId=<?php echo $artist['id']; ?>">
-            Delete
-        </a>
-    </li>
-</ul>
+<p class="mt-3">
+    Monthly Listeners:
+    <?php echo number_format($artist['monthlyListeners'], 0, '.', ','); ?>
+</p>
 
-<table>
-    <tr>
-        <th>Monthly Listeners</th>
-        <td>
-            <?php echo number_format($artist['monthlyListeners'], 0, '.', ','); ?>
-        </td>
-    </tr>
-</table>
+<div class="mt-3">
+    <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>"
+        class="btn btn-warning">
+        Edit
+    </a>
+    <a href=".?action=deleteArtist&artistId=<?php echo $artist['id']; ?>"
+        class="btn btn-danger">
+        Delete
+    </a>
+</div>
 
-<h2>Albums</h2>
+<h2 class="mt-3">Albums</h2>
 
 <?php if (count($albums) == 0) : ?>
 <p>
