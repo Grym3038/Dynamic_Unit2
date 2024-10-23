@@ -17,10 +17,10 @@
     <input type="hidden" name="action" value="editSong" />
     <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
 
-    <div>
+    <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" name="name" id="name"
-            value="<?php echo $song['name']; ?>" autofocus />
+        <input type="text" name="name" id="name" class="form-control"
+            value="<?php echo htmlspecialchars($song['name']); ?>" autofocus />
     </div>
 
     <div>
@@ -41,25 +41,24 @@
     $seconds = $length - ($minutes * 60);
     ?>
                 
-    <div>
-        <label>Length</label>
-        <input type="number" name="minutes" id="minutes"
+    <div class="form-group length-group">
+        <label for="minutes" class="mr-2">Length</label>
+        <input type="number" name="minutes" id="minutes" class="form-control" 
             value="<?php echo $minutes; ?>" />
         <span>:</span>
-        <input type="number" name="seconds" id="seconds"
+        <input type="number" name="seconds" id="seconds" class="form-control" 
             value="<?php echo $seconds; ?>" />
     </div>
 
     <h2>Contributing Artists</h2>
 
-    <div>
+    <div class="form-group check-boxes">
         <?php foreach ($artists as $artist) : ?>
-            <div>
-                <input type="checkbox"
-                    name="artistIds[<?php echo $artist['id']; ?>]"
-                    <?php echo (in_array($artist['id'], $artistIds) ? 'checked' : ''); ?>
-                />
-                <label>
+            <div class="form-check">
+                <input type="checkbox" name="artistIds[<?php echo $artist['id']; ?>]"
+                    class="form-check-input"
+                    <?php echo (in_array($artist['id'], $artistIds) ? 'checked' : ''); ?> />
+                <label class="form-check-label">
                     <?php echo htmlspecialchars($artist['name']); ?>
                 </label>
             </div>
@@ -70,11 +69,11 @@
         <input type="submit" value="Submit" />
 
         <?php if ($songId == 0) : ?>
-            <a href=".">
+            <a href="." class="btn-cancel">
                 Cancel
             </a>
         <?php else : ?>
-            <a href=".?action=viewSong&songId=<?php echo $songId; ?>">
+            <a href=".?action=viewSong&songId=<?php echo $songId; ?>" class="btn-cancel">
                 Cancel
             </a>
         <?php endif; ?>

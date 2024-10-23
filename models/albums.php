@@ -46,7 +46,7 @@ function getAlbums()
 /**
  * Get an album based on its id
  */
-function getAlbum(int $albumId) : array | bool
+function getAlbum(int $albumId) : array 
 {
     global $db;
     $query = 'SELECT id, name, artistId, iPath
