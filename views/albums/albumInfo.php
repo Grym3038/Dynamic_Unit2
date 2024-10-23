@@ -16,34 +16,30 @@
 </h1>
 
 <div>
-    <div class="album-cover"
-        style="background-image: url(<?php echo $album['iPath']; ?>);">
-    </div>
+    <img src="<?php echo $album['iPath']; ?>" alt="">
 </div>
-
-<div class="mt-3">
-    <a href=".?action=albumForm&albumId=<?php echo $album['id']; ?>"
-        class="btn btn-warning">
+<div class="btn-group" role="group" aria-label="Basic example">
+    <a class="btn btn-outline-info" href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
         Edit
     </a>
-    <a href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>"
-        class="btn btn-danger">
+    <a class="btn btn-outline-danger" href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
         Delete
     </a>
+    </li>
 </div>
 
-<table class="table table-dark mt-3">
+<table>
     <tbody>
         <tr>
             <th>Artist</th>
             <td>
-                <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
+                <a class="btn btn-outline-secondary" href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
                     <?php echo htmlspecialchars($artist['name']); ?>
                 </a>
             </td>
         </tr>
         <tr>
-            <th>Duration</th>
+            <th>Length</th>
             <td>
                 <?php echo formatTime($album['length']); ?>
             </td>
@@ -51,18 +47,18 @@
     </tbody>
 </table>
 
-<table class="table table-dark mt-3">
+<table class="table table-sm table-dark">
     <thead>
         <tr>
             <th>Song</th>
-            <th>Duration</th>
+            <th>Length</th>
         </tr>
     </thead>
     <tbody>
     <?php foreach ($songs as $song) : ?>
     <tr>
         <td>
-            <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
+            <a class="link-underline link-underline-opacity-0 text-light" href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
                 <?php echo htmlspecialchars($song['name']); ?>
             </a>
         </td>
