@@ -22,7 +22,7 @@ TO spotifyClone@localhost;
 
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
-    name             varchar(255) NOT NULL,
+    name             varchar(255)  NOT NULL,
     iPath            varchar(2023) NOT NULL,
     monthlyListeners int           NOT NULL,
     PRIMARY KEY (id),

@@ -45,7 +45,6 @@ if ($action == NULL)
 require('controllers/artistsController.php');
 require('controllers/albumsController.php');
 require('controllers/songsController.php');
-require('controllers/artistsSongsController.php');
 require('controllers/likedSongsController.php');
 require('controllers/deletionController.php');
 

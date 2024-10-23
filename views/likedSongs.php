@@ -34,6 +34,8 @@
                                 value="toggleFavorite" />
                             <input type="hidden" name="songId"
                                 value="<?php echo $song['id']; ?>" />
+                            <input type="hidden" name="redirectTo"
+                                value="?action=listLikedSongs" />
                             <input type="submit" value="&times;" />
                         </form>
                     </td>
@@ -55,7 +57,7 @@
     <p>
         <form action="." method="post">
             <input type="hidden" name="action" value="clearLikedSongs" />
-            <input type="submit" value="Unlike All" />
+            <input type="submit" value="Unlike All" class="btn btn-danger" />
         </form>
     </p>
 <?php endif; ?>

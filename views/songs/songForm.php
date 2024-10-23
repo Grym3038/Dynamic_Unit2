@@ -51,6 +51,7 @@
     </div>
 
     <div class="form-group check-boxes mt-3">
+        <label>Artists</label>
         <?php foreach ($artists as $artist) : ?>
             <div class="form-check">
                 <input type="checkbox" name="artistIds[<?php echo $artist['id']; ?>]"

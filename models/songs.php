@@ -132,8 +132,8 @@ function getSongsByArtistId(int $artistId) : array
     global $db;
     $query = 'SELECT songs.id, songs.name, songs.length, songs.albumId
               FROM songs
-                  JOIN artistssongs ON songs.id = artistssongs.songId
-                  JOIN artists ON artistssongs.artistId = artists.id
+                  JOIN artistsSongs ON songs.id = artistsSongs.songId
+                  JOIN artists ON artistsSongs.artistId = artists.id
               WHERE artists.id = :artistId';
     $statement = $db->prepare($query);
     $statement->bindValue(':artistId', $artistId);
@@ -155,9 +155,9 @@ function getAlbumLength(int $albumId) : int
     $statement = $db->prepare($query);
     $statement->bindValue(':albumId', $albumId);
     $statement->execute();
-    $row = $statement->fetch();
+    $length = $statement->fetch()['length'];
     $statement->closeCursor();
-    return $row['length'];
+    return $length;
 }
 
 /**

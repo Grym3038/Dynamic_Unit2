@@ -27,10 +27,9 @@
                     <a class="nav-link" aria-current="page" href=".?action=listArtists">Artists</a>
                     <a class="nav-link" href=".?action=listAlbums">Albums</a>
                     <a class="nav-link" href=".?action=listSongs">Songs</a>
-                    <a class="nav-link" href=".?action=listArtistsSongs">Artists Songs</a>
                     <a class="nav-link" href=".?action=listLikedSongs">Liked Songs</a>
                 </div>
             </div>
         </div>
     </nav>
-<main>
+    <main>

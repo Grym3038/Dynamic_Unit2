@@ -19,6 +19,7 @@ switch ($action)
      */
     case 'toggleFavorite':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
+        $redirectTo = filter_input(INPUT_POST, 'redirectTo');
 
         if ($songId === NULL || $songId === FALSE ||
             songs\getSong($songId) === NULL)
@@ -37,7 +38,7 @@ switch ($action)
             $_SESSION['likedSongIds'][] = $songId;
         }
 
-        header('Location: .?action=listLikedSongs');
+        header('Location: ' . $redirectTo);
         exit();
     
     /**

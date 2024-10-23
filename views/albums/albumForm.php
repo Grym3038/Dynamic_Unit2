@@ -24,7 +24,7 @@
 
     <div>
         <label for="artistId">Artist</label>
-        <select name="artistId" id="artistId" class="form-select">
+        <select name="artistId" id="artistId">
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
                     <?php if ($album['artistId'] == $artist['id']) : ?>
@@ -38,7 +38,7 @@
 
     <div class="form-group">
         <label for="iPath">Image Path</label>
-        <input type="text" name="iPath" id="iPath" class="form-control"
+        <input type="text" name="iPath" id="iPath" class="form-control form-dark"
             value="<?php echo htmlspecialchars($album['iPath']); ?>" />
     </div>
 

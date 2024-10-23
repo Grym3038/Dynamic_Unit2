@@ -8,7 +8,9 @@
     </main>
     <footer class="footer mt-5 p-3 border-top rounded">
         <div class="container">
-            <p> &copy; 2024</p>
+            <p>
+                &copy; 2024 Made by Yasin Sisto, Will Brouillette, &amp; Luke Hamann
+            </p>
         </div>
     </footer>
 </body>

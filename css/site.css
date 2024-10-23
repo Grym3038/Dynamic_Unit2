@@ -4,28 +4,26 @@
  */
 
 html {
-font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
+    html {
+      font-size: 16px;
+    }
+}
+  
 html {
-    font-size: 16px;
+    position: relative;
+    min-height: 100%;
 }
-}
-
-html {
-position: relative;
-min-height: 100%;
-}
-
+  
 body {
     margin-bottom: 60px;
 }
 
-
-
 /* Product card section*/
-
+  
 .product-card {
     cursor: pointer; /* Changes the cursor to pointer */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -35,12 +33,12 @@ body {
     transform: translateY(-5px); /* Move the card up slightly on hover */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
 }
-
+  
 .product-container {
     overflow: hidden; /* Ensures content doesn't overflow */
     position: relative;
 }
-
+  
 .image-wrapper {
     width: 100%; /* Make it responsive */
     padding-top: 100%; /* This creates a square aspect ratio */
@@ -58,69 +56,69 @@ body {
     object-fit: fill; /* Ensures the image covers the square */
     transition: transform 0.3s ease;
 }
-
-/* Dark overlay styling */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0); /* Initially transparent */
-    transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-/* Darken the overlay on hover */
-.product-container:hover .overlay {
-    background-color: rgba(0, 0, 0, .75); /* Dark overlay on hover */
-}
-
-.product-name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: #ffffff; /* White text color */
-    padding: 10px;
-    text-align: center;
-    opacity: 0; /* Start hidden */
-    transition: opacity 0.3s ease;
-    height: 100%; /* Full height to center vertically */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    font-weight: bold;
-    font-size: 30px;
-}
-
-.product-container:hover .product-name {
-    opacity: 1; /* Show on hover */
-}
-
-.product-container:hover .product-image {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-
-
+  
+  /* Dark overlay styling */
+  .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0); /* Initially transparent */
+      transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Darken the overlay on hover */
+  .product-container:hover .overlay {
+      background-color: rgba(0, 0, 0, .75); /* Dark overlay on hover */
+  }
+  
+  .product-name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #ffffff; /* White text color */
+      padding: 10px;
+      text-align: center;
+      opacity: 0; /* Start hidden */
+      transition: opacity 0.3s ease;
+      height: 100%; /* Full height to center vertically */
+      display: flex; /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      font-weight: bold;
+      font-size: 30px;
+  }
+  
+  .product-container:hover .product-name {
+      opacity: 1; /* Show on hover */
+  }
+  
+  .product-container:hover .product-image {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  
+  
 /* Plus icon */
-
-.plus-icon {
-    font-size: 5rem; /* Adjust the size of the + icon */
-    color: lightgray;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: #ffffff; /* White text color */
-    padding: 10px;
-    text-align: center;
-    transition: opacity 0.3s ease;
-    height: 100%; /* Full height to center vertically */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-}
+  
+  .plus-icon {
+      font-size: 5rem; /* Adjust the size of the + icon */
+      color: lightgray;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #ffffff; /* White text color */
+      padding: 10px;
+      text-align: center;
+      transition: opacity 0.3s ease;
+      height: 100%; /* Full height to center vertically */
+      display: flex; /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+  }
 
 .table-vertical-align td, .table-vertical-align th {
     vertical-align: middle;
