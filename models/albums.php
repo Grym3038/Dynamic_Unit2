@@ -68,8 +68,6 @@ function getAlbumsWithArtistNames() : array
     global $db;
     $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId, albums.iPath iPath,
                      artists.name artistName
-    $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId,
-                     albums.iPath iPath, artists.name artistName
               FROM albums
                   JOIN artists ON albums.artistId = artists.id
               ORDER BY LOWER(albums.name)';

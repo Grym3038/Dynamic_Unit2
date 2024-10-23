@@ -18,12 +18,12 @@
             <div class="col-md-2 mb-3">
                     <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>" class="card link-underline link-underline-opacity-0 bg-black border-0 text-center text-light">
                         
-                    <div class="card product-container position-relative bg-dark text-light rounded">
-                        <div class="card-img-top image-wrapper">
-                            <img class="card-img-top "  style="height: 10rem;" src="<?php echo htmlspecialchars($album['iPath']); ?>" alt="<?php echo htmlspecialchars($album['name']); ?>" />
+                    <div class="card position-relative bg-dark text-light rounded">
+                        <div class="card-img-top">
+                            <img style="height: 10rem; width: 10rem;" src="<?php echo htmlspecialchars($album['iPath']); ?>" alt="<?php echo htmlspecialchars($album['name']); ?>" />
                         </div>
-                        <div class="card-body">
-                            <div class="card-title">
+                        <div class="card-body ">
+                            <div class="card-title ">
                                 <?php echo htmlspecialchars($album['name']); ?>
                             </div>
                         </div>
