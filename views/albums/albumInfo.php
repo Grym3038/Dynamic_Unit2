@@ -15,8 +15,10 @@
     <?php echo htmlspecialchars($album['name']); ?>
 </h1>
 
+<div>
+    <img src="<?php echo $album['iPath']; ?>" alt="">
+</div>
 <div class="btn-group" role="group" aria-label="Basic example">
-<img src="<?php echo $album['iPath']; ?>" alt="">
     <a class="btn btn-outline-info" href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
         Edit
     </a>
@@ -45,7 +47,7 @@
     </tbody>
 </table>
 
-<table class="table table-sm">
+<table class="table table-sm table-dark">
     <thead>
         <tr>
             <th>Song</th>
@@ -56,7 +58,7 @@
     <?php foreach ($songs as $song) : ?>
     <tr>
         <td>
-            <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
+            <a class="link-underline link-underline-opacity-0 text-light" href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
                 <?php echo htmlspecialchars($song['name']); ?>
             </a>
         </td>

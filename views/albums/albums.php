@@ -13,35 +13,23 @@
     <a class="btn btn-primary" href=".?action=albumForm" role="button"> 
         Add Album
     </a>
-</div>
-
-<table class="table table-hover">
-    <thead class="table-light">
-        <tr>
-            <Th></th>
-            <th>Name</th>
-            <th>Artist</th>
-        </tr>
-    </thead>
-    <tbody class="table-dark">
+<div class="row">
         <?php foreach($albums as $album) : ?>
-            <tr>
-                <td>
-                    <img src="<?php echo $album['iPath']; ?>" style="width: 9rem; height: 9rem;" class="img-thumbnail" alt="">
-                </td>
-                <td>
-                    <a class="btn btn-dark" href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
-                        <?php echo htmlspecialchars($album['name']); ?>
-                    </a>
-                </td>
-                <td>
-                    <a class="btn btn-dark" href=".?action=viewArtist&artistId=<?php echo $album['artistId']; ?>">
-                        <?php echo $album['artistName']; ?>
-                    </a>
-                </td>
-            </tr>
+            <div class="col-md-2 mb-3">
+                    <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>" class="card link-underline link-underline-opacity-0 bg-black border-0 text-center text-light">
+                        
+                    <div class="card product-container position-relative bg-dark text-light rounded">
+                        <div class="card-img-top image-wrapper">
+                            <img class="card-img-top "  style="height: 10rem;" src="<?php echo htmlspecialchars($album['iPath']); ?>" alt="<?php echo htmlspecialchars($album['name']); ?>" />
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <?php echo htmlspecialchars($album['name']); ?>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         <?php endforeach; ?>
-    </tbody>
-</table>
 
 <?php include('views/_partials/footer.php'); ?>

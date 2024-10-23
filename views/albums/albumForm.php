@@ -18,13 +18,13 @@
     <input type="hidden" name="albumId" value="<?php echo $album['id']; ?>" />
 
     <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
-        <input type="text" class="form-control" aria-describedby="inputGroup-sizing-default" name="name" id="name" autofocus
+        <span class="input-group-text bg-dark text-light rounded" id="inputGroup-sizing-default">Name</span>
+        <input type="text" class="form-control bg-dark text-light rounded" aria-describedby="inputGroup-sizing-default" name="name" id="name" autofocus
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
     <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">Artist</label>
-        <select class="form-select" name="artistId" id="artistId">
+        <label class="input-group-text bg-dark text-light rounded" for="inputGroupSelect01">Artist</label>
+        <select class="form-select bg-dark text-light rounded" name="artistId" id="artistId">
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
                     <?php if ($album['artistId'] == $artist['id']) : ?>
@@ -37,7 +37,7 @@
     </div>
     <div>
         <label for="iPath">Image Path</label>
-        <input type="text" name="iPath" id="iPath" 
+        <input type="text" name="iPath" id="iPath" class="bg-dark text-light rounded"
             value="<?php echo htmlspecialchars($album['iPath']); ?>" />
     </div>
     <div>
