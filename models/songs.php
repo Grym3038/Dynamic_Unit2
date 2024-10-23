@@ -1,12 +1,14 @@
 <?php
 /**
- * Functions for manipulating songs in the database.
+ * Title: Songs Model
+ * Purpose: To provide database access for getting, adding, updating, and
+ *          deleting songs
  */
 
 namespace songs;
 
 /**
- * Validate the properties of a song.
+ * Validate a song
  */
 function validateSong(array $song) : array
 {
@@ -31,7 +33,7 @@ function validateSong(array $song) : array
 }
 
 /**
- * Get all songs.
+ * Get all songs
  */
 function getSongs() : array
 {
@@ -47,7 +49,7 @@ function getSongs() : array
 }
 
 /**
- * Get all songs, including their album names.
+ * Get all songs, including their album names
  */
 function getSongsWithAlbumName() : array
 {
@@ -65,7 +67,7 @@ function getSongsWithAlbumName() : array
 }
 
 /**
- * Get a song based on its id.
+ * Get a song based on its id
  */
 function getSong(int $songId)
 {
@@ -83,7 +85,7 @@ function getSong(int $songId)
 }
 
 /**
- * Get all songs with ids in the given list of ids.
+ * Get all songs with ids in the given list of ids
  */
 function getSongsBySongIds(array $songIds) : array
 {
@@ -105,7 +107,7 @@ function getSongsBySongIds(array $songIds) : array
 }
 
 /**
- * Get all songs with the given album id.
+ * Get all songs with the given album id
  */
 function getSongsByAlbumId(int $albumId) : array
 {
@@ -123,7 +125,7 @@ function getSongsByAlbumId(int $albumId) : array
 }
 
 /**
- * Get all songs with the given artist id.
+ * Get all songs with the given artist id
  */
 function getSongsByArtistId(int $artistId) : array
 {
@@ -142,7 +144,7 @@ function getSongsByArtistId(int $artistId) : array
 }
 
 /**
- * Calculate the duration of an album in seconds given the album id.
+ * Calculate the duration of an album in seconds given the album id
  */
 function getAlbumLength(int $albumId) : int
 {
@@ -159,9 +161,7 @@ function getAlbumLength(int $albumId) : int
 }
 
 /**
- * Add a song.
- * 
- * @return int The id of the new song
+ * Add a song
  */
 function addSong(array $song) : int
 {
@@ -179,7 +179,7 @@ function addSong(array $song) : int
 }
 
 /**
- * Update a song.
+ * Update a song
  */
 function updateSong(array $song) : void
 {
@@ -197,7 +197,7 @@ function updateSong(array $song) : void
 }
 
 /**
- * Delete a song.
+ * Delete a song
  */
 function deleteSong(array $song) : void
 {

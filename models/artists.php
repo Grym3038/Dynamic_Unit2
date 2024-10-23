@@ -25,6 +25,55 @@ function validateArtist(array $artist)
         $errors[] = 'Monthly listeners must be a positive number.';
     }
 
+    if (count($errors) == 0)
+    {
+        // Ensure the artist's name is unique
+        global $db;
+        $query = 'SELECT COUNT(*) count
+                  FROM artists
+                  WHERE name = :name
+                    AND id != :id';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':name', $artist['name']);
+        $statement->bindValue(':id', $artist['id']);
+        $statement->execute();
+        $count = $statement->fetch()['count'];
+        $statement->closeCursor();
+
+        if ($count > 0)
+        {
+            $errors[] = 'An artist with that name already exists.';
+        }
+    }
+
+    return $errors;
+}
+
+/**
+ * Validate a list of artist ids
+ */
+function validateArtistIds(array $artistIds) : array
+{
+    if (count($artistIds) == 0) return array();
+
+    global $db;
+
+    $idList = implode(',', $artistIds); // SQL injection possible?
+
+    $query = "SELECT COUNT(*) count
+              FROM artists
+              WHERE id IN ($idList)";
+
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $count = $statement->fetch()['count'];
+    $statement->closeCursor();
+
+    $errors = array();
+    if ($count != count($artistIds))
+    {
+        $errors[] = 'Invalid artist ids';
+    }
     return $errors;
 }
 

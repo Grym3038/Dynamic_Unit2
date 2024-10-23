@@ -1,3 +1,8 @@
+/**
+ * Title: Site CSS
+ * Purpose: To provide site-wide custom styles
+ */
+
 html {
     font-size: 14px;
   }
@@ -117,3 +122,120 @@ html {
       align-items: center; /* Center vertically */
   }
   
+
+  /* Dark Theme Colors */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Arial', sans-serif;
+}
+
+form {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    margin: auto;
+}
+
+label {
+    color: #b3b3b3;
+}
+
+input[type="text"],
+input[type="number"] {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input[type="submit"],
+a.btn-cancel {
+    background-color: #3a3a3a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+input[type="submit"]:hover{
+    background-color: #00b812;
+}   
+a.btn-cancel:hover {
+    background-color: #ff0000;
+}
+
+a.btn-cancel {
+    margin-left: 10px;
+}
+
+input[type="submit"]:focus,
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+
+select {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+h2 {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+}
+
+
+
+
+/* Flexbox for Length Inputs */
+.length-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+}
+
+.length-group input[type="number"] {
+    width: 25%;
+    height: 22px; /* Reset Bootstrap's form-control height */
+    padding: 5px; /* Reduce padding for a smaller look */
+    text-align: center;
+    margin-bottom: 0px;
+
+}
+
+.length-group span {
+    color: #e0e0e0;
+}
+
+.check-boxes {
+    margin-bottom: 20px;
+
+}

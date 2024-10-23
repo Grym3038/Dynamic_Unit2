@@ -23,8 +23,8 @@
     <div>
         <input type="submit" value="Yes" />
         <?php
-            $href = '.?action=view' . htmlspecialchars(ucwords($entity['type'])) .
-                '&' . htmlspecialchars(strtolower($entity['type'])) . 'Id=' .
+            $href = '.?action=view' . htmlspecialchars(ucwords($entity['type']))
+                . '&' . htmlspecialchars(strtolower($entity['type'])) . 'Id=' .
                 $entity['id'];
         ?>
         <a href="<?php echo $href; ?>">

@@ -70,6 +70,7 @@ switch ($action)
         $name = filter_input(INPUT_POST, 'name');
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
         $albumIpath = filter_input(INPUT_POST, 'iPath');
+
         $album = array(
             'id' => $albumId,
             'name' => $name,
@@ -77,6 +78,7 @@ switch ($action)
             'iPath' => $albumIpath
         );
 
+        // Validate the album
         $errors = albums\validateAlbum($album);
         if (count($errors) > 0)
         {
@@ -85,6 +87,7 @@ switch ($action)
             exit();
         }
 
+        // Add/update the album
         if ($album['id'] == 0)
         {
             $album['id'] = albums\addAlbum($album);

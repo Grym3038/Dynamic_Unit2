@@ -10,8 +10,7 @@
 <h1>
     <?php echo ($album['id'] == 0 ? 'Add' : 'Edit') . ' Album'; ?>
 </h1>
-
-<form action="." method="post">
+<form action="." method="post" class="form-dark">
     <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editAlbum" />
@@ -35,7 +34,8 @@
             <?php endforeach; ?>
         </select>
     </div>
-    <div>
+
+    <div class="form-group">
         <label for="iPath">Image Path</label>
         <input type="text" name="iPath" id="iPath" class="bg-dark text-light rounded"
             value="<?php echo htmlspecialchars($album['iPath']); ?>" />
@@ -57,7 +57,9 @@
         <a class="btn btn-warning" href="<?php echo $href; ?>">
             Cancel
         </a>
+        <a href="<?php echo $href; ?>" class="btn btn-cancel">Cancel</a>
     </div>
 </form>
+
 
 <?php include('views/_partials/footer.php'); ?>

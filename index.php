@@ -6,11 +6,11 @@
 */
 
 // Import the data models
-require_once('models/_database.php');
-require_once('models/artists.php');
-require_once('models/albums.php');
-require_once('models/songs.php');
-require_once('models/artistsSongs.php');
+require('models/_database.php');
+require('models/artists.php');
+require('models/albums.php');
+require('models/songs.php');
+require('models/artistsSongs.php');
 
 // Define a 404 Not Found action
 function return404()

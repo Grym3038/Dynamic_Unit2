@@ -87,7 +87,7 @@ switch ($action)
             'albumId' => $albumId
         );
 
-        // Validate the form data
+        // Validate the song
         $errors = songs\validateSong($song);
 
         if (!is_integer($minutes) || $minutes < 0)
@@ -109,7 +109,10 @@ switch ($action)
         }
 
         $song['length'] = $minutes * 60 + $seconds;
+
+        // Validate the artist ids
         $artistIds = array_keys($artistIdRows);
+        $errors = array_merge($errors, artists\validateArtistIds($artistIds));
 
         if (count($errors) > 0)
         {
@@ -119,7 +122,7 @@ switch ($action)
             exit();
         }
 
-        // Add/edit the song
+        // Add/update the song
         if ($song['id'] == 0)
         {
             $song['id'] = songs\addSong($song);
