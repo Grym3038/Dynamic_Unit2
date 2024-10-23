@@ -12,13 +12,13 @@
 <h1>Songs</h1>
 
 <p>
-    <a href=".?action=songForm">
-        Add Song
+    <a href=".?action=songForm" class="btn btn-primary">
+        &plus; Add Song
     </a>
 </p>
 
-<div>
-    <table>
+<div class="table-responsive">
+    <table class="table table-dark">
         <thead>
             <tr>
                 <th>Name</th>

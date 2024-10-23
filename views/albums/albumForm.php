@@ -10,20 +10,21 @@
 <h1>
     <?php echo ($album['id'] == 0 ? 'Add' : 'Edit') . ' Album'; ?>
 </h1>
-<form action="." method="post" class="form-dark">
+<form action="." method="post" class="form form-dark">
     <?php include('views/_partials/formErrors.php'); ?>
 
     <input type="hidden" name="action" value="editAlbum" />
     <input type="hidden" name="albumId" value="<?php echo $album['id']; ?>" />
 
-    <div class="input-group mb-3">
-        <span class="input-group-text bg-dark text-light rounded" id="inputGroup-sizing-default">Name</span>
-        <input type="text" class="form-control bg-dark text-light rounded" aria-describedby="inputGroup-sizing-default" name="name" id="name" autofocus
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="form-control" 
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
-    <div class="input-group mb-3">
-        <label class="input-group-text bg-dark text-light rounded" for="inputGroupSelect01">Artist</label>
-        <select class="form-select bg-dark text-light rounded" name="artistId" id="artistId">
+
+    <div>
+        <label for="artistId">Artist</label>
+        <select name="artistId" id="artistId" class="form-select">
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
                     <?php if ($album['artistId'] == $artist['id']) : ?>
@@ -37,11 +38,12 @@
 
     <div class="form-group">
         <label for="iPath">Image Path</label>
-        <input type="text" name="iPath" id="iPath" class="bg-dark text-light rounded"
+        <input type="text" name="iPath" id="iPath" class="form-control"
             value="<?php echo htmlspecialchars($album['iPath']); ?>" />
     </div>
-    <div>
-    <input class="btn btn-primary" type="submit" value="Submit" />
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-dark" />
 
         <?php
             if ($album['id'] == 0)
@@ -54,9 +56,6 @@
             }
         ?>
 
-        <a class="btn btn-warning" href="<?php echo $href; ?>">
-            Cancel
-        </a>
         <a href="<?php echo $href; ?>" class="btn btn-cancel">Cancel</a>
     </div>
 </form>

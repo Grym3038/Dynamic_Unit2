@@ -27,7 +27,7 @@
                 . '&' . htmlspecialchars(strtolower($entity['type'])) . 'Id=' .
                 $entity['id'];
         ?>
-        <a href="<?php echo $href; ?>">
+        <a href="<?php echo $href; ?>" class="btn btn-danger">
             Cancel
         </a>
     </div>
