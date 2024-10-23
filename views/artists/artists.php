@@ -6,13 +6,9 @@
 ?>
 
 <?php include('views/_partials/header.php'); ?>
-<div class="container mt-4 bg-dark text-light rounded" style="margin-bottom: 60px;">
+<div class="container bg-dark text-light rounded" style="margin-bottom: 60px;">
 
 <h1>Artists</h1>
-
-
-
-
     <div class="row bg-dark text-light rounded">
 
         <?php foreach ($artists as $artist) : ?>

@@ -10,12 +10,12 @@
 <h1>Artists Songs</h1>
 
 <p>
-    <a href=".?action=artistsSongsForm">
-        Add Relationship
+    <a href=".?action=artistsSongsForm" class="btn btn-primary">
+        &plus; Add Relationship
     </a>
 </p>
 
-<table>
+<table class="table table-dark table-vertical-align">
     <thead>
         <tr>
             <th>Artist</th>
@@ -38,7 +38,8 @@
                     </a>
                 </td>
                 <td>
-                    <a href=".?action=artistsSongsForm&artistSongId=<?php echo $artistSong['id']; ?>">
+                    <a href=".?action=artistsSongsForm&artistSongId=<?php echo $artistSong['id']; ?>"
+                        class="btn btn-warning">
                         Edit
                     </a>
                 </td>

@@ -17,7 +17,7 @@
         <i>None.</i>
     </p>
 <?php else : ?>
-    <table>
+    <table class="table table-dark">
         <thead>
             <tr>
                 <th>&nbsp;</th>

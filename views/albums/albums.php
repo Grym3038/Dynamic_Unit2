@@ -10,22 +10,25 @@
 <h1>Albums</h1>
 
 <p>
-    <a href=".?action=albumForm">
-        Add Album
+    <a href=".?action=albumForm" class="btn btn-primary">
+        &plus; Add Album
     </a>
 </p>
 
-<table>
+<table class="table table-dark table-vertical-align">
     <thead>
         <tr>
+            <th></th>
             <th>Name</th>
             <th>Artist</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($albums as $album) : ?>
-            <img src="<?php echo $album['iPath']; ?>" alt="">
             <tr>
+                <td>
+                    <div class="album-cover" style="background-image: url(<?php echo $album['iPath']; ?>);"></div>
+                </td>
                 <td>
                     <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
                         <?php echo htmlspecialchars($album['name']); ?>
