@@ -12,7 +12,7 @@
 <h1><?php echo htmlspecialchars($artist['name']); ?></h1>
 
 <div class="p-2">
-    <div class="album-cover"
+    <div class="album-banner-image"
         style="background-image: url(<?php echo $artist['imagePath']; ?>)">
     </div>
 </div>
