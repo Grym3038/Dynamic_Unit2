@@ -10,7 +10,7 @@ switch ($action)
      * List all songs
      */
     case 'listSongs':
-        $songs = songs\getSongsWithAlbumName();
+        $songs = songs\getAllSongs();
         include('views/songs/songs.php');
         exit();
 
@@ -27,7 +27,7 @@ switch ($action)
         if ($song === FALSE) return404();
 
         $album = albums\getAlbum($song['albumId']);
-        $artists = artists\getArtistsOfSong($songId);
+        $artists = artists\getSongArtists($songId);
         include('views/songs/songInfo.php');
         exit();
 
@@ -63,8 +63,8 @@ switch ($action)
             }
         }
 
-        $albums = albums\getAlbumsWithArtistNames();
-        $artists = artists\getArtists();
+        $albums = albums\getAllAlbums();
+        $artists = artists\getAllArtists();
         include('views/songs/songForm.php');
         exit();
 
@@ -122,7 +122,7 @@ switch ($action)
         if (count($errors) > 0)
         {
             $artists = artists\getArtists();
-            $albums = albums\getAlbumsWithArtistNames();
+            $albums = albums\getAllAlbums();
             include('views/songs/songForm.php');
             exit();
         }

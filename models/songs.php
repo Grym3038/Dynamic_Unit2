@@ -43,7 +43,7 @@ function validateSong(array $song) : array
 
         if ($row == FALSE)
         {
-            $errors[] = 'That album does not exist.'
+            $errors[] = 'That album does not exist.';
         }
     }
 
@@ -62,7 +62,7 @@ function getSong(int $songId)
                      songs.albumId albumId, albums.name albumName
               FROM songs
                   JOIN albums ON songs.albumId = albums.id
-              WHERE id = :songId';
+              WHERE songs.id = :songId';
     $statement = $db->prepare($query);
     $statement->bindValue(':songId', $songId);
     $statement->execute();
@@ -85,23 +85,23 @@ function getSong(int $songId)
     $statement = $db->prepare($query);
     $statement->bindValue(':songId', $songId);
     $statement->execute();
-    $contributingArtists = $statement->fetchAll();
+    $artists = $statement->fetchAll();
     $statement->closeCursor();
 
-    $song['contributingArtists'] = $contributingArtists;
+    $song['artists'] = $artists;
 
     return $song;
 }
 
 /**
- * Get songs based on a list of song ids
+ * Get songs based on an array of song ids
  */
 function getSongs($songIds)
 {
     $songs = array();
     foreach ($songIds as $songId)
     {
-        $songs[] = getSong($songIds);
+        $songs[] = getSong($songId);
     }
     return $songs;
 }
@@ -158,8 +158,14 @@ function getArtistSongs(int $artistId) : array
     global $db;
 
     // Get the song ids
-    $query = 'SELECT id
+    $query = 'SELECT songs.id
               FROM songs
+                  JOIN albums ON songs.albumId = albums.id
+                  JOIN artists ON albums.artistId = artists.id
+              WHERE artists.id = :artistId
+              UNION
+              SELECT songId
+              FROM artistsSongs
               WHERE artistId = :artistId';
     $statement = $db->prepare($query);
     $statement->bindValue(':artistId', $artistId);

@@ -16,7 +16,7 @@
 </h1>
 
 <div>
-    <img src="<?php echo $album['iPath']; ?>" alt="">
+    <img src="<?php echo $album['imagePath']; ?>" alt="">
 </div>
 <div class="btn-group" role="group" aria-label="Basic example">
     <a class="btn btn-outline-info" href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">

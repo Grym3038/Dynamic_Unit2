@@ -18,7 +18,7 @@
                     <!-- Hover container -->
                     <div class="product-container position-relative">
                         <div class="image-wrapper">
-                            <img class="product-image img-fluid" src="<?php echo htmlspecialchars($artist['iPath']); ?>" alt="<?php echo htmlspecialchars($artist['name']); ?>" />
+                            <img class="product-image img-fluid" src="<?php echo htmlspecialchars($artist['imagePath']); ?>" alt="<?php echo htmlspecialchars($artist['name']); ?>" />
                         </div>
                         <!-- Dark overlay -->
                         <div class="overlay"></div>

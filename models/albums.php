@@ -38,7 +38,7 @@ function validateAlbum(array $album) : array
 
         if ($count > 0)
         {
-            $errors[] = 'The artist already has an album by that name.'
+            $errors[] = 'The artist already has an album by that name.';
         }
     }
 
@@ -96,7 +96,7 @@ function getAlbum(int $albumId) : array
                      albums.imagePath imagePath, artists.name artistName
               FROM albums
                   JOIN artists ON albums.artistId = artists.id
-              WHERE id = :albumId';
+              WHERE albums.id = :albumId';
     $statement = $db->prepare($query);
     $statement->bindValue(':albumId', $albumId);
     $statement->execute();

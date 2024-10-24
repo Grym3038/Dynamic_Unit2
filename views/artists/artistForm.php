@@ -31,9 +31,9 @@
     </div>
 
     <div class="form-group">
-        <label for="iPath">Image Path</label>
-        <input type="text" name="iPath" id="iPath" class="form-control" 
-            value="<?php echo htmlspecialchars($artist['iPath']); ?>" />
+        <label for="imagePath">Image Path</label>
+        <input type="text" name="imagePath" id="imagePath" class="form-control" 
+            value="<?php echo htmlspecialchars($artist['imagePath']); ?>" />
     </div>
 
     <div class="form-group">

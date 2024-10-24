@@ -37,9 +37,9 @@
     </div>
 
     <div class="form-group">
-        <label for="iPath">Image Path</label>
-        <input type="text" name="iPath" id="iPath" class="form-control form-dark"
-            value="<?php echo htmlspecialchars($album['iPath']); ?>" />
+        <label for="imagePath">Image Path</label>
+        <input type="text" name="imagePath" id="imagePath" class="form-control form-dark"
+            value="<?php echo htmlspecialchars($album['imagePath']); ?>" />
     </div>
 
     <div class="form-group">

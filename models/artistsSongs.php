@@ -7,6 +7,30 @@
 namespace artistsSongs;
 
 /**
+ * Get all artist ids associated with a given song id
+ */
+function getArtistIdsBySongId(int $songId) : array
+{
+    global $db;
+    $query = 'SELECT artistId
+              FROM artistsSongs
+              WHERE songId = :songId';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':songId', $songId);
+    $statement->execute();
+    $rows = $statement->fetchAll();
+    $statement->closeCursor();
+
+    $artistIds = array();
+    foreach ($rows as $row)
+    {
+        $artistIds[] = $row['artistId'];
+    }
+
+    return $artistIds;
+}
+
+/**
  * Regenerate the artist-song relationships for a given song given the song id
  * and all artist ids the song should be associated with
  */

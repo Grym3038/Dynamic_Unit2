@@ -20,7 +20,7 @@
                         
                     <div class="card position-relative bg-dark text-light rounded">
                         <div class="card-img-top">
-                            <img style="height: 10rem; width: 10rem; object-fit: cover;" src="<?php echo htmlspecialchars($album['iPath']); ?>" alt="<?php echo htmlspecialchars($album['name']); ?>" />
+                            <img style="height: 10rem; width: 10rem; object-fit: cover;" src="<?php echo htmlspecialchars($album['imagePath']); ?>" alt="<?php echo htmlspecialchars($album['name']); ?>" />
                         </div>
                         <div class="card-body ">
                             <div class="card-title ">

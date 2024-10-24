@@ -13,7 +13,7 @@
 
 <div class="p-2">
     <div class="album-cover"
-        style="background-image: url(<?php echo $artist['iPath']; ?>)">
+        style="background-image: url(<?php echo $artist['imagePath']; ?>)">
     </div>
 </div>
 
