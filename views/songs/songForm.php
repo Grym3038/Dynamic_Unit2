@@ -67,15 +67,20 @@
     <div>
         <input type="submit" value="Submit" />
 
-        <?php if ($songId == 0) : ?>
-            <a href="." class="btn-cancel">
-                Cancel
-            </a>
-        <?php else : ?>
-            <a href=".?action=viewSong&songId=<?php echo $songId; ?>" class="btn-cancel">
-                Cancel
-            </a>
-        <?php endif; ?>
+        <?php
+        if ($song['id'] == 0)
+        {
+            $href = '?action=listSongs';
+        }
+        else
+        {
+            $href = "?action=viewSong&songId=" . $song['id'];
+        }
+        ?>
+
+        <a href="<?php echo $href; ?>" class="btn-cancel">
+            Cancel
+        </a>
     </div>
 </form>
 

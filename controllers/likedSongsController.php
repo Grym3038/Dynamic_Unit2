@@ -17,7 +17,7 @@ switch ($action)
     /**
      * Toggle whether a song is liked or unliked
      */
-    case 'toggleFavorite':
+    case 'toggleLiked':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
         $redirectTo = filter_input(INPUT_POST, 'redirectTo');
 

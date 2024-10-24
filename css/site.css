@@ -126,12 +126,16 @@ body {
 
 /* Albums */
 
-.album-cover {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 10rem;
-    height: 10rem;
+.album-thumbnail-image {
+    object-fit: cover;
+    height: 7rem;
+    width: 7rem;
+}
+
+.album-banner-image {
+    object-fit: cover;
+    height: 14rem;
+    width: 14rem;
 }
 
   /* Dark Theme Colors */

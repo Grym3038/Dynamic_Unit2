@@ -10,43 +10,43 @@
 
 <?php include('views/_partials/header.php'); ?>
 
+<div>
+    <img src="<?php echo htmlspecialchars($song['imagePath']); ?>" class="album-banner-image" />
+</div>
+
 <h1>
     <?php echo htmlspecialchars($song['name']); ?>
 </h1>
 
-<ul>
-    <li>
-        <a href=".?action=songForm&songId=<?php echo $song['id']; ?>">
-            Edit
-        </a>
-    </li>
-    <li>
-        <a href=".?action=deleteSong&songId=<?php echo $song['id']; ?>">
-            Delete
-        </a>
-    </li>
-    <li>
-        <form action="." method="post">
-            <input type="hidden" name="action" value="toggleFavorite" />
-            <input type="hidden" name="songId"
-                value="<?php echo $song['id']; ?>" />
-            <input type="hidden" name="redirectTo"
-                value="?action=viewSong&songId=<?php echo $song['id']; ?>" />
-            
-            <?php
-                if (in_array($song['id'], $_SESSION['likedSongIds']))
-                {
-                    $buttonText = 'Unlike';
-                }
-                else
-                {
-                    $buttonText = 'Like';
-                }
-            ?>
+<p>
+    <a href=".?action=songForm&songId=<?php echo $song['id']; ?>"
+        class="btn btn-warning">
+        Edit
+    </a>
+    <a href=".?action=deleteSong&songId=<?php echo $song['id']; ?>"
+        class="btn btn-danger">
+        Delete
+    </a>
+    <form action="." method="post">
+        <input type="hidden" name="action" value="toggleLiked" />
+        <input type="hidden" name="songId"
+            value="<?php echo $song['id']; ?>" />
+        <input type="hidden" name="redirectTo"
+            value="?action=viewSong&songId=<?php echo $song['id']; ?>" />
+        
+        <?php
+            if (in_array($song['id'], $_SESSION['likedSongIds']))
+            {
+                $buttonText = 'Unlike';
+            }
+            else
+            {
+                $buttonText = 'Like';
+            }
+        ?>
 
-            <input type="submit" value="<?php echo $buttonText; ?>" />
-        </form>
-    </li>
+        <input type="submit" value="<?php echo $buttonText; ?>" />
+    </form>
 </ul>
 
 <table>
@@ -54,8 +54,8 @@
         <tr>
             <th>Album</th>
             <td>
-                <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
-                    <?php echo htmlspecialchars($album['name']); ?>
+                <a href=".?action=viewAlbum&albumId=<?php echo $song['albumId']; ?>">
+                    <?php echo htmlspecialchars($song['albumName']); ?>
                 </a>
             </td>
         </tr>
@@ -71,7 +71,7 @@
 <h2>Artists</h2>
 
 <ul>
-<?php foreach ($artists as $artist) : ?>
+<?php foreach ($song['artists'] as $artist) : ?>
     <li>
         <a href=".?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
             <?php echo htmlspecialchars($artist['name']); ?>

@@ -34,9 +34,9 @@ function validateSong(array $song) : array
         global $db;
         $query = 'SELECT id
                   FROM albums
-                  WHERE id = :id';
+                  WHERE id = :albumId';
         $statement = $db->prepare($query);
-        $statement->bindValue($song['albumId']);
+        $statement->bindValue(':albumId', $song['albumId']);
         $statement->execute();
         $row = $statement->fetch();
         $statement->closeCursor();
