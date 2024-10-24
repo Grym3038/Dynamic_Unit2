@@ -59,7 +59,8 @@ function getSong(int $songId) : array
 
     // Get song
     $query = 'SELECT songs.id id, songs.name name, songs.length length,
-                     songs.albumId albumId, albums.name albumName
+                     songs.albumId albumId, albums.name albumName,
+                     albums.imagePath imagePath
               FROM songs
                   JOIN albums ON songs.albumId = albums.id
               WHERE songs.id = :songId';
