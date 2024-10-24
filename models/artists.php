@@ -42,7 +42,7 @@ function validateArtist(array $artist)
 
     // Ensure monthly listeners is valid
     if (!is_integer($artist['monthlyListeners']) ||
-        $artist['monthlyListeners'] <= 0)
+        $artist['monthlyListeners'] < 0)
     {
         $errors[] = 'Monthly listeners must be a positive number.';
     }
