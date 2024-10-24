@@ -14,18 +14,19 @@ function validateArtist(array $artist)
 {
     $errors = array();
 
+    // Ensure a name was submitted
     if (!is_string($artist['name']) || $artist['name'] == '')
     {
         $errors[] = 'Name is required.';
     }
     else
     {
-        // Ensure the artist's name is unique
+        // Ensure the name is unique
         global $db;
         $query = 'SELECT COUNT(*) count
-                    FROM artists
-                    WHERE name = :name
-                    AND id != :id';
+                  FROM artists
+                  WHERE name = :name
+                      AND id != :id';
         $statement = $db->prepare($query);
         $statement->bindValue(':name', $artist['name']);
         $statement->bindValue(':id', $artist['id']);
@@ -39,6 +40,7 @@ function validateArtist(array $artist)
         }
     }
 
+    // Ensure monthly listeners is valid
     if (!is_integer($artist['monthlyListeners']) ||
         $artist['monthlyListeners'] <= 0)
     {
@@ -71,7 +73,7 @@ function validateArtistIds(array $artistIds) : array
     $errors = array();
     if ($count != count($artistIds))
     {
-        $errors[] = 'Invalid artist ids';
+        $errors[] = 'Invalid artist ids.';
     }
     return $errors;
 }
@@ -79,10 +81,10 @@ function validateArtistIds(array $artistIds) : array
 /**
  * Get all artists
  */
-function getArtists() 
+function getAllArtists() 
 {
     global $db;
-    $query = 'SELECT id, name, monthlyListeners, iPath
+    $query = 'SELECT id, name, monthlyListeners, imagePath
               FROM artists
               ORDER BY LOWER(name)';
     $statement = $db->prepare($query);
@@ -93,12 +95,12 @@ function getArtists()
 }
 
 /**
- * Get an artist based on its id
+ * Get an artist by id
  */
 function getArtist(int $artistId)
 {
     global $db;
-    $query = 'SELECT id, name, monthlyListeners, iPath
+    $query = 'SELECT id, name, monthlyListeners, imagePath
               FROM artists
               WHERE id = :artistId';
     $statement = $db->prepare($query);
@@ -112,10 +114,11 @@ function getArtist(int $artistId)
 /**
  * Get all artists associated with a given song
  */
-function getArtistsOfSong(int $songId) : array
+function getSongArtists(int $songId) : array
 {
     global $db;
-    $query = 'SELECT artists.id, artists.name, artists.monthlyListeners, artists.iPath
+    $query = 'SELECT artists.id, artists.name, artists.monthlyListeners,
+                     artists.imagePath
               FROM artists
                   JOIN artistsSongs ON artists.id = artistsSongs.artistId
                   JOIN songs ON artistsSongs.songId = songs.Id
@@ -135,12 +138,12 @@ function getArtistsOfSong(int $songId) : array
 function addArtist(array $artist) : int
 {
     global $db;
-    $query = 'INSERT INTO artists (name, monthlyListeners, iPath)
-              VALUES (:name, :monthlyListeners, :iPath);';
+    $query = 'INSERT INTO artists (name, monthlyListeners, imagePath)
+              VALUES (:name, :monthlyListeners, :imagePath);';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
-    $statement->bindValue(':iPath', $artist['iPath']);
+    $statement->bindValue(':imagePath', $artist['imagePath']);
     $statement->execute();
     $artistId = $db->lastInsertId();
     $statement->closeCursor();
@@ -154,13 +157,14 @@ function updateArtist(array $artist) : void
 {
     global $db;
     $query = 'UPDATE artists
-              SET name = :name, monthlyListeners = :monthlyListeners, iPath = :iPath
+              SET name = :name, monthlyListeners = :monthlyListeners,
+                  imagePath = :imagePath
               WHERE id = :artistId;';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
     $statement->bindValue(':artistId', $artist['id']);
-    $statement->bindValue(':iPath', $artist['iPath']);
+    $statement->bindValue(':imagePath', $artist['imagePath']);
     $statement->execute();
     $statement->closeCursor();
 }
