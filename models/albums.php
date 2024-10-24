@@ -33,7 +33,7 @@ function validateAlbum(array $album) : array
         $statement->bindValue(':artistId', $album['artistId']);
         $statement->bindValue(':id', $album['id']);
         $statement->execute();
-        $count = $statment->fetch()['count'];
+        $count = $statement->fetch()['count'];
         $statement->closeCursor();
 
         if ($count > 0)
