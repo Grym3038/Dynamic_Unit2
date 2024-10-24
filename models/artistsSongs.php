@@ -22,10 +22,7 @@ function getArtistIdsBySongId(int $songId) : array
     $statement->closeCursor();
 
     $artistIds = array();
-    foreach ($rows as $row)
-    {
-        $artistIds[] = $row['artistId'];
-    }
+    foreach ($rows as $row) $artistIds[] = $row['artistId'];
 
     return $artistIds;
 }
