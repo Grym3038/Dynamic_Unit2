@@ -56,9 +56,10 @@ function validateAlbum(array $album) : array
         $statement = $db->prepare($query);
         $statement->bindValue(':artistId', $album['artistId']);
         $statement->execute();
-        $artistId = $statement->fetch();
+        $row = $statement->fetch();
+        $statement->closeCursor();
 
-        if ($artistId == FALSE)
+        if ($row == FALSE)
         {
             $errors[] = 'That artist does not exist.';
         }

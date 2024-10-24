@@ -10,7 +10,7 @@ switch ($action)
      * List all liked songs
      */
     case 'listLikedSongs':
-        $songs = songs\getSongsBySongIds($_SESSION['likedSongIds']);
+        $songs = songs\getSongs($_SESSION['likedSongIds']);
         include('views/likedSongs.php');
         exit();
     

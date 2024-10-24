@@ -19,7 +19,7 @@ function validateSong(array $song) : array
         $errors[] = 'Name is required';
     }
 
-    if (!is_integer($song['length']) || $song['length'] < 0)
+    if (!is_integer($song['length']) || $song['length'] <= 0)
     {
         $errors[] = 'Length must be a positive number.';
     }
@@ -28,42 +28,26 @@ function validateSong(array $song) : array
     {
         $errors[] = 'Invalid album id.';
     }
+    else
+    {
+        // Ensure the album exists
+        global $db;
+        $query = 'SELECT id
+                  FROM albums
+                  WHERE id = :id';
+        $statement = $db->prepare($query);
+        $statement->bindValue($song['albumId']);
+        $statement->execute();
+        $row = $statement->fetch();
+        $statement->closeCursor();
+
+        if ($row == FALSE)
+        {
+            $errors[] = 'That album does not exist.'
+        }
+    }
 
     return $errors;
-}
-
-/**
- * Get all songs
- */
-function getSongs() : array
-{
-    global $db;
-    $query = 'SELECT id, name, length, albumId
-              FROM songs
-              ORDER BY LOWER(name)';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $songs = $statement->fetchAll();
-    $statement->closeCursor();
-    return $songs;
-}
-
-/**
- * Get all songs, including their album names
- */
-function getSongsWithAlbumName() : array
-{
-    global $db;
-    $query = 'SELECT songs.id id, songs.name name, songs.length length,
-                     songs.albumId albumId, albums.name albumName
-              FROM songs
-                  JOIN albums ON songs.albumId = albums.id
-              ORDER BY LOWER(songs.name)';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $songs = $statement->fetchAll();
-    $statement->closeCursor();
-    return $songs;
 }
 
 /**
@@ -72,8 +56,12 @@ function getSongsWithAlbumName() : array
 function getSong(int $songId)
 {
     global $db;
-    $query = 'SELECT id, name, length, albumId
+
+    // Get song
+    $query = 'SELECT songs.id id, songs.name name, songs.length length,
+                     songs.albumId albumId, albums.name albumName
               FROM songs
+                  JOIN albums ON songs.albumId = albums.id
               WHERE id = :songId';
     $statement = $db->prepare($query);
     $statement->bindValue(':songId', $songId);
@@ -81,66 +69,108 @@ function getSong(int $songId)
     $song = $statement->fetch();
     $statement->closeCursor();
 
+    if ($song == FALSE) return FALSE;
+
+    // Get contributing artists
+    $query = 'SELECT artists.id id, artists.name name
+              FROM songs
+                  JOIN albums ON songs.albumId = albums.id
+                  JOIN artists ON albums.artistId = artists.id
+              WHERE songs.id = :songId
+              UNION
+              SELECT artists.id, artists.name
+              FROM artistsSongs
+                  JOIN artists ON artistsSongs.artistId = artists.id
+              WHERE artistsSongs.songId = :songId';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':songId', $songId);
+    $statement->execute();
+    $contributingArtists = $statement->fetchAll();
+    $statement->closeCursor();
+
+    $song['contributingArtists'] = $contributingArtists;
+
     return $song;
 }
 
 /**
- * Get all songs with ids in the given list of ids
+ * Get songs based on a list of song ids
  */
-function getSongsBySongIds(array $songIds) : array
+function getSongs($songIds)
 {
-    if (count($songIds) == 0) return array();
+    $songs = array();
+    foreach ($songIds as $songId)
+    {
+        $songs[] = getSong($songIds);
+    }
+    return $songs;
+}
 
+/**
+ * Get all songs
+ */
+function getAllSongs() : array
+{
     global $db;
 
-    $idList = implode(',', $songIds); // SQL injection possible?
-
-    $query = "SELECT id, name, length, albumId
-              FROM songs
-              WHERE id IN ($idList)";
-
+    // Get all song ids
+    $query = 'SELECT id
+              FROM songs';
     $statement = $db->prepare($query);
     $statement->execute();
-    $songs = $statement->fetchAll();
+    $rows = $statement->fetchAll();
     $statement->closeCursor();
-    return $songs;
+
+    $ids = array();
+    foreach ($rows as $row) $ids[] = $row['id'];
+
+    return getSongs($ids);
 }
 
 /**
  * Get all songs with the given album id
  */
-function getSongsByAlbumId(int $albumId) : array
+function getAlbumSongs(int $albumId) : array
 {
     global $db;
-    $query = 'SELECT id, name, length, albumId
+
+    // Get the song ids
+    $query = 'SELECT id
               FROM songs
-              WHERE albumId = :albumId
-              ORDER BY LOWER(name)';
+              WHERE albumId = :albumId';
     $statement = $db->prepare($query);
     $statement->bindValue(':albumId', $albumId);
     $statement->execute();
-    $songs = $statement->fetchAll();
+    $rows = $statement->fetchAll();
     $statement->closeCursor();
-    return $songs;
+
+    $ids = array();
+    foreach ($rows as $row) $ids[] = $row['id'];
+
+    return getSongs($ids);
 }
 
 /**
  * Get all songs with the given artist id
  */
-function getSongsByArtistId(int $artistId) : array
+function getArtistSongs(int $artistId) : array
 {
     global $db;
-    $query = 'SELECT songs.id, songs.name, songs.length, songs.albumId
+
+    // Get the song ids
+    $query = 'SELECT id
               FROM songs
-                  JOIN artistsSongs ON songs.id = artistsSongs.songId
-                  JOIN artists ON artistsSongs.artistId = artists.id
-              WHERE artists.id = :artistId';
+              WHERE artistId = :artistId';
     $statement = $db->prepare($query);
     $statement->bindValue(':artistId', $artistId);
     $statement->execute();
-    $songs = $statement->fetchAll();
+    $rows = $statement->fetchAll();
     $statement->closeCursor();
-    return $songs;
+
+    $ids = array();
+    foreach ($rows as $row) $ids[] = $row['id'];
+
+    return getSongs($ids);
 }
 
 /**
