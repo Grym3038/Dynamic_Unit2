@@ -35,7 +35,7 @@ CREATE TABLE albums (
     imagePath varchar(1023) NOT NULL,
     artistId  int           NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT albumsUkName UNIQUE (name),
+    CONSTRAINT albumsUkNameArtistId UNIQUE (name, artistId),
     CONSTRAINT albumsFkArtistId FOREIGN KEY (artistId) REFERENCES artists(id)
         ON DELETE CASCADE
 ) ENGINE = INNODB;
