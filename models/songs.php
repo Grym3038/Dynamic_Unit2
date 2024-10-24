@@ -53,7 +53,7 @@ function validateSong(array $song) : array
 /**
  * Get a song based on its id
  */
-function getSong(int $songId)
+function getSong(int $songId) : array
 {
     global $db;
 
@@ -96,7 +96,7 @@ function getSong(int $songId)
 /**
  * Get songs based on an array of song ids
  */
-function getSongs($songIds)
+function getSongs($songIds) : array
 {
     $songs = array();
     foreach ($songIds as $songId)
