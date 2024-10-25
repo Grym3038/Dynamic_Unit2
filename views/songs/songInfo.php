@@ -14,15 +14,6 @@
 <!-- Song Overview -->
 
 <div class="d-flex flex-wrap">
-    <style>
-        .album-cover {
-            aspect-ratio: 1 / 1;
-            display: block;
-            object-fit: cover;
-            width: 15rem;
-            max-width: 100%;
-        }
-    </style>
     <div class="p-3">
         <img src="<?php echo htmlspecialchars($song['imagePath']); ?>" class="album-cover" />
     </div>
@@ -50,7 +41,7 @@
                 class="btn btn-danger">
                 Delete
             </a>
-            <form action="." method="post" style="display: inline;">
+            <form action="." method="post" class="d-inline">
                 <input type="hidden" name="action" value="toggleLiked" />
                 <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
                 <input type="hidden" name="redirectTo" value="?action=viewSong&songId=<?php echo $song['id']; ?>" />
@@ -77,14 +68,6 @@
 <!-- Contributing Artists -->
 
 <section class="pt-3">
-    <style>
-        .artist-profile-image {
-            aspect-ratio: 1/1;
-            border-radius: 1000px;
-            object-fit: cover;
-            max-width: 5rem;
-        }
-    </style>
     <?php foreach ($song['artists'] as $artist) : ?>
         <div class="d-flex">
             <div class="p-3">

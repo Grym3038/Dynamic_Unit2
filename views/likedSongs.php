@@ -33,17 +33,10 @@
             </tr>
         </thead>
         <tbody>
-            <style>
-                .album-thumbnail-image {
-                    object-fit: cover;
-                    height: 7rem;
-                    width: 7rem;
-                }
-            </style>
             <?php  foreach($songs as $song) : ?>
                 <tr>
                     <td>
-                        <img src="<?php echo $song['imagePath']; ?>" class="album-thumbnail-image" />
+                        <img src="<?php echo $song['imagePath']; ?>" class="album-thumbnail" />
                     </td>
                     <td>
                         <?php
@@ -71,9 +64,7 @@
                             <input type="hidden" name="action" value="toggleLiked" />
                             <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
                             <input type="hidden" name="redirectTo" value="?action=listLikedSongs" />
-                            <button type="submit" class="btn btn-danger">
-                                <img src="lib/bootstrap/icons/heartbreak.svg" style="filter: invert(100%);" />
-                            </button>
+                            <button type="submit" class="btn btn-unlike"></button>
                         </form>
                     </td>
                 </tr>

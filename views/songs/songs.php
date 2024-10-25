@@ -29,13 +29,6 @@
             </tr>
         </thead>
         <tbody>
-            <style>
-                .album-thumbnail {
-                    aspect-ratio: 1 / 1;
-                    object-fit: cover;
-                    max-width: 7rem;
-                }
-            </style>
             <?php foreach($songs as $song) : ?>
                 <tr>
                     <td>
