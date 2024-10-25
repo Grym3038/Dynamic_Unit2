@@ -29,13 +29,24 @@
             </tr>
         </thead>
         <tbody>
+            <style>
+                .album-thumbnail {
+                    aspect-ratio: 1 / 1;
+                    object-fit: cover;
+                    max-width: 7rem;
+                }
+            </style>
             <?php foreach($songs as $song) : ?>
                 <tr>
                     <td>
-                        <img src="<?php echo htmlspecialchars($song['imagePath']); ?>" class="album-thumbnail-image" />
+                        <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
+                            <img src="<?php echo htmlspecialchars($song['imagePath']); ?>"
+                                class="album-thumbnail" />
+                        </a>
                     </td>
                     <td>
-                        <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
+                        <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                             <?php echo htmlspecialchars($song['name']); ?>
                         </a>
                     </td>
@@ -48,12 +59,14 @@
                                 $href = '?action=viewArtist&artistId=' . $artist['id'];
                                 $text = htmlspecialchars($artist['name']);
                                 $comma = ($artist == end($song['artists'])) ? '' : ',';
-                                echo "<a href=\"$href\">$text</a>$comma";
                             ?>
+                            <a href="<?php echo $href; ?>"
+                                class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo $text; ?></a><?php echo $comma; ?>
                         <?php endforeach; ?>
                     </td>
                     <td>
-                        <a href=".?action=viewAlbum&albumId=<?php echo $song['albumId']; ?>">
+                        <a href=".?action=viewAlbum&albumId=<?php echo $song['albumId']; ?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                             <?php echo htmlspecialchars($song['albumName']); ?>
                         </a>
                     </td>

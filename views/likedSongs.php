@@ -33,6 +33,13 @@
             </tr>
         </thead>
         <tbody>
+            <style>
+                .album-thumbnail-image {
+                    object-fit: cover;
+                    height: 7rem;
+                    width: 7rem;
+                }
+            </style>
             <?php  foreach($songs as $song) : ?>
                 <tr>
                     <td>
@@ -42,7 +49,7 @@
                         <?php
                         $href = '.?action=viewSong&songId=' . $song['id'];
                         ?>
-                        <a href="<?php echo $href; ?>">
+                        <a href="<?php echo $href; ?>" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                             <?php echo htmlspecialchars($song['name']); ?>
                         </a>
                     </td>
@@ -55,20 +62,18 @@
                             $href = '?action=viewArtist&artistId=' . $artist['id'];
                             $text = htmlspecialchars($artist['name']);
                             $comma = ($artist == end($song['artists'])) ? '' : ',';
-
-                            echo "<a href=\"$href\">$text</a>$comma";
                             ?>
+                        <a href="<?php echo $href; ?>" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo $text; ?></a><?php echo $comma; ?>
                         <?php endforeach; ?>
                     </td>
                     <td>
                         <form action="." method="post">
-                            <input type="hidden" name="action"
-                                value="toggleLiked" />
-                            <input type="hidden" name="songId"
-                                value="<?php echo $song['id']; ?>" />
-                            <input type="hidden" name="redirectTo"
-                                value="?action=listLikedSongs" />
-                            <input type="submit" value="Remove" />
+                            <input type="hidden" name="action" value="toggleLiked" />
+                            <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
+                            <input type="hidden" name="redirectTo" value="?action=listLikedSongs" />
+                            <button type="submit" class="btn btn-danger">
+                                <img src="lib/bootstrap/icons/heartbreak.svg" style="filter: invert(100%);" />
+                            </button>
                         </form>
                     </td>
                 </tr>

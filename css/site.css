@@ -3,23 +3,24 @@
  * Purpose: To provide site-wide custom styles
  */
 
-html {
-    font-size: 14px;
-}
+/* HTML Styles */
 
-@media (min-width: 768px) {
-    html {
-      font-size: 16px;
-    }
-}
-  
-html {
+:root {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
     position: relative;
     min-height: 100%;
 }
-  
+
+@media (max-width: 768px) {
+    :root {
+      font-size: 16px;
+    }
+}
+
 body {
-    margin-bottom: 60px;
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
 /* Product card section*/
@@ -57,111 +58,88 @@ body {
     transition: transform 0.3s ease;
 }
   
-  /* Dark overlay styling */
-  .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0); /* Initially transparent */
-      transition: background-color 0.3s ease; /* Smooth transition */
-  }
+/* Dark overlay styling */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0); /* Initially transparent */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
   
-  /* Darken the overlay on hover */
-  .product-container:hover .overlay {
-      background-color: rgba(0, 0, 0, .75); /* Dark overlay on hover */
-  }
+/* Darken the overlay on hover */
+.product-container:hover .overlay {
+    background-color: rgba(0, 0, 0, .75); /* Dark overlay on hover */
+}
   
-  .product-name {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: #ffffff; /* White text color */
-      padding: 10px;
-      text-align: center;
-      opacity: 0; /* Start hidden */
-      transition: opacity 0.3s ease;
-      height: 100%; /* Full height to center vertically */
-      display: flex; /* Use flexbox for centering */
-      justify-content: center; /* Center horizontally */
-      align-items: center; /* Center vertically */
-      font-weight: bold;
-      font-size: 30px;
-  }
+.product-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #ffffff; /* White text color */
+    padding: 10px;
+    text-align: center;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease;
+    height: 100%; /* Full height to center vertically */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-weight: bold;
+    font-size: 30px;
+}
   
-  .product-container:hover .product-name {
-      opacity: 1; /* Show on hover */
-  }
-  
-  .product-container:hover .product-image {
-      transform: scale(1.05); /* Slightly enlarge on hover */
-  }
-  
-  
+.product-container:hover .product-name {
+    opacity: 1; /* Show on hover */
+}
+
+.product-container:hover .product-image {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
   
 /* Plus icon */
   
-  .plus-icon {
-      font-size: 5rem; /* Adjust the size of the + icon */
-      color: lightgray;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: #ffffff; /* White text color */
-      padding: 10px;
-      text-align: center;
-      transition: opacity 0.3s ease;
-      height: 100%; /* Full height to center vertically */
-      display: flex; /* Use flexbox for centering */
-      justify-content: center; /* Center horizontally */
-      align-items: center; /* Center vertically */
-  }
+.plus-icon {
+    font-size: 5rem; /* Adjust the size of the + icon */
+    color: lightgray;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #ffffff; /* White text color */
+    padding: 10px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    height: 100%; /* Full height to center vertically */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
 
 .table-vertical-align td, .table-vertical-align th {
     vertical-align: middle;
 }
 
-/* Albums */
-
-.album-thumbnail-image {
-    object-fit: cover;
-    height: 7rem;
-    width: 7rem;
-}
-
-.album-banner-image {
-    object-fit: cover;
-    height: 14rem;
-    width: 14rem;
-}
-
-  /* Dark Theme Colors */
-body {
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: 'Arial', sans-serif;
-}
-
+/* Dark Theme Colors */
 .form {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     max-width: 400px;
-    margin: auto;
+    margin: 3rem auto;
 }
 
-label {
+.label {
     color: #b3b3b3;
 }
 
-input[type="text"],
-input[type="number"] {
-    background-color: #2a2a2a;
+.input {
     color: #e0e0e0;
+    background-color: #2a2a2a;
     border: 1px solid #444;
     border-radius: 4px;
     padding: 10px;
@@ -169,8 +147,7 @@ input[type="number"] {
     margin-bottom: 15px;
 }
 
-input[type="submit"],
-a.btn-cancel {
+.btn-submit, .btn-cancel {
     background-color: #3a3a3a;
     color: #fff;
     border: none;
@@ -182,26 +159,21 @@ a.btn-cancel {
     display: inline-block;
 }
 
-input[value="Submit"]:hover{
+.btn-submit:hover{
     background-color: #00b812;
 }   
-a.btn-cancel:hover {
+.btn-cancel:hover {
     background-color: #ff0000;
 }
 
-a.btn-cancel {
-    margin-left: 10px;
-}
-
-input[type="submit"]:focus,
-input[type="text"]:focus,
-input[type="number"]:focus {
+.btn-submit:focus,
+.input-text:focus,
+.input-number:focus {
     outline: none;
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-
-select {
+.select {
     background-color: #2a2a2a;
     color: #e0e0e0;
     border: 1px solid #444;
@@ -212,16 +184,16 @@ select {
 
 }
 
-select:focus {
+.select:focus {
     outline: none;
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
-input[type="checkbox"] {
+.form-check-input {
     margin-right: 10px;
 }
 
-h2 {
+.h2 {
     color: #e0e0e0;
     margin-bottom: 10px;
 }
@@ -234,10 +206,8 @@ h2 {
     gap: 5px;
 }
 
-.length-group input[type="number"] {
+.length-group .input {
     width: 25%;
-    height: 22px; /* Reset Bootstrap's form-control height */
-    padding: 5px; /* Reduce padding for a smaller look */
     text-align: center;
     margin-bottom: 0px;
 }
