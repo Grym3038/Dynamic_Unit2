@@ -52,35 +52,8 @@
             </a>
             <form action="." method="post" style="display: inline;">
                 <input type="hidden" name="action" value="toggleLiked" />
-                <input type="hidden" name="songId"
-                    value="<?php echo $song['id']; ?>" />
-                <input type="hidden" name="redirectTo"
-                    value="?action=viewSong&songId=<?php echo $song['id']; ?>" />
-
-                <style>
-                    .btn-like, .btn-unlike {
-                        height: 2.25rem;
-                        width: 2.25rem;
-                        background-color: orange;
-                        border-color: orange;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        filter: invert(100%);
-                    }
-
-                    .btn-like {
-                        background-image: url('lib/bootstrap/icons/heart.svg');
-                    }
-
-                    .btn-unlike {
-                        background-image: url('lib/bootstrap/icons/heart-fill.svg');
-                    }
-
-                    .btn-like:hover, .btn-unlike:hover {
-                        background-color: orange;
-                        background-image: url('lib/bootstrap/icons/heart-half.svg');
-                    }
-                </style>
+                <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
+                <input type="hidden" name="redirectTo" value="?action=viewSong&songId=<?php echo $song['id']; ?>" />
 
                 <?php
                     if (in_array($song['id'], $_SESSION['likedSongIds']))
@@ -93,7 +66,9 @@
                     }
                 ?>
 
-                <button type="submit" class="btn btn-<?php echo $class; ?>"></button>
+                <button type="submit" class="btn btn-<?php echo $class; ?>">
+                    &nbsp;
+                </button>
             </form>
         </div>
     </div>

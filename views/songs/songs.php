@@ -11,13 +11,13 @@
 
 <h1>Songs</h1>
 
-<p>
+<div class="mt-3">
     <a href=".?action=songForm" class="btn btn-primary">
         &plus; Add Song
     </a>
-</p>
+</div>
 
-<div class="table-responsive">
+<div class="table-responsive mt-3">
     <table class="table table-dark">
         <thead>
             <tr>
