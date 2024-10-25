@@ -73,13 +73,14 @@ function getSong(int $songId) : array
     if ($song == FALSE) return FALSE;
 
     // Get contributing artists
-    $query = 'SELECT artists.id id, artists.name name
+    $query = 'SELECT artists.id id, artists.name name,
+                     artists.imagePath imagePath
               FROM songs
                   JOIN albums ON songs.albumId = albums.id
                   JOIN artists ON albums.artistId = artists.id
               WHERE songs.id = :songId
               UNION
-              SELECT artists.id, artists.name
+              SELECT artists.id, artists.name, artists.imagePath
               FROM artistsSongs
                   JOIN artists ON artistsSongs.artistId = artists.id
               WHERE artistsSongs.songId = :songId';
@@ -223,12 +224,12 @@ function updateSong(array $song) : void
     global $db;
     $query = 'UPDATE songs
               SET name = :name, length = :length, albumId = :albumId
-              WHERE id = :songId';
+              WHERE id = :id';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $song['name']);
     $statement->bindValue(':length', $song['length']);
     $statement->bindValue(':albumId', $song['albumId']);
-    $statement->bindValue(':songId', $song['songId']);
+    $statement->bindValue(':id', $song['id']);
     $statement->execute();
     $statement->closeCursor();
 }
