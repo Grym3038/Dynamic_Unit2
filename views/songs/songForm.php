@@ -67,7 +67,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Submit" class="btn-submit" />
+        <input type="submit" value="Submit" class="btn btn-submit" />
 
         <?php
         if ($song['id'] == 0)
@@ -80,7 +80,7 @@
         }
         ?>
 
-        <a href="<?php echo $href; ?>" class="btn-cancel">
+        <a href="<?php echo $href; ?>" class="btn btn-cancel">
             Cancel
         </a>
     </div>
