@@ -21,13 +21,13 @@
     <input type="hidden" name="entityId"
         value="<?php echo htmlspecialchars($entity['id']); ?>" />
     <div>
-        <input type="submit" value="Yes" />
+        <input type="submit" value="Yes" class="btn btn-submit" />
         <?php
             $href = '.?action=view' . htmlspecialchars(ucwords($entity['type']))
                 . '&' . htmlspecialchars(strtolower($entity['type'])) . 'Id=' .
                 $entity['id'];
         ?>
-        <a href="<?php echo $href; ?>" class="btn btn-danger">
+        <a href="<?php echo $href; ?>" class="btn btn-cancel">
             Cancel
         </a>
     </div>

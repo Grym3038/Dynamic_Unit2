@@ -10,7 +10,7 @@ switch($action)
      * List all artists
      */
     case 'listArtists':
-        $artists = artists\getArtists();
+        $artists = artists\getAllArtists();
         include('views/artists/artists.php');
         exit();
 
@@ -26,8 +26,8 @@ switch($action)
 
         if ($artist === FALSE) return404();
 
-        $albums = albums\getAlbumsByArtistId($artistId);
-        $songs = songs\getSongsByArtistId($artistId);
+        $albums = albums\getArtistAlbums($artistId);
+        $songs = songs\getArtistSongs($artistId);
         include('views/artists/artistInfo.php');
         exit();
 
@@ -41,7 +41,7 @@ switch($action)
             'id' => 0,
             'name' => '',
             'monthlyListeners' => '',
-            'iPath' => ''
+            'imagePath' => ''
         );
 
         if (!is_integer($artistId) || $artistId < 0)
@@ -66,7 +66,7 @@ switch($action)
     case 'editArtist':
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
-        $iPath = filter_input(INPUT_POST, 'iPath');
+        $imagePath = filter_input(INPUT_POST, 'imagePath');
         $monthlyListeners = filter_input(INPUT_POST, 'monthlyListeners',
             FILTER_VALIDATE_INT);
 
@@ -74,7 +74,7 @@ switch($action)
             'id' => $artistId,
             'name' => $name,
             'monthlyListeners' => $monthlyListeners,
-            'iPath' => $iPath
+            'imagePath' => $imagePath
         );
 
         // Validate the artist

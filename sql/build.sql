@@ -23,18 +23,19 @@ TO spotifyClone@localhost;
 CREATE TABLE artists (
     id               int           AUTO_INCREMENT,
     name             varchar(255)  NOT NULL,
-    iPath            varchar(2023) NOT NULL,
+    imagePath        varchar(1023) NOT NULL,
     monthlyListeners int           NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT artistsUkName UNIQUE (name)
 ) ENGINE = INNODB;
 
 CREATE TABLE albums (
-    id       int           AUTO_INCREMENT,
-    name     varchar(1023) NOT NULL,
-    iPath    varchar(2023) NOT NULL,
-    artistId int           NOT NULL,
+    id        int           AUTO_INCREMENT,
+    name      varchar(255)  NOT NULL,
+    imagePath varchar(1023) NOT NULL,
+    artistId  int           NOT NULL,
     PRIMARY KEY (id),
+    CONSTRAINT albumsUkNameArtistId UNIQUE (name, artistId),
     CONSTRAINT albumsFkArtistId FOREIGN KEY (artistId) REFERENCES artists(id)
         ON DELETE CASCADE
 ) ENGINE = INNODB;
@@ -63,7 +64,7 @@ CREATE TABLE artistsSongs (
 
 /* Insert the sample data */
 
-INSERT INTO artists (name, iPath, monthlyListeners)
+INSERT INTO artists (name, imagePath, monthlyListeners)
 VALUES ('Coldplay', 'images/artists/coldPlay.png', 47850643),
        ('Sabrina Carpenter', 'images/artists/sabrinaCarpenter.png', 32976052),
        ('Zach Bryan', 'images/artists/zachBryan.png', 5965245),
@@ -71,12 +72,12 @@ VALUES ('Coldplay', 'images/artists/coldPlay.png', 47850643),
        ('Post Malone', 'images/artists/postMalone.png', 48176336),
        ('Kendrick Lamar', 'images/artists/kendrickLamar.png', 44523462),
        ('Teddy Swims', 'images/artists/teddySwims.png', 45574887),
-       ('Eminem', 'images/artists/Eminem.png', 39851740),
+       ('Eminem', 'images/artists/eminem.png', 39851740),
        ('Travis Scott', 'images/artists/travisScott.png', 29176861),
        ('Tyler, the Creator', 'images/artists/tylerTheCreator.png',  10649493)
        ;
 
-INSERT INTO albums (name, iPath, artistId)
+INSERT INTO albums (name, imagePath, artistId)
 VALUES ('Pre-emptive encompassing open architecture', 'images/albums/openArchitecture.png', 3),
        ('Adaptive needs-based solution', 'images/albums/basedSolution.png', 5),
        ('Adaptive mobile ability', 'images/albums/mobileAbility.png', 8),

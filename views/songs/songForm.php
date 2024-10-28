@@ -17,15 +17,17 @@
     <input type="hidden" name="action" value="editSong" />
     <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
 
+    <!-- Name -->
     <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control"
+        <label for="name" class="label">Name</label>
+        <input type="text" name="name" id="name" class="input"
             value="<?php echo htmlspecialchars($song['name']); ?>" autofocus />
     </div>
 
+    <!-- Album -->
     <div>
-        <label for="albumId">Album</label>
-        <select name="albumId">
+        <label for="albumId" class="label">Album</label>
+        <select name="albumId" class="select">
             <?php foreach ($albums as $album) : ?>
                 <option value="<?php echo $album['id']; ?>">
                     <?php echo htmlspecialchars($album['name']) . ' (' .
@@ -42,22 +44,22 @@
     ?>
     
     <div class="form-group length-group">
-        <label for="minutes" class="mr-2">Length</label>
-        <input type="number" name="minutes" id="minutes" class="form-control" 
+        <label for="minutes" class="mr-2 label">Length</label>
+        <input type="number" name="minutes" id="minutes" class="input" 
             value="<?php echo $minutes; ?>" />
-        <span>:</span>
-        <input type="number" name="seconds" id="seconds" class="form-control" 
+        <span class="label">:</span>
+        <input type="number" name="seconds" id="seconds" class="input" 
             value="<?php echo $seconds; ?>" />
     </div>
 
     <div class="form-group check-boxes mt-3">
-        <label>Artists</label>
+        <label class="label">Artists</label>
         <?php foreach ($artists as $artist) : ?>
             <div class="form-check">
                 <input type="checkbox" name="artistIds[<?php echo $artist['id']; ?>]"
                     class="form-check-input"
                     <?php echo (in_array($artist['id'], $artistIds) ? 'checked' : ''); ?> />
-                <label class="form-check-label">
+                <label class="form-check-label label">
                     <?php echo htmlspecialchars($artist['name']); ?>
                 </label>
             </div>
@@ -65,17 +67,22 @@
     </div>
 
     <div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" class="btn btn-submit" />
 
-        <?php if ($songId == 0) : ?>
-            <a href="." class="btn-cancel">
-                Cancel
-            </a>
-        <?php else : ?>
-            <a href=".?action=viewSong&songId=<?php echo $songId; ?>" class="btn-cancel">
-                Cancel
-            </a>
-        <?php endif; ?>
+        <?php
+        if ($song['id'] == 0)
+        {
+            $href = '?action=listSongs';
+        }
+        else
+        {
+            $href = "?action=viewSong&songId=" . $song['id'];
+        }
+        ?>
+
+        <a href="<?php echo $href; ?>" class="btn btn-cancel">
+            Cancel
+        </a>
     </div>
 </form>
 

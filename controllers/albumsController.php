@@ -10,7 +10,7 @@ switch ($action)
      * List all albums
      */
     case 'listAlbums':
-        $albums = albums\getAlbumsWithArtistNames();
+        $albums = albums\getAllAlbums();
         include('views/albums/albums.php');
         exit();
 
@@ -28,7 +28,7 @@ switch ($action)
 
         $album['length'] = songs\getAlbumLength($album['id']);
         $artist = artists\getArtist($album['artistId']);
-        $songs = songs\getSongsByAlbumId($album['id']);
+        $songs = songs\getAlbumSongs($album['id']);
         include('views/albums/albumInfo.php');
         exit();
 
@@ -42,7 +42,7 @@ switch ($action)
             'id' => 0,
             'name' => '',
             'artistId' => '',
-            'iPath' => ''
+            'imagePath' => ''
         );
 
         if (!is_integer($albumId) || $albumId < 0)
@@ -58,7 +58,7 @@ switch ($action)
             }
         }
 
-        $artists = artists\getArtists();
+        $artists = artists\getAllArtists();
         include('views/albums/albumForm.php');
         exit();
 
@@ -69,20 +69,20 @@ switch ($action)
         $albumId = filter_input(INPUT_POST, 'albumId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
-        $albumIpath = filter_input(INPUT_POST, 'iPath');
+        $albumImagePath = filter_input(INPUT_POST, 'imagePath');
 
         $album = array(
             'id' => $albumId,
             'name' => $name,
             'artistId' => $artistId,
-            'iPath' => $albumIpath
+            'imagePath' => $albumImagePath
         );
 
         // Validate the album
         $errors = albums\validateAlbum($album);
         if (count($errors) > 0)
         {
-            $artists = artists\getArtists();
+            $artists = artists\getAllArtists();
             include('views/albums/albumForm.php');
             exit();
         }
