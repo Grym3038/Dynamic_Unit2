@@ -10,14 +10,14 @@ switch ($action)
      * List all liked songs
      */
     case 'listLikedSongs':
-        $songs = songs\getSongsBySongIds($_SESSION['likedSongIds']);
+        $songs = songs\getSongs($_SESSION['likedSongIds']);
         include('views/likedSongs.php');
         exit();
     
     /**
      * Toggle whether a song is liked or unliked
      */
-    case 'toggleFavorite':
+    case 'toggleLiked':
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
         $redirectTo = filter_input(INPUT_POST, 'redirectTo');
 

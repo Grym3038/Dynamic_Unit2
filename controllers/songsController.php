@@ -10,7 +10,7 @@ switch ($action)
      * List all songs
      */
     case 'listSongs':
-        $songs = songs\getSongsWithAlbumName();
+        $songs = songs\getAllSongs();
         include('views/songs/songs.php');
         exit();
 
@@ -26,8 +26,6 @@ switch ($action)
 
         if ($song === FALSE) return404();
 
-        $album = albums\getAlbum($song['albumId']);
-        $artists = artists\getArtistsOfSong($songId);
         include('views/songs/songInfo.php');
         exit();
 
@@ -63,8 +61,8 @@ switch ($action)
             }
         }
 
-        $albums = albums\getAlbumsWithArtistNames();
-        $artists = artists\getArtists();
+        $albums = albums\getAllAlbums();
+        $artists = artists\getAllArtists();
         include('views/songs/songForm.php');
         exit();
 
@@ -88,7 +86,6 @@ switch ($action)
         );
 
         // Validate the song
-        $errors = songs\validateSong($song);
 
         if (!is_integer($minutes) || $minutes < 0)
         {
@@ -102,27 +99,24 @@ switch ($action)
             $seconds = 0;
         }
 
+        $song['length'] = $minutes * 60 + $seconds;
+        $errors = songs\validateSong($song);
+
+        // Validate the artist ids
         if (!is_array($artistIdRows) || count($artistIdRows) == 0)
         {
             $errors[] = 'Please select at least one contributing artist.';
             $artistIdRows = array();
         }
 
-        $song['length'] = $minutes * 60 + $seconds;
-
-        if ($song['length'] == 0)
-        {
-            $errors[] = 'Song length must be greater than 0.';
-        }
-
-        // Validate the artist ids
         $artistIds = array_keys($artistIdRows);
         $errors = array_merge($errors, artists\validateArtistIds($artistIds));
 
+        // Show the errors
         if (count($errors) > 0)
         {
-            $artists = artists\getArtists();
-            $albums = albums\getAlbumsWithArtistNames();
+            $artists = artists\getAllArtists();
+            $albums = albums\getAllAlbums();
             include('views/songs/songForm.php');
             exit();
         }
