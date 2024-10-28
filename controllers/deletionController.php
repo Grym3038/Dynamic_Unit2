@@ -2,7 +2,7 @@
 /**
  * Title: Deletion Confirmation Controller
  * Purpose: To accept form data to delete a database entity, including artists,
- *          albums, songs, and artist-song relationships
+ *          albums, and songs
  */
 
 if ($action == 'deleteEntity')
@@ -35,11 +35,8 @@ if ($action == 'deleteEntity')
             break;
     }
 
-    if ($entity == FALSE)
-    {
-        return404();
-    }
-
+    if ($entity === FALSE) return404();
+    
     // Delete the entity based on the type
     switch ($entityType)
     {

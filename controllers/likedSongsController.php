@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Liked Songs Controller
- * Purpsose: To like songs, unlike songs, and view liked songs
+ * Purpose: To like songs, unlike songs, and view liked songs
  */
 
 switch ($action)
@@ -21,20 +21,24 @@ switch ($action)
         $songId = filter_input(INPUT_POST, 'songId', FILTER_VALIDATE_INT);
         $redirectTo = filter_input(INPUT_POST, 'redirectTo');
 
-        if ($songId === NULL || $songId === FALSE ||
-            songs\getSong($songId) === NULL)
+        // Validate the song id
+        if (!is_integer($songId) || $songId < 1 ||
+            songs\getSong($songId) === FALSE)
         {
             header('Location: .?action=listSongs');
             exit();
         }
 
-        if (in_array($songId, $_SESSION['likedSongIds']))
+        $isSongLiked = in_array($songId, $_SESSION['likedSongIds']);
+        if ($isSongLiked)
         {
-            $_SESSION['likedSongIds'] = array_diff($_SESSION['likedSongIds'],
-                [$songId]);
+            // Unlike the song
+            $newLikedSongs = array_diff($_SESSION['likedSongIds'], [$songId]);
+            $_SESSION['likedSongIds'] = $newLikedSongs;
         }
         else
         {
+            // Like the song
             $_SESSION['likedSongIds'][] = $songId;
         }
 

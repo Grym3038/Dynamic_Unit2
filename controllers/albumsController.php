@@ -45,7 +45,7 @@ switch ($action)
             'imagePath' => ''
         );
 
-        if (!is_integer($albumId) || $albumId < 0)
+        if (!is_integer($albumId) || $albumId < 1)
         {
             $album = $newAlbum;
         }
@@ -106,7 +106,7 @@ switch ($action)
     case 'deleteAlbum':
         $albumId = filter_input(INPUT_GET, 'albumId', FILTER_VALIDATE_INT);
 
-        if (!is_integer($albumId) || $albumId < 0) return404();
+        if (!is_integer($albumId) || $albumId < 1) return404();
 
         $entity = albums\getAlbum($albumId);
 

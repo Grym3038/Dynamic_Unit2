@@ -42,7 +42,7 @@ switch ($action)
             'albumId' => ''
         );
 
-        if (!is_integer($songId) || $songId < 0)
+        if (!is_integer($songId) || $songId < 1)
         {
             $song = $newSong;
             $artistIds = array();
@@ -89,7 +89,7 @@ switch ($action)
 
         if (!is_integer($minutes) || $minutes < 0)
         {
-            $errors[] = 'Minutes must a positive number.';
+            $errors[] = 'Minutes must be a positive number.';
             $minutes = 0;
         }
 
