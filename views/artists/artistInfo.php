@@ -7,66 +7,120 @@
  */
 ?>
 
+<?php require('views/_helpers/artistList.php'); ?>
+<?php require('views/_helpers/formatTime.php'); ?>
+
 <?php include('views/_partials/header.php'); ?>
 
-<h1><?php echo htmlspecialchars($artist['name']); ?></h1>
-
-<div class="p-2">
-    <div class="album-banner-image"
-        style="background-image: url(<?php echo $artist['imagePath']; ?>)">
+<div class="d-flex flex-wrap">
+    <div class="p-3">
+        <img src="<?php echo htmlspecialchars($artist['imagePath']); ?>" class="album-cover" />
     </div>
-</div>
-
-<p class="mt-3">
-    Monthly Listeners:
-    <?php echo number_format($artist['monthlyListeners'], 0, '.', ','); ?>
-</p>
-
-<div class="mt-3">
-    <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>"
-        class="btn btn-warning">
-        Edit
-    </a>
-    <a href=".?action=deleteArtist&artistId=<?php echo $artist['id']; ?>"
-        class="btn btn-danger">
-        Delete
-    </a>
+    <div class="p-3 d-flex flex-column justify-content-end">
+        <div>Artist</div>
+        <h1>
+            <?php echo htmlspecialchars($artist['name']); ?>
+        </h1>
+        <div>
+            <span>
+                <?php echo number_format($artist['monthlyListeners'], 0, '.', ','); ?>
+                monthly listeners
+            </span>
+            <span>&#x2022;</span>
+            <span>
+                <?php echo count($albums); ?> albums
+            </span>
+            <span>&#x2022;</span>
+            <span>
+                <?php echo count($songs); ?> songs
+            </span>
+        </div>
+        <div class="pt-3">
+            <a href=".?action=artistForm&artistId=<?php echo $artist['id']; ?>"
+                class="btn btn-warning">
+                Edit
+            </a>
+            <a href=".?action=deleteArtist&artistId=<?php echo $artist['id']; ?>"
+                class="btn btn-danger">
+                Delete
+            </a>
+        </div>
+    </div>
 </div>
 
 <h2 class="mt-3">Albums</h2>
 
 <?php if (count($albums) == 0) : ?>
-<p>
-    <i>No albums.</i>
-</p>
+    <p>
+        <i>No albums.</i>
+    </p>
 <?php else : ?>
-<ul>
-    <?php foreach ($albums as $album) : ?>
-    <li>
-        <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>">
-            <?php echo htmlspecialchars($album['name']); ?>
-        </a>
-    </li>
-    <?php endforeach; ?>
-</ul>
+    <div class="table-responsive">
+        <table class="table table-dark">
+            <tr>
+                <th></th>
+                <th>Name</th>
+            </tr>
+            <?php foreach ($albums as $album) : ?>
+                <tr>
+                    <td>
+                        <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                            <img src="<?php echo htmlspecialchars($album['imagePath']); ?>"
+                                class="album-thumbnail" />
+                        </a>
+                    </td>
+                    <td>
+                        <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                            <?php echo htmlspecialchars($album['name']); ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
 <?php endif; ?>
 
-<h2>Songs</h2>
+<h2 class="pt-3">Songs</h2>
 
 <?php if (count($songs) == 0) : ?>
-<p>
-    <i>No songs.</i>
-</p>
+    <p>
+        <i>No songs.</i>
+    </p>
 <?php else : ?>
-<ul>
-    <?php foreach ($songs as $song) : ?>
-    <li>
-        <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
-            <?php echo htmlspecialchars($song['name']); ?>
-        </a>
-    </li>
-    <?php endforeach; ?>
-</ul>
+    <div class="table-responsive">
+        <table class="table table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Artists</th>
+                <th>Duration</th>
+                <th>Album</th>
+            </tr>
+            <?php foreach ($songs as $song) : ?>
+                <tr>
+                    <td>
+                        <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                            <?php echo htmlspecialchars($song['name']); ?>
+                        </a>
+                    </td>
+                    <td>
+                        <?php artistList\build($song['artists']); ?>
+                    </td>
+                    <td>
+                        <?php echo formatTime($song['length']); ?>
+                    </td>
+                    <td>
+                        <a href="?action=viewAlbum&albumId=<?php echo $song['albumId']?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                            <?php echo htmlspecialchars($song['albumName']); ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
 <?php endif ?>
 
 <?php include('views/_partials/footer.php'); ?>

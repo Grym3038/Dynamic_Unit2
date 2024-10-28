@@ -6,6 +6,7 @@
  */
 ?>
 
+<?php require('views/_helpers/artistList.php'); ?>
 <?php require('views/_helpers/formatTime.php'); ?>
 
 <?php include('views/_partials/header.php'); ?>
@@ -36,7 +37,9 @@
             <?php  foreach($songs as $song) : ?>
                 <tr>
                     <td>
-                        <img src="<?php echo $song['imagePath']; ?>" class="album-thumbnail" />
+                        <a href="?action=viewSong&songId=<?php echo $song['id']; ?>">
+                            <img src="<?php echo $song['imagePath']; ?>" class="album-thumbnail" />
+                        </a>
                     </td>
                     <td>
                         <?php
@@ -50,14 +53,7 @@
                         <?php echo formatTime($song['length']); ?>
                     </td>
                     <td>
-                        <?php foreach ($song['artists'] as $artist) : ?>
-                            <?php
-                            $href = '?action=viewArtist&artistId=' . $artist['id'];
-                            $text = htmlspecialchars($artist['name']);
-                            $comma = ($artist == end($song['artists'])) ? '' : ',';
-                            ?>
-                        <a href="<?php echo $href; ?>" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo $text; ?></a><?php echo $comma; ?>
-                        <?php endforeach; ?>
+                        <?php artistList\build($song['artists']); ?>
                     </td>
                     <td>
                         <form action="." method="post">
