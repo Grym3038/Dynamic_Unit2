@@ -1,7 +1,8 @@
 <?php
 /**
  * Title: Artists-Songs Model
- * Purpose: To provide database access for updating artist-song relationships
+ * Purpose: To provide database access for getting and updating artist-song
+ *          relationships
  */
 
 namespace artistsSongs;
@@ -31,7 +32,7 @@ function getArtistIdsBySongId(int $songId) : array
  * Regenerate the artist-song relationships for a given song given the song id
  * and all artist ids the song should be associated with
  */
-function updateArtistsSongs(int $songId, array $artistIds)
+function updateArtistsSongs(int $songId, array $artistIds) : void
 {
     global $db;
     $query = 'DELETE FROM artistsSongs
