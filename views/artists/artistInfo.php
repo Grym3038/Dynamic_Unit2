@@ -23,8 +23,9 @@
         </h1>
         <div>
             <span>
-                <?php echo number_format($artist['monthlyListeners'], 0, '.', ','); ?>
-                monthly listeners
+                <?php
+                    echo number_format($artist['monthlyListeners'], 0, '.', ',')
+                        . ' monthly listener' . ($artist['monthlyListeners'] == 1 ? '' : 's'); ?>
             </span>
             <span>&#x2022;</span>
             <span>

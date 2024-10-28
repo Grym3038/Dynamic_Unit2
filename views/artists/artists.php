@@ -32,10 +32,10 @@
 
         <?php endforeach ?>
     
-
         <!-- Add Product Card -->
-        <div class="col-md-2 mb-2">
-            <a href=".?action=artistForm" class="card bg-black border-0 text-center text-light product-card">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+            <a href=".?action=artistForm"
+                class="card bg-black border-0 text-center text-light product-card">
                 <div class="product-container position-relative">
                     <div class="image-wrapper d-flex justify-content-center align-items-center">
                         <div class="plus-icon" style="font-size: 5rem; color: lightgray;">+</div>
