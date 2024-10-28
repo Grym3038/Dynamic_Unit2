@@ -43,7 +43,7 @@
                     </td>
                     <td>
                         <?php
-                        $href = '.?action=viewSong&songId=' . $song['id'];
+                            $href = '.?action=viewSong&songId=' . $song['id'];
                         ?>
                         <a href="<?php echo $href; ?>" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                             <?php echo htmlspecialchars($song['name']); ?>
@@ -60,7 +60,9 @@
                             <input type="hidden" name="action" value="toggleLiked" />
                             <input type="hidden" name="songId" value="<?php echo $song['id']; ?>" />
                             <input type="hidden" name="redirectTo" value="?action=listLikedSongs" />
-                            <button type="submit" class="btn btn-unlike"></button>
+                            <button type="submit" class="btn btn-unlike pt-2">
+                                &nbsp;
+                            </button>
                         </form>
                     </td>
                 </tr>
