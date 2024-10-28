@@ -17,14 +17,14 @@
     <input type="hidden" name="albumId" value="<?php echo $album['id']; ?>" />
 
     <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control" 
+        <label for="name" class="label">Name</label>
+        <input type="text" name="name" id="name" class="input" 
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
 
     <div>
-        <label for="artistId">Artist</label>
-        <select name="artistId" id="artistId">
+        <label for="artistId" class="label">Artist</label>
+        <select name="artistId" id="artistId" class="select">
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
                     <?php if ($album['artistId'] == $artist['id']) : ?>
@@ -37,8 +37,8 @@
     </div>
 
     <div class="form-group">
-        <label for="imagePath">Image Path</label>
-        <input type="text" name="imagePath" id="imagePath" class="form-control form-dark"
+        <label for="imagePath" class="label">Image Path</label>
+        <input type="text" name="imagePath" id="imagePath" class="input"
             value="<?php echo htmlspecialchars($album['imagePath']); ?>" />
     </div>
 
