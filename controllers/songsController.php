@@ -86,6 +86,7 @@ switch ($action)
         );
 
         // Validate the song
+        $errors = array();
 
         if (!is_integer($minutes) || $minutes < 0)
         {
@@ -100,7 +101,7 @@ switch ($action)
         }
 
         $song['length'] = $minutes * 60 + $seconds;
-        $errors = songs\validateSong($song);
+        $errors = array_merge(songs\validateSong($song), $errors);
 
         // Validate the artist ids
         if (!is_array($artistIdRows) || count($artistIdRows) == 0)
