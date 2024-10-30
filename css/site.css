@@ -3,7 +3,7 @@
  * Purpose: To provide site-wide custom styles
  */
 
-/* Root Styles */
+/* Root styles */
 
 :root {
     font-family: 'Arial', sans-serif;
@@ -70,13 +70,11 @@ body {
     background-color: rgba(0, 0, 0, 0); /* Initially transparent */
     transition: background-color 0.3s ease; /* Smooth transition */
 }
-  
-/* Darken the overlay on hover */
 
 .product-container:hover .overlay {
     background-color: rgba(0, 0, 0, .75); /* Dark overlay on hover */
 }
-  
+
 .product-name {
     position: absolute;
     bottom: 0;
@@ -122,10 +120,6 @@ body {
     align-items: center; /* Center vertically */
 }
 
-.table-vertical-align td, .table-vertical-align th {
-    vertical-align: middle;
-}
-
 /* Images */
 
 .album-thumbnail {
@@ -149,7 +143,7 @@ body {
 }
 
 .artist-profile-image {
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     border-radius: 1000px;
     object-fit: cover;
     max-width: 5rem;
@@ -233,7 +227,6 @@ body {
     padding: 10px;
     width: 100%;
     margin-bottom: 15px;
-
 }
 
 .input:focus, .select:focus {
@@ -245,7 +238,7 @@ body {
     margin-right: 10px;
 }
 
-/* Flexbox for Length Inputs */
+/* Flexbox for length inputs */
 
 .length-group {
     display: flex;
