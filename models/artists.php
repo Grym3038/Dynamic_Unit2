@@ -10,7 +10,7 @@ namespace artists;
 /**
  * Validate an artist
  */
-function validateArtist(array $artist)
+function validateArtist(array $artist) : array
 {
     $errors = array();
 
@@ -59,7 +59,16 @@ function validateArtistIds(array $artistIds) : array
 
     global $db;
 
-    $idList = implode(',', $artistIds); // SQL injection possible?
+    // Ensure the artist ids are valid integers
+    foreach ($artistIds as $artistId)
+    {
+        if (!is_integer($artistId) || $artistId < 1)
+        {
+            return array('Invalid artist ids.');
+        }
+    }
+
+    $idList = implode(',', $artistIds);
 
     $query = "SELECT COUNT(*) count
               FROM artists
@@ -81,7 +90,7 @@ function validateArtistIds(array $artistIds) : array
 /**
  * Get all artists
  */
-function getAllArtists() 
+function getAllArtists() : array
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners, imagePath
@@ -97,7 +106,7 @@ function getAllArtists()
 /**
  * Get an artist by id
  */
-function getArtist(int $artistId)
+function getArtist(int $artistId) : array
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners, imagePath
@@ -112,34 +121,13 @@ function getArtist(int $artistId)
 }
 
 /**
- * Get all artists associated with a given song
- */
-function getSongArtists(int $songId) : array
-{
-    global $db;
-    $query = 'SELECT artists.id, artists.name, artists.monthlyListeners,
-                     artists.imagePath
-              FROM artists
-                  JOIN artistsSongs ON artists.id = artistsSongs.artistId
-                  JOIN songs ON artistsSongs.songId = songs.Id
-              WHERE songs.id = :songId
-              ORDER BY LOWER(artists.name)';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':songId', $songId);
-    $statement->execute();
-    $artists = $statement->fetchAll();
-    $statement->closeCursor();
-    return $artists;
-}
-
-/**
  * Add an artist to the database
  */
 function addArtist(array $artist) : int
 {
     global $db;
     $query = 'INSERT INTO artists (name, monthlyListeners, imagePath)
-              VALUES (:name, :monthlyListeners, :imagePath);';
+              VALUES (:name, :monthlyListeners, :imagePath)';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
@@ -159,7 +147,7 @@ function updateArtist(array $artist) : void
     $query = 'UPDATE artists
               SET name = :name, monthlyListeners = :monthlyListeners,
                   imagePath = :imagePath
-              WHERE id = :artistId;';
+              WHERE id = :artistId';
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
@@ -176,7 +164,7 @@ function deleteArtist(array $artist) : void
 {
     global $db;
     $query = 'DELETE FROM artists
-              WHERE id = :artistId;';
+              WHERE id = :artistId';
     $statement = $db->prepare($query);
     $statement->bindValue(':artistId', $artist['id']);
     $statement->execute();

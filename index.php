@@ -12,7 +12,7 @@ require('models/albums.php');
 require('models/songs.php');
 require('models/artistsSongs.php');
 
-// Define a 404 Not Found action
+// Define a 404 Not Found function
 function return404()
 {
     $title = '404 Not Found';

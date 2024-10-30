@@ -15,7 +15,7 @@
 
 <?php if (count($songs) == 0) : ?>
     <p class="mt-5">
-        No liked songs.
+        <i>No liked songs.</i>
     </p>
 <?php else : ?>
     <p>
@@ -45,7 +45,8 @@
                         <?php
                             $href = '.?action=viewSong&songId=' . $song['id'];
                         ?>
-                        <a href="<?php echo $href; ?>" class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                        <a href="<?php echo $href; ?>"
+                            class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                             <?php echo htmlspecialchars($song['name']); ?>
                         </a>
                     </td>

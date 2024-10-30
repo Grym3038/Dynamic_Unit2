@@ -44,7 +44,7 @@ switch($action)
             'imagePath' => ''
         );
 
-        if (!is_integer($artistId) || $artistId < 0)
+        if (!is_integer($artistId) || $artistId < 1)
         {
             $artist = $newArtist;
         }
@@ -66,9 +66,9 @@ switch($action)
     case 'editArtist':
         $artistId = filter_input(INPUT_POST, 'artistId', FILTER_VALIDATE_INT);
         $name = filter_input(INPUT_POST, 'name');
-        $imagePath = filter_input(INPUT_POST, 'imagePath');
         $monthlyListeners = filter_input(INPUT_POST, 'monthlyListeners',
             FILTER_VALIDATE_INT);
+        $imagePath = filter_input(INPUT_POST, 'imagePath');
 
         $artist = array(
             'id' => $artistId,
@@ -104,17 +104,11 @@ switch($action)
     case 'deleteArtist':
         $artistId = filter_input(INPUT_GET, 'artistId', FILTER_VALIDATE_INT);
 
-        if (!is_integer($artistId) || $artistId < 1)
-        {
-            return404();
-        }
+        if (!is_integer($artistId) || $artistId < 1) return404();
 
         $entity = artists\getArtist($artistId);
 
-        if ($entity === FALSE)
-        {
-            return404();
-        }
+        if ($entity === FALSE) return404();
 
         $entity['type'] = 'artist';
 

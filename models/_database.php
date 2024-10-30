@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Database Model
- * Purpose: Configure the connection to the database
+ * Purpose: To configure the connection to the database
  */
 
 $dsn = 'mysql:host=localhost;dbname=spotifyClone';

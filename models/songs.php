@@ -14,16 +14,19 @@ function validateSong(array $song) : array
 {
     $errors = array();
 
+    // Ensure a name was submitted
     if (!is_string($song['name']) || $song['name'] == '')
     {
         $errors[] = 'Name is required';
     }
 
+    // Ensure the length is valid
     if (!is_integer($song['length']) || $song['length'] <= 0)
     {
         $errors[] = 'Length must be a positive number.';
     }
 
+    // Validate the album id
     if (!is_integer($song['albumId']) || $song['albumId'] < 0)
     {
         $errors[] = 'Invalid album id.';
@@ -51,13 +54,13 @@ function validateSong(array $song) : array
 }
 
 /**
- * Get a song based on its id
+ * Get a song based on its id (including contributing artists)
  */
 function getSong(int $songId) : array
 {
     global $db;
 
-    // Get song
+    // Get the song
     $query = 'SELECT songs.id id, songs.name name, songs.length length,
                      songs.albumId albumId, albums.name albumName,
                      albums.imagePath imagePath
@@ -72,7 +75,8 @@ function getSong(int $songId) : array
 
     if ($song == FALSE) return FALSE;
 
-    // Get contributing artists
+    // Get the contributing artists based on the album and the artist-song
+    // relationships
     $query = 'SELECT artists.id id, artists.name name,
                      artists.imagePath imagePath
               FROM songs
@@ -98,7 +102,7 @@ function getSong(int $songId) : array
 /**
  * Get songs based on an array of song ids
  */
-function getSongs($songIds) : array
+function getSongs(array $songIds) : array
 {
     $songs = array();
     foreach ($songIds as $songId)
@@ -159,7 +163,7 @@ function getArtistSongs(int $artistId) : array
 {
     global $db;
 
-    // Get the song ids
+    // Get the song ids based on the albums and artist-song relationships
     $query = 'SELECT songs.id
               FROM songs
                   JOIN albums ON songs.albumId = albums.id
