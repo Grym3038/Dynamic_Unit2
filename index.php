@@ -1,9 +1,9 @@
 <?php
-/*
-    Title: Main Controller
-    Purpose: To serve as the entry point of the application that imports all
-             data models and controllers
-*/
+/**
+ * Title: Index Controller
+ * Purpose: To serve as the entry point of the application that imports all
+ *          models and controllers
+ */
 
 // Import the data models
 require('models/_database.php');
@@ -16,7 +16,7 @@ require('models/artistsSongs.php');
 function return404()
 {
     $title = '404 Not Found';
-    $body = 'That page does not exist';
+    $body = 'That page does not exist.';
     include('views/error.php');
     exit();
 }
