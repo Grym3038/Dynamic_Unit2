@@ -25,9 +25,9 @@
         <div>
             <a href="?action=viewArtist&artistId=<?php echo $artist['id']; ?>"
                 class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo htmlspecialchars($artist['name']); ?></a>
-            <span>&#x2022;</span>
+            &#x2022;
             <?php echo count($songs) . ' song' . (count($songs) == 1 ? '' : 's'); ?>
-            <span>&#x2022;</span>
+            &#x2022;
             <?php echo formatTime($album['length']); ?>
         </div>
         <div class="pt-3">
