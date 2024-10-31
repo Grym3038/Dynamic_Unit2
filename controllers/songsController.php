@@ -148,7 +148,7 @@ switch ($action)
 
         $entity = songs\getSong($songId);
 
-        if ($entity == FALSE) return404();
+        if ($entity === FALSE) return404();
 
         $entity['type'] = 'song';
 
