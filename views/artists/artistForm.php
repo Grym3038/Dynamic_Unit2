@@ -1,15 +1,14 @@
 <?php
 /**
  * Title: Artist Form
- * Purpose: To provide a form for adding or editing an album
+ * Purpose: To provide a form for adding or editing an artist
  */
 ?>
 
 <?php include('views/_partials/header.php'); ?>
 
 <h1>
-    <?php echo ($artist['id'] == 0 ? 'Add' : 'Edit'); ?>
-    Artist
+    <?php echo ($artist['id'] == 0 ? 'Add' : 'Edit') . ' Artist'; ?>
 </h1>
 
 <form action="." method="post" class="form form-dark">
@@ -53,6 +52,5 @@
         <a href="<?php echo $href; ?>" class="btn btn-cancel">Cancel</a>
     </div>
 </form>
-
 
 <?php include('views/_partials/footer.php'); ?>
