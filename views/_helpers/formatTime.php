@@ -3,14 +3,15 @@
  * Title: Format Time
  * Purpose: Format a number of seconds as a human-readable string
  */
-function formatTime(int $duration, bool $humanMode = TRUE) : string
+function formatTime(int $duration, bool $abbreviationMode = TRUE) : string
 {
+    // Calculate the time components
     $hours = intdiv($duration, 60 * 60);
     $seconds = $duration - ($hours * 60 * 60);
     $minutes = intdiv($seconds, 60);
     $seconds -= $minutes * 60;
 
-    if ($humanMode)
+    if ($abbreviationMode)
     {
         // Time unit abbreviation mode
         $hours_f = "$hours hr" . ($hours == 1 ? '' : 's');
