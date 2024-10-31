@@ -16,7 +16,7 @@
         </a>
     </div>
     <div class="row mt-3">
-        <?php foreach($albums as $album) : ?>
+        <?php foreach ($albums as $album) : ?>
             <div class="col-sm-6 col-md-4 col-lg-2 mb-3">
                 <a href=".?action=viewAlbum&albumId=<?php echo $album['id']; ?>"
                     class="card link-underline link-underline-opacity-0 bg-black border-0 text-center text-light">
@@ -35,6 +35,7 @@
                 </a>
             </div>
         <?php endforeach; ?>
+    </div>
 </div>
 
 <?php include('views/_partials/footer.php'); ?>
