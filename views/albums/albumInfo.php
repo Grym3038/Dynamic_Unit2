@@ -25,16 +25,18 @@
         <div>
             <a href="?action=viewArtist&artistId=<?php echo $artist['id']; ?>"
                 class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"><?php echo htmlspecialchars($artist['name']); ?></a>
-            &#x2022;
+            <span>&#x2022;</span>
             <?php echo count($songs) . ' song' . (count($songs) == 1 ? '' : 's'); ?>
-            &#x2022;
+            <span>&#x2022;</span>
             <?php echo formatTime($album['length']); ?>
         </div>
         <div class="pt-3">
-            <a class="btn btn-warning" href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
+            <a class="btn btn-warning"
+                href=".?action=albumForm&albumId=<?php echo $album['id']; ?>">
                 Edit
             </a>
-            <a class="btn btn-danger" href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
+            <a class="btn btn-danger"
+                href=".?action=deleteAlbum&albumId=<?php echo $album['id']; ?>">
                 Delete
             </a>
         </div>
@@ -51,26 +53,26 @@
             <tr>
                 <th>Song</th>
                 <th>Artists</th>
-                <th>Length</th>
+                <th>Duration</th>
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($songs as $song) : ?>
-        <tr>
-            <td>
-                <a class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"
-                    href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
-                    <?php echo htmlspecialchars($song['name']); ?>
-                </a>
-            </td>
-            <td>
-                <?php artistList\build($song['artists']); ?>
-            </td>
-            <td>
-                <?php echo formatTime($song['length']); ?>
-            </td>
-        </tr>
-        <?php endforeach; ?>
+            <?php foreach ($songs as $song) : ?>
+                <tr>
+                    <td>
+                        <a class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"
+                            href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
+                            <?php echo htmlspecialchars($song['name']); ?>
+                        </a>
+                    </td>
+                    <td>
+                        <?php artistList\build($song['artists']); ?>
+                    </td>
+                    <td>
+                        <?php echo formatTime($song['length']); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 <?php endif; ?>
