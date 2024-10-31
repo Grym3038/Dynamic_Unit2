@@ -96,7 +96,7 @@ INSERT INTO albums (Name, imagePath, artistId) VALUES
 	('DAMN.', 'images/albums/damn.png', '6'),
 	('Mr. Morale & the Big Steppers', 'images/albums/mrMorale&TheBigSteppers.png', '6'),
 	('good kid, m.A.A.d city', 'images/albums/goodKidMadCity.png', '6'),
-	('I''ve Tried Everything but Therapy (Part 1)', 'images/albums/iIveTriedEverythingButTherapy.png', '7'),
+	('I''ve Tried Everything but Therapy (Part 1)', 'images/albums/iveTriedEverythingButTherapy.png', '7'),
 	('The Eminem Show', 'images/albums/theEminemShow.png', '8'),
 	('Encore', 'images/albums/encore.png', '8'),
 	('Kamikaze', 'images/albums/kamikaze.png', '8'),
