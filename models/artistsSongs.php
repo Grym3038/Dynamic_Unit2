@@ -29,18 +29,21 @@ function getArtistIdsBySongId(int $songId) : array
 }
 
 /**
- * Regenerate the artist-song relationships for a given song given the song id
- * and all artist ids the song should be associated with
+ * Regenerate the artist-song relationships for a song given the song id and all
+ * artist ids the song should be associated with
  */
 function updateArtistsSongs(int $songId, array $artistIds) : void
 {
     global $db;
+
+    // Delete the previous artist-song relationships
     $query = 'DELETE FROM artistsSongs
               WHERE songId = :songId';
     $statement = $db->prepare($query);
     $statement->bindValue(':songId', $songId);
     $statement->execute();
     
+    // Add the new artist-song relationships
     foreach ($artistIds as $artistId)
     {
         $query = 'INSERT INTO artistsSongs (artistId, songId)
