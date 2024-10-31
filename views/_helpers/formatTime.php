@@ -1,9 +1,7 @@
 <?php
 /**
  * Title: Format Time
- * Purpose: Format a number of seconds as a string with hours, minutes, and
- *          seconds, separated by colons
- * Example: 123 => "00:02:03"
+ * Purpose: Format a number of seconds as a human-readable string
  */
 function formatTime(int $duration, bool $humanMode = TRUE) : string
 {
@@ -14,6 +12,7 @@ function formatTime(int $duration, bool $humanMode = TRUE) : string
 
     if ($humanMode)
     {
+        // Time unit abbreviation mode
         $hours_f = "$hours hr" . ($hours == 1 ? '' : 's');
         $minutes_f = "$minutes min" . ($minutes == 1 ? '' : 's');
         $seconds_f = "$seconds sec" . ($seconds == 1 ? '' : 's');
@@ -33,6 +32,7 @@ function formatTime(int $duration, bool $humanMode = TRUE) : string
     }
     else
     {
+        // Colon separator mode
         $seconds_padded = str_pad($seconds, 2, '0', STR_PAD_LEFT);
         $minutes_padded = str_pad($minutes, 2, '0', STR_PAD_LEFT);
 
