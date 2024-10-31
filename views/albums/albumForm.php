@@ -60,5 +60,4 @@
     </div>
 </form>
 
-
 <?php include('views/_partials/footer.php'); ?>
