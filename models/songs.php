@@ -17,7 +17,7 @@ function validateSong(array $song) : array
     // Ensure a name was submitted
     if (!is_string($song['name']) || $song['name'] == '')
     {
-        $errors[] = 'Name is required';
+        $errors[] = 'Name is required.';
     }
 
     // Ensure the length is valid
@@ -27,7 +27,7 @@ function validateSong(array $song) : array
     }
 
     // Validate the album id
-    if (!is_integer($song['albumId']) || $song['albumId'] < 0)
+    if (!is_integer($song['albumId']) || $song['albumId'] < 1)
     {
         $errors[] = 'Invalid album id.';
     }
