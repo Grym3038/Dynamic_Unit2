@@ -68,6 +68,7 @@ function validateArtistIds(array $artistIds) : array
         }
     }
 
+    // Ensure the artist ids exist
     $idList = implode(',', $artistIds);
 
     $query = "SELECT COUNT(*) count
@@ -151,8 +152,8 @@ function updateArtist(array $artist) : void
     $statement = $db->prepare($query);
     $statement->bindValue(':name', $artist['name']);
     $statement->bindValue(':monthlyListeners', $artist['monthlyListeners']);
-    $statement->bindValue(':artistId', $artist['id']);
     $statement->bindValue(':imagePath', $artist['imagePath']);
+    $statement->bindValue(':artistId', $artist['id']);
     $statement->execute();
     $statement->closeCursor();
 }
