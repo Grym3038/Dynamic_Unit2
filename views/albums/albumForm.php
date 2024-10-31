@@ -43,7 +43,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-dark" />
+        <input type="submit" value="Submit" class="btn btn-submit" />
 
         <?php
             if ($album['id'] == 0)
