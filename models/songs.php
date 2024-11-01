@@ -56,7 +56,7 @@ function validateSong(array $song) : array
 /**
  * Get a song based on its id (including contributing artists)
  */
-function getSong(int $songId) : array
+function getSong(int $songId)
 {
     global $db;
 
@@ -107,7 +107,8 @@ function getSongs(array $songIds) : array
     $songs = array();
     foreach ($songIds as $songId)
     {
-        $songs[] = getSong($songId);
+        $song = getSong($songId);
+        if ($song !== FALSE) $songs[] = $song;
     }
     return $songs;
 }
