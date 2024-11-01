@@ -11,6 +11,17 @@ switch ($action)
      */
     case 'listLikedSongs':
         $songs = songs\getSongs($_SESSION['likedSongIds']);
+
+        // Account for the deletion of liked songs
+        if (count($songs) < count($_SESSION['likedSongIds']))
+        {
+            $_SESSION['likedSongIds'] = array();
+            foreach ($songs as $song)
+            {
+                $_SESSION['likedSongIds'][] = $song['id'];
+            }
+        }
+        
         include('views/likedSongs.php');
         exit();
     
