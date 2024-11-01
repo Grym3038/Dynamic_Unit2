@@ -1,7 +1,8 @@
 <?php
 /**
  * Title: Songs List
- * Purpose: To list all songs, including their durations and albums
+ * Purpose: To list all songs, including their durations, contributing artists,
+ *          and albums
  */
 ?>
 
@@ -30,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($songs as $song) : ?>
+            <?php foreach ($songs as $song) : ?>
                 <tr>
                     <td>
                         <a href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
@@ -45,7 +46,7 @@
                         </a>
                     </td>
                     <td>
-                        <?php echo formattime($song['length']); ?>
+                        <?php echo formatTime($song['length']); ?>
                     </td>
                     <td>
                         <?php artistList\build($song['artists']); ?>
