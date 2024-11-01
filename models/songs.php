@@ -23,13 +23,13 @@ function validateSong(array $song) : array
     // Ensure the length is valid
     if (!is_integer($song['length']) || $song['length'] <= 0)
     {
-        $errors[] = 'Length must be a positive number.';
+        $errors[] = 'Length must be greater than zero.';
     }
 
     // Validate the album id
     if (!is_integer($song['albumId']) || $song['albumId'] < 1)
     {
-        $errors[] = 'Invalid album id.';
+        $errors[] = 'Album is required.';
     }
     else
     {
