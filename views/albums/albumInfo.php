@@ -48,33 +48,35 @@
         <i>No songs.</i>
     </p>
 <?php else : ?>
-    <table class="table table-sm table-dark">
-        <thead>
-            <tr>
-                <th>Song</th>
-                <th>Artists</th>
-                <th>Duration</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($songs as $song) : ?>
+    <div class="table-responsive pt-3">
+        <table class="table table-sm table-dark">
+            <thead>
                 <tr>
-                    <td>
-                        <a class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"
-                            href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
-                            <?php echo htmlspecialchars($song['name']); ?>
-                        </a>
-                    </td>
-                    <td>
-                        <?php artistList\build($song['artists']); ?>
-                    </td>
-                    <td>
-                        <?php echo formatTime($song['length']); ?>
-                    </td>
+                    <th>Song</th>
+                    <th>Artists</th>
+                    <th>Duration</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($songs as $song) : ?>
+                    <tr>
+                        <td>
+                            <a class="link-light link-underline-opacity-0 link-underline-opacity-100-hover"
+                                href=".?action=viewSong&songId=<?php echo $song['id']; ?>">
+                                <?php echo htmlspecialchars($song['name']); ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?php artistList\build($song['artists']); ?>
+                        </td>
+                        <td>
+                            <?php echo formatTime($song['length']); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 <?php endif; ?>
 
 <?php include('views/_partials/footer.php'); ?>
