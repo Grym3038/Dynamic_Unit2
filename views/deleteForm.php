@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Deletion Confirmation
+ * Title: Deletion Confirmation Form
  * Purpose: To provide a form for confirming the deletion of arbitrary entites
  *          in the database
  */
@@ -11,15 +11,15 @@
 <h1>Confirm Deletion</h1>
 
 <form action="." method="post">
-    <p>
-        Are you sure you want to delete
-        "<?php echo htmlspecialchars($entity['name']) ?>"?
-    </p>
     <input type="hidden" name="action" value="deleteEntity" />
     <input type="hidden" name="entityType"
         value="<?php echo htmlspecialchars($entity['type']); ?>" />
     <input type="hidden" name="entityId"
         value="<?php echo htmlspecialchars($entity['id']); ?>" />
+    <p>
+        Are you sure you want to delete
+        "<?php echo htmlspecialchars($entity['name']) ?>"?
+    </p>
     <div>
         <input type="submit" value="Yes" class="btn btn-submit" />
         <?php
