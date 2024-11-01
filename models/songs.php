@@ -10,7 +10,7 @@ namespace songs;
 /**
  * Validate a song
  */
-function validateSong(array $song) : array
+function validateSong(array $song)
 {
     $errors = array();
 
@@ -102,7 +102,7 @@ function getSong(int $songId)
 /**
  * Get songs based on an array of song ids
  */
-function getSongs(array $songIds) : array
+function getSongs(array $songIds)
 {
     $songs = array();
     foreach ($songIds as $songId)
@@ -116,7 +116,7 @@ function getSongs(array $songIds) : array
 /**
  * Get all songs
  */
-function getAllSongs() : array
+function getAllSongs()
 {
     global $db;
 
@@ -137,7 +137,7 @@ function getAllSongs() : array
 /**
  * Get all songs with the given album id
  */
-function getAlbumSongs(int $albumId) : array
+function getAlbumSongs(int $albumId)
 {
     global $db;
 
@@ -160,7 +160,7 @@ function getAlbumSongs(int $albumId) : array
 /**
  * Get all songs with the given artist id
  */
-function getArtistSongs(int $artistId) : array
+function getArtistSongs(int $artistId)
 {
     global $db;
 
@@ -189,7 +189,7 @@ function getArtistSongs(int $artistId) : array
 /**
  * Calculate the duration of an album in seconds given the album id
  */
-function getAlbumLength(int $albumId) : int
+function getAlbumLength(int $albumId)
 {
     global $db;
     $query = 'SELECT COALESCE(SUM(length), 0) length
@@ -206,7 +206,7 @@ function getAlbumLength(int $albumId) : int
 /**
  * Add a song
  */
-function addSong(array $song) : int
+function addSong(array $song)
 {
     global $db;
     $query = 'INSERT INTO songs (name, length, albumId)
@@ -224,7 +224,7 @@ function addSong(array $song) : int
 /**
  * Update a song
  */
-function updateSong(array $song) : void
+function updateSong(array $song)
 {
     global $db;
     $query = 'UPDATE songs
@@ -242,7 +242,7 @@ function updateSong(array $song) : void
 /**
  * Delete a song
  */
-function deleteSong(array $song) : void
+function deleteSong(array $song)
 {
     global $db;
     $query = 'DELETE FROM songs

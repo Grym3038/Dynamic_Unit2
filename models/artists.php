@@ -10,7 +10,7 @@ namespace artists;
 /**
  * Validate an artist
  */
-function validateArtist(array $artist) : array
+function validateArtist(array $artist)
 {
     $errors = array();
 
@@ -59,7 +59,7 @@ function validateArtist(array $artist) : array
 /**
  * Validate a list of artist ids
  */
-function validateArtistIds(array $artistIds) : array
+function validateArtistIds(array $artistIds)
 {
     if (count($artistIds) == 0) return array();
 
@@ -97,7 +97,7 @@ function validateArtistIds(array $artistIds) : array
 /**
  * Get all artists
  */
-function getAllArtists() : array
+function getAllArtists()
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners, imagePath
@@ -113,7 +113,7 @@ function getAllArtists() : array
 /**
  * Get an artist by id
  */
-function getArtist(int $artistId) : array
+function getArtist(int $artistId)
 {
     global $db;
     $query = 'SELECT id, name, monthlyListeners, imagePath
@@ -130,7 +130,7 @@ function getArtist(int $artistId) : array
 /**
  * Add an artist to the database
  */
-function addArtist(array $artist) : int
+function addArtist(array $artist)
 {
     global $db;
     $query = 'INSERT INTO artists (name, monthlyListeners, imagePath)
@@ -148,7 +148,7 @@ function addArtist(array $artist) : int
 /**
  * Update an artist in the database
  */
-function updateArtist(array $artist) : void
+function updateArtist(array $artist)
 {
     global $db;
     $query = 'UPDATE artists
@@ -167,7 +167,7 @@ function updateArtist(array $artist) : void
 /**
  * Delete an artist from the database
  */
-function deleteArtist(array $artist) : void
+function deleteArtist(array $artist)
 {
     global $db;
     $query = 'DELETE FROM artists

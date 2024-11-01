@@ -10,7 +10,7 @@ namespace albums;
 /**
  * Validate an album
  */
-function validateAlbum(array $album) : array
+function validateAlbum(array $album)
 {
     global $db;
     $errors = array();
@@ -67,7 +67,7 @@ function validateAlbum(array $album) : array
 /**
  * Get all albums, including their artist names
  */
-function getAllAlbums() : array
+function getAllAlbums()
 {
     global $db;
     $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId,
@@ -85,7 +85,7 @@ function getAllAlbums() : array
 /**
  * Get an album based on its id
  */
-function getAlbum(int $albumId) : array 
+function getAlbum(int $albumId)
 {
     global $db;
     $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId,
@@ -104,7 +104,7 @@ function getAlbum(int $albumId) : array
 /**
  * Get all albums associated with a given artist
  */
-function getArtistAlbums(int $artistId) : array
+function getArtistAlbums(int $artistId)
 {
     global $db;
     $query = 'SELECT albums.id id, albums.name name, albums.artistId artistId,
@@ -123,7 +123,7 @@ function getArtistAlbums(int $artistId) : array
 /**
  * Add an album to the database
  */
-function addAlbum(array $album) : int
+function addAlbum(array $album)
 {
     global $db;
     $query = 'INSERT INTO albums (name, artistId, imagePath)
@@ -141,7 +141,7 @@ function addAlbum(array $album) : int
 /**
  * Update an album in the database
  */
-function updateAlbum(array $album) : void
+function updateAlbum(array $album)
 {
     global $db;
     $query = 'UPDATE albums
@@ -159,7 +159,7 @@ function updateAlbum(array $album) : void
 /**
  * Delete an album from the database
  */
-function deleteAlbum(array $album) : void
+function deleteAlbum(array $album)
 {
     global $db;
     $query = 'DELETE FROM albums

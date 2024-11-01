@@ -10,7 +10,7 @@ namespace artistsSongs;
 /**
  * Get all artist ids associated with a given song id
  */
-function getArtistIdsBySongId(int $songId) : array
+function getArtistIdsBySongId(int $songId)
 {
     global $db;
     $query = 'SELECT artistId
@@ -32,7 +32,7 @@ function getArtistIdsBySongId(int $songId) : array
  * Regenerate the artist-song relationships for a song given the song id and all
  * artist ids the song should be associated with
  */
-function updateArtistsSongs(int $songId, array $artistIds) : void
+function updateArtistsSongs(int $songId, array $artistIds)
 {
     global $db;
 
