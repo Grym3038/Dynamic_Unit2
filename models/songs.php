@@ -20,12 +20,6 @@ function validateSong(array $song) : array
         $errors[] = 'Name is required.';
     }
 
-    // Ensure the length is valid
-    if (!is_integer($song['length']) || $song['length'] <= 0)
-    {
-        $errors[] = 'Length must be greater than zero.';
-    }
-
     // Validate the album id
     if (!is_integer($song['albumId']) || $song['albumId'] < 1)
     {
@@ -48,6 +42,12 @@ function validateSong(array $song) : array
         {
             $errors[] = 'That album does not exist.';
         }
+    }
+
+    // Ensure the length is valid
+    if (!is_integer($song['length']) || $song['length'] <= 0)
+    {
+        $errors[] = 'Length must be greater than zero.';
     }
 
     return $errors;
