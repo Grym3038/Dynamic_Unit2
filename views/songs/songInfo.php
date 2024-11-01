@@ -18,7 +18,7 @@
         <img src="<?php echo htmlspecialchars($song['imagePath']); ?>" class="album-cover" />
     </div>
     <div class="p-3 d-flex flex-column justify-content-end">
-        <div class="m-0">Song</div>
+        <div>Song</div>
         <h1>
             <?php echo htmlspecialchars($song['name']); ?>
         </h1>
