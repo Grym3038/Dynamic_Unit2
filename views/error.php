@@ -14,7 +14,7 @@
     <?php echo $body; ?>
 </p>
 <p>
-    <a href=".?action=listArtists" class="btn btn-primary">
+    <a href="." class="btn btn-primary">
         Go Home
     </a>
 </p>
