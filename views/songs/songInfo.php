@@ -67,12 +67,12 @@
 
 <!-- Contributing Artists -->
 
-<section class="pt-3">
+<div class="pt-3">
     <?php foreach ($song['artists'] as $artist) : ?>
         <div class="d-flex">
             <div class="p-3">
                 <a href="?action=viewArtist&artistId=<?php echo $artist['id']; ?>">
-                    <img src="<?php echo $artist['imagePath']; ?>" class="artist-profile-image"/>
+                    <img src="<?php echo htmlspecialchars($artist['imagePath']); ?>" class="artist-profile-image" />
                 </a>
             </div>
             <div class="p-3 d-flex flex-column justify-content-center">
@@ -86,6 +86,6 @@
             </div>
         </div>
     <?php endforeach; ?>
-</section>
+</div>
 
 <?php include('views/_partials/footer.php'); ?>
