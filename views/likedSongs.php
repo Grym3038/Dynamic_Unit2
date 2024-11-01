@@ -28,26 +28,24 @@
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th>&nbsp;</th>
+                    <th></th>
                     <th>Name</th>
                     <th>Duration</th>
                     <th>Artists</th>
-                    <th>&nbsp;</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <?php  foreach($songs as $song) : ?>
+                <?php foreach ($songs as $song) : ?>
                     <tr>
                         <td>
                             <a href="?action=viewSong&songId=<?php echo $song['id']; ?>">
-                                <img src="<?php echo $song['imagePath']; ?>" class="album-thumbnail" />
+                                <img src="<?php echo htmlspecialchars($song['imagePath']); ?>"
+                                    class="album-thumbnail" />
                             </a>
                         </td>
                         <td>
-                            <?php
-                                $href = '.?action=viewSong&songId=' . $song['id'];
-                            ?>
-                            <a href="<?php echo $href; ?>"
+                            <a href="?action=viewSong&songId=<?php echo $song['id']; ?>"
                                 class="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                                 <?php echo htmlspecialchars($song['name']); ?>
                             </a>
