@@ -104,12 +104,7 @@ switch ($action)
         $errors = array_merge(songs\validateSong($song), $errors);
 
         // Validate the artist ids
-        if (!is_array($artistIdRows) || count($artistIdRows) == 0)
-        {
-            $errors[] = 'Please select at least one contributing artist.';
-            $artistIdRows = array();
-        }
-
+        if (!is_array($artistIdRows)) $artistIdRows = array();
         $artistIds = array_keys($artistIdRows);
         $errors = array_merge($errors, artists\validateArtistIds($artistIds));
 
