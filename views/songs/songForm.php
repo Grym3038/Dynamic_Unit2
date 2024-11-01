@@ -26,8 +26,10 @@
     <div>
         <label for="albumId" class="label">Album</label>
         <select name="albumId" class="select">
+            <option value="0">-</option>
             <?php foreach ($albums as $album) : ?>
-                <option value="<?php echo $album['id']; ?>">
+                <option value="<?php echo $album['id']; ?>"
+                    <?php echo ($song['albumId'] == $album['id']) ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($album['name']) . ' (' .
                         htmlspecialchars($album['artistName']) . ')'; ?>
                 </option>
