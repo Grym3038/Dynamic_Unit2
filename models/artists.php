@@ -47,6 +47,12 @@ function validateArtist(array $artist) : array
         $errors[] = 'Monthly listeners must be a positive number.';
     }
 
+    // Ensure an image path was submitted
+    if (!is_string($artist['imagePath']) || $artist['imagePath'] == '')
+    {
+        $errors[] = 'Image path is required.';
+    }
+
     return $errors;
 }
 
