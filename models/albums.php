@@ -24,19 +24,13 @@ function validateAlbum(array $album) : array
     // Ensure a name was submitted
     if (!is_string($album['name']) || $album['name'] == '')
     {
-        $errors[] = 'Name is required';
+        $errors[] = 'Name is required.';
     }
 
-    // Ensure an image path was submitted
-    if (!is_string($album['imagePath']) || $album['imagePath'] == '')
-    {
-        $errors[] = 'Image path is required.';
-    }
-
-    // Validate the artist id
+    // Ensure an artist was submitted
     if (!is_integer($album['artistId']) || $album['artistId'] < 1)
     {
-        $error[] = 'Invalid artist id.';
+        $errors[] = 'Artist is required.';
     }
 
     if (count($errors) == 0)
@@ -59,6 +53,12 @@ function validateAlbum(array $album) : array
         {
             $errors[] = 'The artist already has an album by that name.';
         }
+    }
+
+    // Ensure an image path was submitted
+    if (!is_string($album['imagePath']) || $album['imagePath'] == '')
+    {
+        $errors[] = 'Image path is required.';
     }
 
     return $errors;
