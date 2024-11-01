@@ -18,18 +18,17 @@
 
     <div class="form-group">
         <label for="name" class="label">Name</label>
-        <input type="text" name="name" id="name" class="input" 
+        <input type="text" name="name" id="name" class="input" autofocus
             value="<?php echo htmlspecialchars($album['name']); ?>" />
     </div>
 
     <div>
         <label for="artistId" class="label">Artist</label>
         <select name="artistId" id="artistId" class="select">
+            <option value="0">-</option>
             <?php foreach ($artists as $artist) : ?>
                 <option value="<?php echo $artist['id']; ?>"
-                    <?php if ($album['artistId'] == $artist['id']) : ?>
-                        selected
-                    <?php endif; ?>>
+                    <?php echo ($album['artistId'] == $artist['id']) ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($artist['name']) ?>
                 </option>
             <?php endforeach; ?>
